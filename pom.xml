@@ -1,9 +1,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.internshipsiemenspopf</groupId>
-  <artifactId>internshipSiemensPoPf</artifactId>
+  <groupId>com.internship2021</groupId>
+  <artifactId>internship2021</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>internship Siemens PoPf</name>
+  <name>internship Siemens 2021</name>
   <description>internship 2021 PageObject Page Factory</description>
    <properties>
       <selenium.version>3.14.0</selenium.version>
