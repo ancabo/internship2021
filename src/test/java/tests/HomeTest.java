@@ -45,5 +45,30 @@ public class HomeTest {
 		public void verifyBackground() { 
 			Assert.assertTrue(homePage.backgroundDisplayed(), "Background is not displayed");
 		}
+	    
+	    @Test 
+		public void verifySocialMedia() throws InterruptedException { 
+			Assert.assertTrue(homePage.facebookIconDisplayed(), "Facebook icon is not displayed");
+			Assert.assertTrue(homePage.twiterIconDisplayed(), "Twiter icon is not displayed");
+			Assert.assertTrue(homePage.pinterestIconDisplayed(), "Pinterest icon is not displayed");
+			homePage.facebookClicked();
+			homePage.switchTo(1);
+		    Assert.assertTrue(homePage.getUrl().contains("facebook"), "Facebook page is not displayed");
+		    homePage.closeDriver();
+		    homePage.switchTo(0);
+		    
+		    homePage.twitterClicked();
+		    homePage.switchTo(1);
+			Assert.assertTrue(homePage.getUrl().contains("twitter"), "Twiter page is not displayed");
+			homePage.closeDriver();
+			homePage.switchTo(0);
+			
+			//Click the Pinterest icon
+			homePage.pinterestClicked();
+			homePage.switchTo(1);
+			Assert.assertTrue(homePage.getUrl().contains("pinterest"), "Pinterest page is not displayed");
+			homePage.closeDriver();
+		
+		}
 
 }
