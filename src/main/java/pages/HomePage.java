@@ -21,6 +21,8 @@ public class HomePage {
 	@FindBy(xpath = "//p[.='HOME']")
 	private WebElement homeTab;
 	
+	@FindBy(xpath = "//div/wix-image/img")
+	private WebElement background;
 	
 	
 	//Actions on WebElements//
@@ -36,4 +38,7 @@ public class HomePage {
 		return homeTab.isDisplayed();
 	}
 
+	public boolean backgroundDisplayed() {
+		return background.isDisplayed();
+	}
 }
