@@ -17,4 +17,4 @@
 
 # Steps to get the latest version
 
-git pull
+1. git pull
