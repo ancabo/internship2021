@@ -12,4 +12,4 @@
 
 # Steps to get the latest version
 
-# git pull
+git pull
