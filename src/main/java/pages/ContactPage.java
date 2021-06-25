@@ -17,7 +17,7 @@ public class ContactPage {
 	
 	//WebElements//
 	
-		@FindBy(xpath = "(//p[@class='ccDUc'])[4]") //  (//a[@data-testid=\"linkElement\"])[5]
+		@FindBy(xpath = "(//p[@class='ccDUc'])[4]") //  (//a[@data-testid=\"linkElement\"])[5] //
 		private WebElement contactButton;
 		
 		@FindBy(id = "i6ly3ckd")
