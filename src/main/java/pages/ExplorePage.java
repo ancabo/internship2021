@@ -160,8 +160,8 @@ public class ExplorePage {
 		return exploreBtn.isDisplayed();
 	}
 
-	public boolean exploreBtnClicked() {
-		return exploreBtn.isDisplayed();
+	public void exploreBtnClicked() {
+		 exploreBtn.click();
 	}
 
 	public String amentiesGetText() {

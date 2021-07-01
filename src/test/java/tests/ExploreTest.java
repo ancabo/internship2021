@@ -20,7 +20,7 @@ public class ExploreTest {
 		driver = new ChromeDriver(); 
 		driver.manage().window().maximize();
 		explorePage = new ExplorePage(driver);
-		driver.get("https://ancabota09.wixsite.com/intern/explore"); 
+		driver.get("https://ancabota09.wixsite.com/intern"); 
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS); 
 	}
 
@@ -29,15 +29,23 @@ public class ExploreTest {
 		driver.quit(); 
 	} 
 
+
 	@Test
-	public void verifyInfo() { 
+	public void verifyExploreButton() {
+		Assert.assertTrue(explorePage.exploreBtnDisplayed(), "Explore button is not displayed");
+	}
+	
+	
+	@Test
+	public void verifyInfo() throws InterruptedException { 
 
 		//Validate that the Explore button exists 
 		Assert.assertTrue(explorePage.exploreBtnDisplayed(), "Title button is not displayed");
 
 		//Click the Explore button
 		explorePage.exploreBtnClicked();
-
+		Thread.sleep(3000);
+		
 		//Validate that the title "Explore the hotel" exists
 		Assert.assertEquals(explorePage.textEqual(), "EXPLORE THE HOTEL", "Not as expected");
 
@@ -75,12 +83,20 @@ public class ExploreTest {
 	}
 
 	@Test
-	public void verifyBackground() { 
+	public void verifyBackground() throws InterruptedException { 
+		//Click the Explore button
+		explorePage.exploreBtnClicked();
+		Thread.sleep(3000);
+
 		Assert.assertTrue(explorePage.backgroundDisplayed(), "Background is not displayed");
 	}
 
 	@Test 
 	public void verifySocialMedia() throws InterruptedException { 
+		//Click the Explore button
+		explorePage.exploreBtnClicked();
+		Thread.sleep(3000);
+
 		Assert.assertTrue(explorePage.facebookIconDisplayed(), "Facebook icon is not displayed");
 		//Assert.assertTrue(explorePage.twiterIconDisplayed(), "Twiter icon is not displayed");
 		Assert.assertTrue(explorePage.pinterestIconDisplayed(), "Pinterest icon is not displayed");
@@ -106,8 +122,11 @@ public class ExploreTest {
 
 
 	@Test 
-	public void verifyGeneralInfo() { 
-
+	public void verifyGeneralInfo() throws InterruptedException { 
+		//Click the Explore button
+		explorePage.exploreBtnClicked();
+		Thread.sleep(3000);
+		
 		//Validate that the address exists at the bottom of the page
 		Assert.assertTrue(explorePage.addressDisplayed(), "Address is not displayed");
 		Assert.assertTrue(explorePage.addressDisplayed1(), "Address is not displayed");
@@ -133,6 +152,8 @@ public class ExploreTest {
 
 	@Test
 	public void verifyChat() throws InterruptedException {
+		//Click the Explore button
+		explorePage.exploreBtnClicked();
 		Thread.sleep(3000);
 
 		//swich to frame
