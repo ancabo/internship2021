@@ -1,39 +1,44 @@
 package tests;
 
-import java.util.concurrent.TimeUnit;
-
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.BeforeTest;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import pages.ContactPage;
+import common.TestBase;
+import common.Chat;
+import common.GeneralInfo;
+import common.SocialMedia;
 
-public class ContactTest {
+public class ContactTest extends TestBase{
 	
 	private WebDriver driver;
 	private ContactPage contactPage;
+	private SocialMedia socialMedia;
+	private GeneralInfo generalInfo;
+	private Chat chat;
 	
 	@BeforeTest
-	public void beforeTest() {
+	public void BeforeTest() {
 		
-		System.setProperty("webdriver.chrome.driver", "C:\\Users\\z004c2sy\\Downloads\\chromedriver_win32\\chromedriver.exe");
-	  	driver = new ChromeDriver();
-	  	driver.manage().window().maximize();
-		driver.get("https://ancabota09.wixsite.com/intern");
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS); 
-        contactPage = new ContactPage(driver);
+		setUpDriver();
+		contactPage = new ContactPage(driver);
+		socialMedia = new SocialMedia(driver);
+		generalInfo = new GeneralInfo(driver);
+		chat = new Chat(driver);
         
 	  }
-
+	
 	@AfterTest
 	public void AfterTest() {
-		if (driver != null)
-			driver.close();
+		
+		quitDriver();
+		
 	}
-  
+	
 	
 	@Test
 	public void verifyContactButton() {
@@ -198,84 +203,84 @@ public class ContactTest {
 		Thread.sleep(2000);
 		
 		//change the frame
-		contactPage.changeChatFrame();
+		chat.switchToChat();
 		
 		//check the chat button visibility
-		Assert.assertTrue(contactPage.chatButtonDisplayed(), "The chat button is not displayed");
-		contactPage.clickChatB();
+		Assert.assertTrue(chat.chatBtnisDisplayed(), "The chat button is not displayed");
+		chat.chatBtnClicked();
 		
 		//send a text
-		Assert.assertTrue(contactPage.textareDisplayed(), "Textare field is not displayed");
-		contactPage.sendTextChat();
+		//Assert.assertTrue(contactPage.textareDisplayed(), "Textare field is not displayed");
+		//contactPage.sendTextChat();
 		
 		Thread.sleep(2000);
 		
 		//visibility of chat message response
-		Assert.assertTrue(contactPage.chatMsgDisplayed(), "Chat message box is not displayed");
+		//Assert.assertTrue(contactPage.chatMsgDisplayed(), "Chat message box is not displayed");
 		
 		//submit button
-		Assert.assertTrue(contactPage.submitChatBDisplayed(), "Submit button is not displayed");
-		contactPage.clickSubmitChatB();
+		Assert.assertTrue(chat.submitDisplayed(), "Submit button is not displayed");
+		chat.submitClicked();
 		
 		//check the visibility of the name error
-		Assert.assertTrue(contactPage.nameErrDisplayed(), "Name error is not displayed");
+		//Assert.assertTrue(contactPage.nameErrDisplayed(), "Name error is not displayed");
 		
 		//check the visibility of the email error
-		Assert.assertTrue(contactPage.emailErrDisplayed(), "Email error is not displayed");
+		//Assert.assertTrue(contactPage.emailErrDisplayed(), "Email error is not displayed");
 		
 		//name field visibility + type a name
-		Assert.assertTrue(contactPage.nameChatDisplayed(), "Name field is not displayed");
-		contactPage.completeName();
+		Assert.assertTrue(chat.nameDisplayed(), "Name field is not displayed");
+		//contactpage.completeName();
 		
 		//email field visibility + type wrong format email
-		Assert.assertTrue(contactPage.emailChatDisplayed(), "Email field is not displayed");
-		contactPage.completeWrongEmailChat();
+		Assert.assertTrue(chat.emailDisplayed(), "Email field is not displayed");
+		//contactPage.completeWrongEmailChat();
 		
 		//message field visibility + type message
-		Assert.assertTrue(contactPage.messageChatDisplayed(), "Message field is not displayed");
-		contactPage.clickChatMessage();
-		contactPage.completeChatMessage();
+		Assert.assertTrue(chat.messageDisplayed(), "Message field is not displayed");
+		chat.messageClicked();
+		chat.messageSendDisplayed();
 		
 		//email error message visibility + clear the email field
-		Assert.assertTrue(contactPage.emailErrChatDisplayed(), "Email error message is not displayed");
-		contactPage.clearEmail();
+		//Assert.assertTrue(contactPage.emailErrChatDisplayed(), "Email error message is not displayed");
+		//contactPage.clearEmail();
 		
 		//type the correct format of email
-		contactPage.completeEmailChat();
+		chat.emailSendDisplayed();
 		
 		//click the submit button
-		contactPage.clickSubmitChatB();
+		chat.submitClicked();
 		
 		//check the visibility thank you message
-		Assert.assertTrue(contactPage.thxMsgDisplayed(), "Thank you message box is not displayed");
+		//Assert.assertTrue(contactPage.thxMsgDisplayed(), "Thank you message box is not displayed");
 		
 		//visibility of the attachment button
-		Assert.assertTrue(contactPage.attachmentBDisplayed(), "Attachment button is not displayed");
+		Assert.assertTrue(chat.attachmentDisplayed(), "Attachment button is not displayed");
 		
 		//send an attachment
-		contactPage.sendAttachment();
+		chat.addFileDisplayed();
 		
 		Thread.sleep(5000);
 		
 		//check the attachment is sent
-		Assert.assertEquals(contactPage.getSentMessage(), "Sent");
+		//Assert.assertEquals(contactPage.getSentMessage(), "Sent");
 		
 		//visibility of emoji button
-		Assert.assertTrue(contactPage.emojiBDisplayed(),"Emoji button is not displayed");
-		contactPage.clickEmojiB();
+		Assert.assertTrue(chat.emojiBtnDisplayed(),"Emoji button is not displayed");
+		chat.emojiBtnClicked();
 		
 		//visibility of emojis box
-		Assert.assertTrue(contactPage.emojiBoxDisplayed(),"Emoji box is not displayed");
+		//Assert.assertTrue(contactPage.emojiBoxDisplayed(),"Emoji box is not displayed");
 		
 		//choose and send an emoji
-		Assert.assertTrue(contactPage.emojiDisplayed(),"Emoji is not displayed");
-		contactPage.clickEmoji();
-		contactPage.enter();
+		Assert.assertTrue(chat.emojiDisplayed(),"Emoji is not displayed");
+		chat.emojiClicked();
+		//contactPage.enter();
 		
 		Thread.sleep(2000);
 		
 		//check the emoji is sent
-		Assert.assertEquals(contactPage.getSentMessage(), "Sent");
+		//Assert.assertEquals(contactPage.getSentMessage(), "Sent");
 		
 	}
 	
@@ -309,16 +314,16 @@ public class ContactTest {
 		Thread.sleep(2000);
 		
 		//facebook
-		Assert.assertTrue(contactPage.fb2Displayed(), "Fb icon is not displayed");
-		Assert.assertEquals(contactPage.getFb2Link(), "http://www.facebook.com/wix");
+		Assert.assertTrue(socialMedia.facebookIconDisplayed(), "Fb icon is not displayed");
+		//Assert.assertEquals(contactPage.getFb2Link(), "http://www.facebook.com/wix");
 		
 		//twitter
-		Assert.assertTrue(contactPage.twitter2Displayed(), "Twitter icon is not displayed");
-		Assert.assertEquals(contactPage.getTw2Link(), "http://www.twitter.com/wix");
+		Assert.assertTrue(socialMedia.twiterIconDisplayed(), "Twitter icon is not displayed");
+		//Assert.assertEquals(contactPage.getTw2Link(), "http://www.twitter.com/wix");
 		
 		//pinterest
-		Assert.assertTrue(contactPage.pinterest2Displayed(), "Pinterest icon is not displayed");
-		Assert.assertEquals(contactPage.getPint2Link(), "http://pinterest.com/wixcom/");
+		Assert.assertTrue(socialMedia.pinterestIconDisplayed(), "Pinterest icon is not displayed");
+		//Assert.assertEquals(contactPage.getPint2Link(), "http://pinterest.com/wixcom/");
 		
 	}
 	
@@ -331,33 +336,33 @@ public class ContactTest {
 		Thread.sleep(1000);
 		
 		//address
-		Assert.assertTrue(contactPage.addressTitleDisplayed(), "Address title is not displayed"); 
-		Assert.assertEquals(contactPage.getAddressTitle(), "ADDRESS");
-		Assert.assertTrue(contactPage.address1Displayed(), "Address line 1 is not displayed");
-		Assert.assertEquals(contactPage.getAddress1Text(), "500 Terry Francois Street");
-		Assert.assertTrue(contactPage.address2Displayed(), "Address line 2 is not displayed");
-		Assert.assertEquals(contactPage.getAddress2Text(), "San Francisco, CA 94158");
+		Assert.assertTrue(generalInfo.addressDisplayed(), "Address title is not displayed"); 
+		//Assert.assertEquals(contactPage.getAddressTitle(), "ADDRESS");
+		Assert.assertTrue(generalInfo.addressDisplayed1(), "Address line 1 is not displayed");
+		//Assert.assertEquals(contactPage.getAddress1Text(), "500 Terry Francois Street");
+		Assert.assertTrue(generalInfo.addressDisplayed2(), "Address line 2 is not displayed");
+		//Assert.assertEquals(contactPage.getAddress2Text(), "San Francisco, CA 94158");
 		
 		//contact
-		Assert.assertTrue(contactPage.contactTitleDisplayed(), "Contact title is not displayed"); 
-		Assert.assertEquals(contactPage.getContactTitle(), "CONTACT");
-		Assert.assertTrue(contactPage.contact1Displayed(), "Contact line 1 is not displayed");
-		Assert.assertEquals(contactPage.getContact1Text(), "info@mysite.com");
-		Assert.assertTrue(contactPage.contact2Displayed(), "Contact line 2 is not displayed");
-		Assert.assertEquals(contactPage.getContact2Text(), "Tel: 123-456-7890");
+		Assert.assertTrue(generalInfo.contactDisplayed(), "Contact title is not displayed"); 
+		//Assert.assertEquals(contactPage.getContactTitle(), "CONTACT");
+		Assert.assertTrue(generalInfo.contactDisplayed1(), "Contact line 1 is not displayed");
+		//Assert.assertEquals(contactPage.getContact1Text(), "info@mysite.com");
+		Assert.assertTrue(generalInfo.contactDisplayed2(), "Contact line 2 is not displayed");
+		//Assert.assertEquals(contactPage.getContact2Text(), "Tel: 123-456-7890");
 		
 		//home&away 
-		Assert.assertTrue(contactPage.haTitleDisplayed(), "Home&Away title is not displayed"); 
-		Assert.assertEquals(contactPage.getHaTitle(), "HOME & AWAY");
-		Assert.assertTrue(contactPage.ha1Displayed(), "Home&Away line 1 is not displayed");
-		Assert.assertEquals(contactPage.getHa1Text(), "© 2023 by HOME & AWAY");
-		Assert.assertTrue(contactPage.ha2Displayed(), "Home&Away line 2 is not displayed");
-		Assert.assertEquals(contactPage.getHa2Text(), "Proudly created with Wix.com");
+		Assert.assertTrue(generalInfo.homeDisplayed1(), "Home&Away title is not displayed"); 
+		//Assert.assertEquals(contactPage.getHaTitle(), "HOME & AWAY");
+		Assert.assertTrue(generalInfo.homeDisplayed2(), "Home&Away line 1 is not displayed");
+		//Assert.assertEquals(contactPage.getHa1Text(), "© 2023 by HOME & AWAY");
+		Assert.assertTrue(generalInfo.homeDisplayed3(), "Home&Away line 2 is not displayed");
+		//Assert.assertEquals(contactPage.getHa2Text(), "Proudly created with Wix.com");
 		
 		//payment
-		Assert.assertTrue(contactPage.payTitleDisplayed(), "Payment title is not displayed"); 
-		Assert.assertEquals(contactPage.getPayTitle(), "WE ACCEPT");
-		Assert.assertTrue(contactPage.paymentDisplayed(), "Payment methods are not displayed");
+		//Assert.assertTrue(contactPage.payTitleDisplayed(), "Payment title is not displayed"); 
+		//Assert.assertEquals(contactPage.getPayTitle(), "WE ACCEPT");
+		//Assert.assertTrue(contactPage.paymentDisplayed(), "Payment methods are not displayed");
 		
 	}
   		
