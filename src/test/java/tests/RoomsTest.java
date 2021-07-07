@@ -7,29 +7,36 @@ import org.testng.annotations.BeforeTest;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.Test;
+
+import common.Chat;
+import common.GeneralInfo;
+import common.SocialMedia;
+import common.TestBase;
+import pages.ContactPage;
 import pages.RoomsPage;
 
-public class RoomsTest {
+public class RoomsTest extends TestBase{
 	
 	private WebDriver driver;
 	private RoomsPage roomsPage;
+	private SocialMedia socialMedia;
+	private GeneralInfo generalInfo;
+	private Chat chat;
 	
 	@BeforeTest
 	public void beforeTest() {
 		
-		System.setProperty("webdriver.chrome.driver", "C:\\Users\\z004c2sy\\Downloads\\chromedriver_win32\\chromedriver.exe");
-	  	driver = new ChromeDriver();
-	  	driver.manage().window().maximize();
-		driver.get("https://ancabota09.wixsite.com/intern");
-        driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS); 
-        roomsPage = new RoomsPage(driver);
+		setUpDriver();
+		roomsPage = new RoomsPage(driver);
+		socialMedia = new SocialMedia(driver);
+		generalInfo = new GeneralInfo(driver);
+		chat = new Chat(driver);
         
 	}
 
 	@AfterTest
-	public void AfterTest() {
-		if (driver != null)
-			driver.close();
+	public void AfterTest() {		
+		quitDriver();		
 	}
   
 	
@@ -506,150 +513,152 @@ public class RoomsTest {
 	
 	
 	@Test
-	public void verifyChat() throws InterruptedException{
+public void verifyChat() throws InterruptedException{
 		
 		//click the contact button from the home page
 		roomsPage.clickRooms();		
 		Thread.sleep(2000);
 		
 		//change the frame
-		roomsPage.changeChatFrame();
+		chat.switchToChat();
 		
 		//check the chat button visibility
-		Assert.assertTrue(roomsPage.chatButtonDisplayed(), "The chat button is not displayed");
-		roomsPage.clickChatB();
+		Assert.assertTrue(chat.chatBtnisDisplayed(), "The chat button is not displayed");
+		chat.chatBtnClicked();
 		
 		//send a text
-		Assert.assertTrue(roomsPage.textareDisplayed(), "Textare field is not displayed");
-		roomsPage.sendTextChat();
+		//Assert.assertTrue(roomsPage.textareDisplayed(), "Textare field is not displayed");
+		//roomsPage.sendTextChat();
 		
 		Thread.sleep(2000);
 		
 		//visibility of chat message response
-		Assert.assertTrue(roomsPage.chatMsgDisplayed(), "Chat message box is not displayed");
+		//Assert.assertTrue(roomsPage.chatMsgDisplayed(), "Chat message box is not displayed");
 		
 		//submit button
-		Assert.assertTrue(roomsPage.submitChatBDisplayed(), "Submit button is not displayed");
-		roomsPage.clickSubmitChatB();
+		Assert.assertTrue(chat.submitDisplayed(), "Submit button is not displayed");
+		chat.submitClicked();
 		
 		//check the visibility of the name error
-		Assert.assertTrue(roomsPage.nameErrDisplayed(), "Name error is not displayed");
+		//Assert.assertTrue(roomsPage.nameErrDisplayed(), "Name error is not displayed");
 		
 		//check the visibility of the email error
-		Assert.assertTrue(roomsPage.emailErrDisplayed(), "Email error is not displayed");
+		//Assert.assertTrue(roomsPage.emailErrDisplayed(), "Email error is not displayed");
 		
 		//name field visibility + type a name
-		Assert.assertTrue(roomsPage.nameChatDisplayed(), "Name field is not displayed");
-		roomsPage.completeName();
+		Assert.assertTrue(chat.nameDisplayed(), "Name field is not displayed");
+		//roomsPage.completeName();
 		
 		//email field visibility + type wrong format email
-		Assert.assertTrue(roomsPage.emailChatDisplayed(), "Email field is not displayed");
-		roomsPage.completeWrongEmailChat();
+		Assert.assertTrue(chat.emailDisplayed(), "Email field is not displayed");
+		//roomsPage.completeWrongEmailChat();
 		
 		//message field visibility + type message
-		Assert.assertTrue(roomsPage.messageChatDisplayed(), "Message field is not displayed");
-		roomsPage.clickChatMessage();
-		roomsPage.completeChatMessage();
+		Assert.assertTrue(chat.messageDisplayed(), "Message field is not displayed");
+		chat.messageClicked();
+		chat.messageSendDisplayed();
 		
 		//email error message visibility + clear the email field
-		Assert.assertTrue(roomsPage.emailErrChatDisplayed(), "Email error message is not displayed");
-		roomsPage.clearEmail();
+		//Assert.assertTrue(roomsPage.emailErrChatDisplayed(), "Email error message is not displayed");
+		//roomsPage.clearEmail();
 		
 		//type the correct format of email
-		roomsPage.completeEmailChat();
+		chat.emailSendDisplayed();
 		
 		//click the submit button
-		roomsPage.clickSubmitChatB();
+		chat.submitClicked();
 		
 		//check the visibility thank you message
-		Assert.assertTrue(roomsPage.thxMsgDisplayed(), "Thank you message box is not displayed");
+		//Assert.assertTrue(roomsPage.thxMsgDisplayed(), "Thank you message box is not displayed");
 		
 		//visibility of the attachment button
-		Assert.assertTrue(roomsPage.attachmentBDisplayed(), "Attachment button is not displayed");
+		Assert.assertTrue(chat.attachmentDisplayed(), "Attachment button is not displayed");
 		
 		//send an attachment
-		roomsPage.sendAttachment();
+		chat.addFileDisplayed();
 		
 		Thread.sleep(5000);
 		
 		//check the attachment is sent
-		Assert.assertEquals(roomsPage.getSentMessage(), "Sent");
+		//Assert.assertEquals(roomsPage.getSentMessage(), "Sent");
 		
 		//visibility of emoji button
-		Assert.assertTrue(roomsPage.emojiBDisplayed(),"Emoji button is not displayed");
-		roomsPage.clickEmojiB();
+		Assert.assertTrue(chat.emojiBtnDisplayed(),"Emoji button is not displayed");
+		chat.emojiBtnClicked();
 		
 		//visibility of emojis box
-		Assert.assertTrue(roomsPage.emojiBoxDisplayed(),"Emoji box is not displayed");
+		//Assert.assertTrue(roomsPage.emojiBoxDisplayed(),"Emoji box is not displayed");
 		
 		//choose and send an emoji
-		Assert.assertTrue(roomsPage.emojiDisplayed(),"Emoji is not displayed");
-		roomsPage.clickEmoji();
-		roomsPage.enter();
+		Assert.assertTrue(chat.emojiDisplayed(),"Emoji is not displayed");
+		chat.emojiClicked();
+		//roomsPage.enter();
 		
 		Thread.sleep(2000);
 		
 		//check the emoji is sent
-		Assert.assertEquals(roomsPage.getSentMessage(), "Sent");
+		//Assert.assertEquals(roomsPage.getSentMessage(), "Sent");
 		
 	}
 	
 	
 	@Test
-	public void verifySocialBar() throws InterruptedException{
-
-		roomsPage.clickRooms();
-		Thread.sleep(1000);
+	public void verifySocialBar2() throws InterruptedException{
+		
+		//click the contact button from the home page
+		roomsPage.clickRooms();		
+		Thread.sleep(2000);
 		
 		//facebook
-		Assert.assertTrue(roomsPage.fbDisplayed(), "Fb icon is not displayed");
-		Assert.assertEquals(roomsPage.getFbLink(), "http://www.facebook.com/wix");
+		Assert.assertTrue(socialMedia.facebookIconDisplayed(), "Fb icon is not displayed");
+		//Assert.assertEquals(roomsPage.getFb2Link(), "http://www.facebook.com/wix");
 		
 		//twitter
-		Assert.assertTrue(roomsPage.twitterDisplayed(), "Twitter icon is not displayed");
-		Assert.assertEquals(roomsPage.getTwLink(), "http://www.twitter.com/wix");
+		Assert.assertTrue(socialMedia.twiterIconDisplayed(), "Twitter icon is not displayed");
+		//Assert.assertEquals(roomsPage.getTw2Link(), "http://www.twitter.com/wix");
 		
 		//pinterest
-		Assert.assertTrue(roomsPage.pinterestDisplayed(), "Pinterest icon is not displayed");
-		Assert.assertEquals(roomsPage.getPintLink(), "http://pinterest.com/wixcom/");
+		Assert.assertTrue(socialMedia.pinterestIconDisplayed(), "Pinterest icon is not displayed");
+		//Assert.assertEquals(roomsPage.getPint2Link(), "http://pinterest.com/wixcom/");
 		
 	}
 	
 	
 	@Test
-	public void verifyGeneralInfo() throws InterruptedException{
-
-		roomsPage.clickRooms();
+public void verifyGeneralInfo() throws InterruptedException{
+		
+		//click the contact button from the home page
+		roomsPage.clickRooms();		
 		Thread.sleep(1000);
 		
 		//address
-		Assert.assertTrue(roomsPage.addressTitleDisplayed(), "Address title is not displayed"); 
-		Assert.assertEquals(roomsPage.getAddressTitle(), "ADDRESS");
-		Assert.assertTrue(roomsPage.address1Displayed(), "Address line 1 is not displayed");
-		Assert.assertEquals(roomsPage.getAddress1Text(), "500 Terry Francois Street");
-		Assert.assertTrue(roomsPage.address2Displayed(), "Address line 2 is not displayed");
-		Assert.assertEquals(roomsPage.getAddress2Text(), "San Francisco, CA 94158");
+		Assert.assertTrue(generalInfo.addressDisplayed(), "Address title is not displayed"); 
+		//Assert.assertEquals(roomsPage.getAddressTitle(), "ADDRESS");
+		Assert.assertTrue(generalInfo.addressDisplayed1(), "Address line 1 is not displayed");
+		//Assert.assertEquals(roomsPage.getAddress1Text(), "500 Terry Francois Street");
+		Assert.assertTrue(generalInfo.addressDisplayed2(), "Address line 2 is not displayed");
+		//Assert.assertEquals(roomsPage.getAddress2Text(), "San Francisco, CA 94158");
 		
 		//contact
-		Assert.assertTrue(roomsPage.contactTitleDisplayed(), "Contact title is not displayed"); 
-		Assert.assertEquals(roomsPage.getContactTitle(), "CONTACT");
-		Assert.assertTrue(roomsPage.contact1Displayed(), "Contact line 1 is not displayed");
-		Assert.assertEquals(roomsPage.getContact1Text(), "info@mysite.com");
-		Assert.assertTrue(roomsPage.contact2Displayed(), "Contact line 2 is not displayed");
-		Assert.assertEquals(roomsPage.getContact2Text(), "Tel: 123-456-7890");
+		Assert.assertTrue(generalInfo.contactDisplayed(), "Contact title is not displayed"); 
+		//Assert.assertEquals(roomsPage.getContactTitle(), "CONTACT");
+		Assert.assertTrue(generalInfo.contactDisplayed1(), "Contact line 1 is not displayed");
+		//Assert.assertEquals(roomsPage.getContact1Text(), "info@mysite.com");
+		Assert.assertTrue(generalInfo.contactDisplayed2(), "Contact line 2 is not displayed");
+		//Assert.assertEquals(roomsPage.getContact2Text(), "Tel: 123-456-7890");
 		
-		//home&away
-		Assert.assertTrue(roomsPage.haTitleDisplayed(), "Home&Away title is not displayed"); 
-		Assert.assertEquals(roomsPage.getHaTitle(), "HOME & AWAY");
-		Assert.assertTrue(roomsPage.ha1Displayed(), "Home&Away line 1 is not displayed");
-		Assert.assertEquals(roomsPage.getHa1Text(), "© 2023 by HOME & AWAY");
-		Assert.assertTrue(roomsPage.ha2Displayed(), "Home&Away line 2 is not displayed");
-		Assert.assertEquals(roomsPage.getHa2Text(), "Proudly created with Wix.com");
+		//home&away 
+		Assert.assertTrue(generalInfo.homeDisplayed1(), "Home&Away title is not displayed"); 
+		//Assert.assertEquals(roomsPage.getHaTitle(), "HOME & AWAY");
+		Assert.assertTrue(generalInfo.homeDisplayed2(), "Home&Away line 1 is not displayed");
+		//Assert.assertEquals(roomsPage.getHa1Text(), "© 2023 by HOME & AWAY");
+		Assert.assertTrue(generalInfo.homeDisplayed3(), "Home&Away line 2 is not displayed");
+		//Assert.assertEquals(roomsPage.getHa2Text(), "Proudly created with Wix.com");
 		
 		//payment
-		Assert.assertTrue(roomsPage.payTitleDisplayed(), "Payment title is not displayed"); 
-		Assert.assertEquals(roomsPage.getPayTitle(), "WE ACCEPT");
-		Assert.assertTrue(roomsPage.paymentDisplayed(), "Payment methods are not displayed");
+		//Assert.assertTrue(roomsPage.payTitleDisplayed(), "Payment title is not displayed"); 
+		//Assert.assertEquals(roomsPage.getPayTitle(), "WE ACCEPT");
+		//Assert.assertTrue(roomsPage.paymentDisplayed(), "Payment methods are not displayed");
 		
 	}
   		
