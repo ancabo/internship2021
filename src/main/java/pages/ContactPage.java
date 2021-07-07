@@ -1,13 +1,13 @@
 package pages;
 
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import common.TestBase;
 
-public class ContactPage {
+public class ContactPage extends TestBase{
 	
 	protected WebDriver driver;
 	
@@ -67,118 +67,24 @@ public class ContactPage {
 	@FindBy(xpath = "//p[@class=\"tMcTE\"]")
 	private WebElement verificationMsg;
 	
-	@FindBy(xpath = "//iframe[@title='Wix Chat']")
-	private WebElement frameChat; 
-	
-	@FindBy(xpath = "//div[@data-hook=\"chat-widget\"]")
-	private WebElement chatB;
-	
-	@FindBy(xpath = "//textarea[@role=\"textbox\"]")
-	private WebElement textare;
-	
-	@FindBy(xpath = "//span[@data-hook=\"indication-text\"]")
-	private WebElement sent;
-	
-	@FindBy(xpath = "//div[@data-hook=\"chat-message\"]")
-	private WebElement chatMsg;
-	
-	@FindBy(xpath = "//button[@type=\"submit\"]")
-	private WebElement submitChatB;
-	
-	@FindBy(xpath = "//div[@id=\"name-error\"]")
-	private WebElement nameErr;
-	
-	@FindBy(xpath = "//div[@id=\"email-error\"]")
-	private WebElement emailErr;
-	
-	@FindBy(xpath = "//input[@id=\"name\"]")
-	private WebElement nameChat;
-	
-	@FindBy(xpath = "//input[@id=\"email\"]")
-	private WebElement emailChat;
-	
-	@FindBy(xpath = "//textarea[@id=\"message\"]")
-	private WebElement messageChat;
-	
-	@FindBy(xpath = "//div[@data-hook=\"lcf-thank-you\"]")
-	private WebElement thxMsg;
-	
-	@FindBy(xpath = "//button[@data-hook=\"attachment-button\"]")
-	private WebElement attachmentB;
-	
-	@FindBy(xpath = "//input[@type='file']")
-	private WebElement attachment;
-	
-	@FindBy(xpath = "//button[@data-hook=\"emoji-keyboard\"]")
-	private WebElement emojiB;
-	
-	@FindBy(xpath = "//div[@id=\"emojis-tab-content-0\"]")
-	private WebElement emojiBox;
-	
-	@FindBy(xpath = "//button[@data-unicode=\"1f609\"]")
-	private WebElement emoji;
-	
-	@FindBy(xpath = "//*[@id=\"i01vcq-i6m1143v\"]/a")
+	@FindBy(xpath = "//*[@id=\"i0odz-i6rlbitx\"]/a")
 	private WebElement fb;
 	
-	@FindBy(xpath = "//*[@id=\"i21ibq-i6m1143v\"]/a")
+	@FindBy(xpath = "//*[@id=\"i220sc-i6rlbitx\"]/a")
 	private WebElement tw;
 	
-	@FindBy(xpath = "//*[@id=\"i3mls-i6m1143v\"]/a")
-	private WebElement pint;
-	
-	@FindBy(xpath = "//*[@id=\"i0odz-i6rlbitx\"]/a")
-	private WebElement fb2;
-	
-	@FindBy(xpath = "//*[@id=\"i220sc-i6rlbitx\"]/a")
-	private WebElement tw2;
-	
 	@FindBy(xpath = "//*[@id=\"i3175p-i6rlbitx\"]/a")
-	private WebElement pint2;
-	
-	@FindBy(xpath = "//*[@id=\"i6ku0wvj\"]/p/span")
-	private WebElement addressTitle;
-	
-	@FindBy(xpath = "//*[@id=\"i71wvfxg\"]/p[1]")
-	private WebElement address1;
-	
-	@FindBy(xpath = "//*[@id=\"i71wvfxg\"]/p[2]")
-	private WebElement address2;
-	
-	@FindBy(xpath = "//*[@id=\"i6ku3n0i\"]/p/span")
-	private WebElement contactTitle;
-	
-	@FindBy(xpath = "//*[@id=\"i71ww6nk\"]/p[1]")
-	private WebElement contact1;
-	
-	@FindBy(xpath = "//*[@id=\"i71ww6nk\"]/p[2]")
-	private WebElement contact2;
-	
-	@FindBy(xpath = "//*[@id=\"i6ktzy38\"]/p/span")
-	private WebElement haTitle;
-	
-	@FindBy(xpath = "//*[@id=\"i71wwqnj\"]/p[1]")
-	private WebElement ha1;
-	
-	@FindBy(xpath = "//*[@id=\"i71wwqnj\"]/p[2]")
-	private WebElement ha2;
-	
-	@FindBy(xpath = "//*[@id=\"i6lux50r_0\"]/p/span")
-	private WebElement payTitle;
-	
-	@FindBy(xpath = "//*[@id=\"i71uub1o\"]/div[1]")
-	private WebElement payment;
-	
+	private WebElement pint;
 	
 	
 	//Actions on WebElements//	
 	
 	public boolean contactButtonDisplayed() {
-		return contactButton.isDisplayed();
+		return display(contactButton);
 	}
 	
 	public void clickContact() {
-		contactButton.click();
+		click(contactButton);
 	}
 	
 	public String getPageTitle() {
@@ -186,7 +92,7 @@ public class ContactPage {
 	}
 	
 	public boolean contactUsDisplayed() {
-		return contact.isDisplayed();
+		return display(contact);
 	}
 	
 	public String getContactUsText() {
@@ -194,11 +100,11 @@ public class ContactPage {
 	}
 	
 	public boolean paragraphDisplayed() {
-		return paragraph.isDisplayed();
+		return display(paragraph);
 	}
 	
 	public boolean talkToUsDisplayed() { 
-		return talkToUs.isDisplayed();
+		return display(talkToUs);
 	}
 	
 	public String getTalkToUsText() {
@@ -206,7 +112,7 @@ public class ContactPage {
 	}
 	
 	public boolean backgroundImgDisplayed() { 
-		return backgroundImg.isDisplayed();
+		return display(backgroundImg);
 	}
 	
 	public void changeFrame() {
@@ -214,42 +120,42 @@ public class ContactPage {
 	}
 	
 	public boolean mapDisplayed() {
-		return map.isDisplayed();
+		return display(map);
 	}
 	
 	public boolean fullScreenBDisplayed() {
-		return fullScreenB.isDisplayed();
+		return display(fullScreenB);
 	}
 	
 	public void clickFullScreenB() {
-		fullScreenB.click();
+		click(fullScreenB);
 	}
 	
 	public void clickAndHoldMap() {
 		Actions action = new Actions(driver);
         action.moveToElement(map);
         action.clickAndHold().perform();
-        map.click();
+        click(map);
 	}
 	
 	public boolean mapTermsDisplayed() {
-		return mapTerms.isDisplayed();
+		return display(mapTerms);
 	}
 	
 	public String getMapTermsLink() {
-		return mapTerms.getAttribute("href");
+		return getAttributeValue(mapTerms, "href");
 	}
 	
 	public boolean mapErrorDisplayed() {
-		return mapError.isDisplayed();
+		return display(mapError);
 	}
 	
 	public String getMapErrorLink() {
-		return mapError.getAttribute("href");
+		return getAttributeValue(mapError, "href");
 	}
 	
 	public boolean nameDisplayed() {
-		return name.isDisplayed();
+		return display(name);
 	}
 	
 	public String getNameColour() {
@@ -257,7 +163,7 @@ public class ContactPage {
 	}
 	
 	public boolean emailDisplayed() {
-		return email.isDisplayed();
+		return display(email);
 	}
 	
 	public String getEmailColour() {
@@ -269,11 +175,11 @@ public class ContactPage {
 	}
 	
 	public boolean phoneDisplayed() {
-		return phone.isDisplayed();
+		return display(phone);
 	}
 	
 	public boolean messageDisplayed() {
-		return message.isDisplayed();
+		return display(message);
 	}
 	
 	public String getMessageColour() {
@@ -281,7 +187,7 @@ public class ContactPage {
 	}
 	
 	public boolean submitBDisplayed() {
-		return submitB.isDisplayed();
+		return display(submitB);
 	}
 	
 	public void completeFields() {
@@ -296,265 +202,35 @@ public class ContactPage {
 	}
 	
 	public void clickSubmit() {
-		submitB.click();
+		click(submitB);
 	}
 	
 	public boolean verificationMsgDisplayed() {
-		return verificationMsg.isDisplayed();
-	}
-	
-	public void changeChatFrame() {
-		driver.switchTo().frame(frameChat);
-	}
-	
-	public boolean chatButtonDisplayed() {
-		return chatB.isDisplayed();
-	}
-	
-	public void clickChatB() {
-		chatB.click();
-	}
-	
-	public boolean textareDisplayed() {
-		return textare.isDisplayed();
-	}
-	
-	public void sendTextChat() {
-		textare.sendKeys("Hey");  
-    	textare.sendKeys(Keys.ENTER);
-	}
-	
-	public String getSentMessage() {
-		return sent.getText();
-	}
-	
-	public boolean chatMsgDisplayed() {
-		return chatMsg.isDisplayed();
-	}
-	
-	public boolean submitChatBDisplayed() {
-		return submitChatB.isDisplayed();
-	}
-	
-	public void clickSubmitChatB() {
-		submitChatB.click();
-	}
-	
-	public boolean nameErrDisplayed() {
-		return nameErr.isDisplayed();
-	}
-	
-	public boolean emailErrDisplayed() {
-		return emailErr.isDisplayed();
-	}
-	
-	public boolean nameChatDisplayed() {
-		return nameChat.isDisplayed();
-	}
-	
-	public void completeName() {
-		nameChat.sendKeys("Ion");
-	}
-	
-	public boolean emailChatDisplayed() {
-		return emailChat.isDisplayed();
-	}
-	
-	public void completeWrongEmailChat() {
-		emailChat.sendKeys("hey..."); 
-	}
-	
-	public boolean messageChatDisplayed() {
-		return messageChat.isDisplayed();
-	}
-	
-	public void clickChatMessage() {
-		messageChat.click();
-	}
-	
-	public void completeChatMessage() {
-		messageChat.sendKeys("Hello");
-	}
-	
-	public boolean emailErrChatDisplayed() {
-		return emailErr.isDisplayed();
-	}
-	
-	public void clearEmail() {
-		emailChat.click();
-        emailChat.clear();
-	}
-	
-	public void completeEmailChat() {
-		emailChat.sendKeys("ion@yahoo.com"); 
-	}
-	
-	public boolean thxMsgDisplayed() {
-		return thxMsg.isDisplayed();
-	}
-	
-	public boolean attachmentBDisplayed() {
-		return attachmentB.isDisplayed();
-	}
-	
-	public void sendAttachment() {
-		attachment.sendKeys("D:\\hey.png");
-	}
-	
-	public boolean emojiBDisplayed() {
-		return emojiB.isDisplayed();
-	}
-	
-	public void clickEmojiB() {
-		emojiB.click();
-	}
-	
-	public boolean emojiBoxDisplayed() {
-		return emojiBox.isDisplayed();
-	}
-	
-	public boolean emojiDisplayed() {
-		return emoji.isDisplayed();
-	}
-	
-	public void clickEmoji() {
-		emoji.click();
-	}
-	
-	public void enter() {
-		textare.sendKeys(Keys.ENTER);    
+		return display(verificationMsg);
 	}
 	
 	public boolean fbDisplayed() {
-		return fb.isDisplayed();
+		return display(fb);
 	}
 	
 	public String getFbLink() {
-		return fb.getAttribute("href");
+		return getAttributeValue(fb, "href");
 	}
 	
 	public boolean twitterDisplayed() {
-		return tw.isDisplayed();
+		return display(tw);
 	}
 	
 	public String getTwLink() {
-		return tw.getAttribute("href");
+		return getAttributeValue(tw, "href");
 	}
 	
 	public boolean pinterestDisplayed() {
-		return pint.isDisplayed();
+		return display(pint);
 	}
 	
 	public String getPintLink() {
-		return pint.getAttribute("href");
-	}
-	
-	public boolean fb2Displayed() {
-		return fb2.isDisplayed();
-	}
-	
-	public String getFb2Link() {
-		return fb2.getAttribute("href");
-	}
-	
-	public boolean twitter2Displayed() {
-		return tw2.isDisplayed();
-	}
-	
-	public String getTw2Link() {
-		return tw2.getAttribute("href");
-	}
-	
-	public boolean pinterest2Displayed() {
-		return pint2.isDisplayed();
-	}
-	
-	public String getPint2Link() {
-		return pint2.getAttribute("href");
-	}
-	
-	public boolean addressTitleDisplayed() {
-		return addressTitle.isDisplayed();
-	}
-	
-	public String getAddressTitle() {
-		return addressTitle.getText();
-	}
-	
-	public boolean address1Displayed() {
-		return address1.isDisplayed();
-	}
-	
-	public String getAddress1Text() {
-		return address1.getText();
-	}
-	
-	public boolean address2Displayed() {
-		return address2.isDisplayed();
-	}
-	
-	public String getAddress2Text() {
-		return address2.getText();
-	}
-	
-	public boolean contactTitleDisplayed() {
-		return contactTitle.isDisplayed();
-	}
-	
-	public String getContactTitle() {
-		return contactTitle.getText();
-	}
-	
-	public boolean contact1Displayed() {
-		return contact1.isDisplayed();
-	}
-	
-	public String getContact1Text() {
-		return contact1.getText();
-	}
-	
-	public boolean contact2Displayed() {
-		return contact2.isDisplayed();
-	}
-	
-	public String getContact2Text() {
-		return contact2.getText();
-	}
-	
-	public boolean haTitleDisplayed() {
-		return haTitle.isDisplayed();
-	}
-	
-	public String getHaTitle() {
-		return haTitle.getText();
-	}
-	
-	public boolean ha1Displayed() {
-		return ha1.isDisplayed();
-	}
-	
-	public String getHa1Text() {
-		return ha1.getText();
-	}
-	
-	public boolean ha2Displayed() {
-		return ha2.isDisplayed();
-	}
-	
-	public String getHa2Text() {
-		return ha2.getText();
-	}
-	
-	public boolean payTitleDisplayed() {
-		return payTitle.isDisplayed();
-	}
-	
-	public String getPayTitle() {
-		return payTitle.getText();
-	}
-	
-	public boolean paymentDisplayed() {
-		return payment.isDisplayed();
+		return getAttributeValue(pint, "href");
 	}
 
 }
