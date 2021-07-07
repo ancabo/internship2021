@@ -1,27 +1,29 @@
 package tests;
 
 
-import java.util.concurrent.TimeUnit;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import common.Chat;
+import common.GeneralInfo;
+import common.SocialMedia;
+import common.TestBase;
 import pages.ExplorePage;
 
-public class ExploreTest {
-	private WebDriver driver; 
+public class ExploreTest extends TestBase {
 	ExplorePage explorePage;
-	@BeforeTest
-	public void beforeTest() {
-		System.setProperty("webdriver.chrome.driver", "C:\\Users\\z004c2sx\\Downloads\\chromedriver.exe");
-		driver = new ChromeDriver(); 
-		driver.manage().window().maximize();
+	SocialMedia socialMedia;
+	GeneralInfo generalInfo;
+	Chat chat;
+	
+	@BeforeMethod
+	public void beforeMethod() {
 		explorePage = new ExplorePage(driver);
-		driver.get("https://ancabota09.wixsite.com/intern"); 
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS); 
+		socialMedia = new SocialMedia(driver);
+		generalInfo = new GeneralInfo(driver);
+		chat = new Chat(driver);
 	}
 
 	@AfterTest 
@@ -34,8 +36,8 @@ public class ExploreTest {
 	public void verifyExploreButton() {
 		Assert.assertTrue(explorePage.exploreBtnDisplayed(), "Explore button is not displayed");
 	}
-	
-	
+
+
 	@Test
 	public void verifyInfo() throws InterruptedException { 
 
@@ -45,7 +47,7 @@ public class ExploreTest {
 		//Click the Explore button
 		explorePage.exploreBtnClicked();
 		Thread.sleep(3000);
-		
+
 		//Validate that the title "Explore the hotel" exists
 		Assert.assertEquals(explorePage.textEqual(), "EXPLORE THE HOTEL", "Not as expected");
 
@@ -97,26 +99,27 @@ public class ExploreTest {
 		explorePage.exploreBtnClicked();
 		Thread.sleep(3000);
 
-		Assert.assertTrue(explorePage.facebookIconDisplayed(), "Facebook icon is not displayed");
-		//Assert.assertTrue(explorePage.twiterIconDisplayed(), "Twiter icon is not displayed");
-		Assert.assertTrue(explorePage.pinterestIconDisplayed(), "Pinterest icon is not displayed");
-		explorePage.facebookClicked();
-		explorePage.switchTo(1);
-		Assert.assertTrue(explorePage.getUrl().contains("facebook"), "Facebook page is not displayed");
-		explorePage.closeDriver();
-		explorePage.switchTo(0);
+		Assert.assertTrue(socialMedia.facebookIconDisplayed(), "Facebook icon is not displayed");
+		Assert.assertTrue(socialMedia.twiterIconDisplayed(), "Twiter icon is not displayed");
+		Assert.assertTrue(socialMedia.pinterestIconDisplayed(), "Pinterest icon is not displayed");
+		socialMedia.facebookClicked();
+		socialMedia.switchTo(1);
+		Assert.assertTrue(socialMedia.getUrl().contains("facebook"), "Facebook page is not displayed");
+		driver.close();
+		socialMedia.switchTo(0);
 
-		explorePage.twitterClicked();
-		explorePage.switchTo(1);
-		Assert.assertTrue(explorePage.getUrl().contains("twitter"), "Twiter page is not displayed");
-		explorePage.closeDriver();
-		explorePage.switchTo(0);
+
+		socialMedia.twitterClicked();
+		socialMedia.switchTo(1);
+		Assert.assertTrue(socialMedia.getUrl().contains("twitter"), "Twiter page is not displayed");
+		driver.close();
+		socialMedia.switchTo(0);
 
 		//Click the Pinterest icon
-		explorePage.pinterestClicked();
-		explorePage.switchTo(1);
-		Assert.assertTrue(explorePage.getUrl().contains("pinterest"), "Pinterest page is not displayed");
-		explorePage.closeDriver();
+		socialMedia.pinterestClicked();
+		socialMedia.switchTo(1);
+		Assert.assertTrue(socialMedia.getUrl().contains("pinterest"), "Pinterest page is not displayed");
+		driver.close();
 
 	}
 
@@ -126,27 +129,27 @@ public class ExploreTest {
 		//Click the Explore button
 		explorePage.exploreBtnClicked();
 		Thread.sleep(3000);
-		
+
 		//Validate that the address exists at the bottom of the page
-		Assert.assertTrue(explorePage.addressDisplayed(), "Address is not displayed");
-		Assert.assertTrue(explorePage.addressDisplayed1(), "Address is not displayed");
-		Assert.assertTrue(explorePage.addressDisplayed2(), "Address is not displayed");
+		Assert.assertTrue(generalInfo.addressDisplayed(), "Address is not displayed");
+		Assert.assertTrue(generalInfo.addressDisplayed1(), "Address is not displayed");
+		Assert.assertTrue(generalInfo.addressDisplayed2(), "Address is not displayed");
 
 
 		//Validate that the contact information exist at the bottom of the page
-		Assert.assertTrue(explorePage.addressDisplayed(), "Contact is not displayed");
-		Assert.assertTrue(explorePage.addressDisplayed1(), "Contact is not displayed");
+		Assert.assertTrue(generalInfo.addressDisplayed(), "Contact is not displayed");
+		Assert.assertTrue(generalInfo.addressDisplayed1(), "Contact is not displayed");
 
-		explorePage.contactAcceptDisplayed2();
+		generalInfo.contactAcceptDisplayed2();
 		driver.switchTo().defaultContent();
 
-		Assert.assertTrue(explorePage.contactDisplayed2(), "Contact is not displayed");
+		Assert.assertTrue(generalInfo.contactDisplayed2(), "Contact is not displayed");
 
 
 		//Validate that the site information exist at the bottom of the page
-		Assert.assertTrue(explorePage.homeDisplayed1(), "Home&Away is not displayed");
-		Assert.assertTrue(explorePage.homeDisplayed2(), "Home&Away is not displayed");
-		Assert.assertTrue(explorePage.homeDisplayed3(), "Home&Away is not displayed");
+		Assert.assertTrue(generalInfo.homeDisplayed1(), "Home&Away is not displayed");
+		Assert.assertTrue(generalInfo.homeDisplayed2(), "Home&Away is not displayed");
+		Assert.assertTrue(generalInfo.homeDisplayed3(), "Home&Away is not displayed");
 		driver.switchTo().defaultContent();
 	}
 
@@ -156,62 +159,64 @@ public class ExploreTest {
 		explorePage.exploreBtnClicked();
 		Thread.sleep(3000);
 
+		Thread.sleep(3000);
+
 		//swich to frame
-		explorePage.switchToChat();
+		chat.switchToChat();
 
 		Thread.sleep(1000);
 
 		//Validate that the Chat button exists 
-		Assert.assertTrue(explorePage.chatBtnisDisplayed(), "Chat is not displayed");
+		Assert.assertTrue(chat.chatBtnisDisplayed(), "Chat is not displayed");
 
 		//Click the chat button
-		explorePage.chatBtnClicked();
+		chat.chatBtnClicked();
 
 		Thread.sleep(1000);
 
 		//Enter a message/emoji 
-		explorePage.emojiBtnClicked();
-		Assert.assertTrue(explorePage.emojiBtnDisplayed(), "Emoji button is not selected");
+		chat.emojiBtnClicked();
+		Assert.assertTrue(chat.emojiBtnDisplayed(), "Emoji button is not selected");
 
 		Thread.sleep(1000);
-		explorePage.emojiClicked();
-		Assert.assertTrue(explorePage.emojiDisplayed(), "Emoji is not selected");
+		chat.emojiClicked();
+		Assert.assertTrue(chat.emojiDisplayed(), "Emoji is not selected");
 
 		Thread.sleep(1000);
 
-		explorePage.sendEmojiClicked();
+		chat.sendEmojiClicked();
 
-		Assert.assertTrue(explorePage.expectedEmojiDisplayed(), "Emoji is not dispayed");
+		Assert.assertTrue(chat.expectedEmojiDisplayed(), "Emoji is not dispayed");
 
 		//Enter all the information and click the submit button
-		Assert.assertTrue(explorePage.formDisplayed(), "Chat is not displayed");
+		Assert.assertTrue(chat.formDisplayed(), "Chat is not displayed");
 
-		explorePage.nameClicked();
-		explorePage.nameSendDisplayed();
-		Assert.assertTrue(explorePage.nameDisplayed(), "Name is not displayed");
-
-		Thread.sleep(1000);
-
-		explorePage.emailClicked();
-		explorePage.emailSendDisplayed();
-		Assert.assertTrue(explorePage.emailDisplayed(), "Email is not displayed");
+		chat.nameClicked();
+		chat.nameSendDisplayed();
+		Assert.assertTrue(chat.nameDisplayed(), "Name is not displayed");
 
 		Thread.sleep(1000);
 
-		explorePage.messageClicked();
-		explorePage.messageSendDisplayed();
-		Assert.assertTrue(explorePage.messageDisplayed(), "Name is not displayed");
+		chat.emailClicked();
+		chat.emailSendDisplayed();
+		Assert.assertTrue(chat.emailDisplayed(), "Email is not displayed");
 
 		Thread.sleep(1000);
 
-		explorePage.submitClicked();
-		Assert.assertTrue(explorePage.submitDisplayed(), "Submit has a problem");
+		chat.messageClicked();
+		chat.messageSendDisplayed();
+		Assert.assertTrue(chat.messageDisplayed(), "Name is not displayed");
+
+		Thread.sleep(1000);
+
+		chat.submitClicked();
+		Assert.assertTrue(chat.submitDisplayed(), "Submit has a problem");
 
 		Thread.sleep(3000);
 
 		//Click the attachment button
-		Assert.assertTrue(explorePage.attachmentDisplayed(), "Chat is not displayed");
-		explorePage.addFileDisplayed();
+		Assert.assertTrue(chat.attachmentDisplayed(), "Chat is not displayed");
+		chat.addFileDisplayed();
 
 		Thread.sleep(5000);
 		driver.switchTo().defaultContent();

@@ -1,41 +1,33 @@
 package tests;
 
-import java.util.concurrent.TimeUnit;
-
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import common.Chat;
+import common.GeneralInfo;
+import common.SocialMedia;
+import common.TestBase;
 import pages.HomePage;
 
-public class HomeTest {
-	private WebDriver driver;
+public class HomeTest extends TestBase{
 	HomePage homePage;
-	@BeforeTest
-	public void beforeTest() {
-		System.setProperty("webdriver.chrome.driver", "C:\\Users\\z004c2sx\\Downloads\\chromedriver.exe");
-		driver = new ChromeDriver(); 
-		driver.manage().window().maximize();
-
+	SocialMedia socialMedia;
+	GeneralInfo generalInfo;
+	Chat chat;
+	
+	@BeforeMethod
+	public void beforeMethod() {
 		homePage = new HomePage(driver);
-
-		driver.get("https://ancabota09.wixsite.com/intern"); 
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS); 
+		socialMedia = new SocialMedia(driver);
+		generalInfo = new GeneralInfo(driver);
+		chat = new Chat(driver);
 	}
-
-	@AfterTest
-	public void afterTest() {
-		if (driver != null)
-			driver.quit();
-	}
-
 
 	@Test
 	public void verifyHomeTab() {
@@ -52,26 +44,27 @@ public class HomeTest {
 
 	@Test 
 	public void verifySocialMedia() throws InterruptedException { 
-		Assert.assertTrue(homePage.facebookIconDisplayed(), "Facebook icon is not displayed");
-		Assert.assertTrue(homePage.twiterIconDisplayed(), "Twiter icon is not displayed");
-		Assert.assertTrue(homePage.pinterestIconDisplayed(), "Pinterest icon is not displayed");
-		homePage.facebookClicked();
-		homePage.switchTo(1);
-		Assert.assertTrue(homePage.getUrl().contains("facebook"), "Facebook page is not displayed");
-		homePage.closeDriver();
-		homePage.switchTo(0);
+		Assert.assertTrue(socialMedia.facebookIconDisplayed(), "Facebook icon is not displayed");
+		Assert.assertTrue(socialMedia.twiterIconDisplayed(), "Twiter icon is not displayed");
+		Assert.assertTrue(socialMedia.pinterestIconDisplayed(), "Pinterest icon is not displayed");
+		socialMedia.facebookClicked();
+		socialMedia.switchTo(1);
+		Assert.assertTrue(socialMedia.getUrl().contains("facebook"), "Facebook page is not displayed");
+		driver.close();
+		socialMedia.switchTo(0);
 
-		homePage.twitterClicked();
-		homePage.switchTo(1);
-		Assert.assertTrue(homePage.getUrl().contains("twitter"), "Twiter page is not displayed");
-		homePage.closeDriver();
-		homePage.switchTo(0);
+
+		socialMedia.twitterClicked();
+		socialMedia.switchTo(1);
+		Assert.assertTrue(socialMedia.getUrl().contains("twitter"), "Twiter page is not displayed");
+		driver.close();
+		socialMedia.switchTo(0);
 
 		//Click the Pinterest icon
-		homePage.pinterestClicked();
-		homePage.switchTo(1);
-		Assert.assertTrue(homePage.getUrl().contains("pinterest"), "Pinterest page is not displayed");
-		homePage.closeDriver();
+		socialMedia.pinterestClicked();
+		socialMedia.switchTo(1);
+		Assert.assertTrue(socialMedia.getUrl().contains("pinterest"), "Pinterest page is not displayed");
+		driver.close();
 
 	}
 
@@ -81,34 +74,39 @@ public class HomeTest {
 		homePage.frameWixHotels();
 
 		Assert.assertTrue(homePage.adultsDisplayed(), "Adults field is not displayed");
+		Assert.assertTrue(homePage.adultsUpDisplayed(), "Adults up button is not displayed");
+		
 		homePage.adultsUpClicked();
 		homePage.adultsUpClicked();
 
-		Thread.sleep(1000);
-		Assert.assertTrue( homePage.twoUpAdultsDisplayed(), "There are not 3 adults");
+		Thread.sleep(1000); 
+		Assert.assertEquals( homePage.adultsgetText(), "Adults" + '\n' +"3");
 		Thread.sleep(1000);
 
+		Assert.assertTrue(homePage.adultsDownDisplayed(), "Adults down button is not displayed");
 		homePage.adultsDownClicked();
 
-		Assert.assertTrue( homePage.oneDownAdultsDisplayed(), "There are not 2 adults");
+		Assert.assertEquals( homePage.adultsgetText(), "Adults" + '\n' + "2");
 		Thread.sleep(1000);
 
 	}
 
 	@Test
 	public void verifyKids() throws InterruptedException { 
-		homePage.frameWixHotels1();
+		homePage.frameWixHotels();
 
 		Assert.assertTrue(homePage.kidsDisplayed(), "Kids field is not displayed");
+		Assert.assertTrue(homePage.kidsUpDisplayed(), "Kids up button is not displayed");
 		homePage.kidsUpClicked();
 		homePage.kidsUpClicked();
 
-		Assert.assertTrue( homePage.twoUpKidsDisplayed(), "There are not 3 kids");
+		Assert.assertEquals( homePage.kidsGetText(), "2");
 		Thread.sleep(1000);
 
+		Assert.assertTrue(homePage.kidsDownDisplayed(), "Kids down button is not displayed");
 		homePage.kidsDownClicked();
 
-		Assert.assertTrue( homePage.oneDownKidsDisplayed(), "There are not 2 kids");
+		Assert.assertEquals( homePage.kidsGetText(), "1");
 		Thread.sleep(1000);
 
 	}
@@ -119,61 +117,61 @@ public class HomeTest {
 		Thread.sleep(3000);
 
 		//swich to frame
-		homePage.switchToChat();
+		chat.switchToChat();
 
 		Thread.sleep(1000);
 
 		//Validate that the Chat button exists 
-		Assert.assertTrue(homePage.chatBtnisDisplayed(), "Chat is not displayed");
+		Assert.assertTrue(chat.chatBtnisDisplayed(), "Chat is not displayed");
 
 		//Click the chat button
-		homePage.chatBtnClicked();
+		chat.chatBtnClicked();
 
 		Thread.sleep(1000);
 
 		//Enter a message/emoji 
-		homePage.emojiBtnClicked();
-		Assert.assertTrue(homePage.emojiBtnDisplayed(), "Emoji button is not selected");
+		chat.emojiBtnClicked();
+		Assert.assertTrue(chat.emojiBtnDisplayed(), "Emoji button is not selected");
 
 		Thread.sleep(1000);
-		homePage.emojiClicked();
-		Assert.assertTrue(homePage.emojiDisplayed(), "Emoji is not selected");
+		chat.emojiClicked();
+		Assert.assertTrue(chat.emojiDisplayed(), "Emoji is not selected");
 
 		Thread.sleep(1000);
 
-		homePage.sendEmojiClicked();
+		chat.sendEmojiClicked();
 
-		Assert.assertTrue(homePage.expectedEmojiDisplayed(), "Emoji is not dispayed");
+		Assert.assertTrue(chat.expectedEmojiDisplayed(), "Emoji is not dispayed");
 
 		//Enter all the information and click the submit button
-		Assert.assertTrue(homePage.formDisplayed(), "Chat is not displayed");
+		Assert.assertTrue(chat.formDisplayed(), "Chat is not displayed");
 
-		homePage.nameClicked();
-		homePage.nameSendDisplayed();
-		Assert.assertTrue(homePage.nameDisplayed(), "Name is not displayed");
-
-		Thread.sleep(1000);
-
-		homePage.emailClicked();
-		homePage.emailSendDisplayed();
-		Assert.assertTrue(homePage.emailDisplayed(), "Email is not displayed");
+		chat.nameClicked();
+		chat.nameSendDisplayed();
+		Assert.assertTrue(chat.nameDisplayed(), "Name is not displayed");
 
 		Thread.sleep(1000);
 
-		homePage.messageClicked();
-		homePage.messageSendDisplayed();
-		Assert.assertTrue(homePage.messageDisplayed(), "Name is not displayed");
+		chat.emailClicked();
+		chat.emailSendDisplayed();
+		Assert.assertTrue(chat.emailDisplayed(), "Email is not displayed");
 
 		Thread.sleep(1000);
 
-		homePage.submitClicked();
-		Assert.assertTrue(homePage.submitDisplayed(), "Submit has a problem");
+		chat.messageClicked();
+		chat.messageSendDisplayed();
+		Assert.assertTrue(chat.messageDisplayed(), "Name is not displayed");
+
+		Thread.sleep(1000);
+
+		chat.submitClicked();
+		Assert.assertTrue(chat.submitDisplayed(), "Submit has a problem");
 
 		Thread.sleep(3000);
 
 		//Click the attachment button
-		Assert.assertTrue(homePage.attachmentDisplayed(), "Chat is not displayed");
-		homePage.addFileDisplayed();
+		Assert.assertTrue(chat.attachmentDisplayed(), "Chat is not displayed");
+		chat.addFileDisplayed();
 
 		Thread.sleep(5000);
 		driver.switchTo().defaultContent();
@@ -182,25 +180,25 @@ public class HomeTest {
 	@Test 
 	public void verifyGeneralInfo() { 
 		//Validate that the address exists at the bottom of the page
-		Assert.assertTrue(homePage.addressDisplayed(), "Address is not displayed");
-		Assert.assertTrue(homePage.addressDisplayed1(), "Address is not displayed");
-		Assert.assertTrue(homePage.addressDisplayed2(), "Address is not displayed");
+		Assert.assertTrue(generalInfo.addressDisplayed(), "Address is not displayed");
+		Assert.assertTrue(generalInfo.addressDisplayed1(), "Address is not displayed");
+		Assert.assertTrue(generalInfo.addressDisplayed2(), "Address is not displayed");
 
 
 		//Validate that the contact information exist at the bottom of the page
-		Assert.assertTrue(homePage.addressDisplayed(), "Contact is not displayed");
-		Assert.assertTrue(homePage.addressDisplayed1(), "Contact is not displayed");
+		Assert.assertTrue(generalInfo.addressDisplayed(), "Contact is not displayed");
+		Assert.assertTrue(generalInfo.addressDisplayed1(), "Contact is not displayed");
 
-		homePage.contactAcceptDisplayed2();
+		generalInfo.contactAcceptDisplayed2();
 		driver.switchTo().defaultContent();
 
-		Assert.assertTrue(homePage.contactDisplayed2(), "Contact is not displayed");
+		Assert.assertTrue(generalInfo.contactDisplayed2(), "Contact is not displayed");
 
 
 		//Validate that the site information exist at the bottom of the page
-		Assert.assertTrue(homePage.homeDisplayed1(), "Home&Away is not displayed");
-		Assert.assertTrue(homePage.homeDisplayed2(), "Home&Away is not displayed");
-		Assert.assertTrue(homePage.homeDisplayed3(), "Home&Away is not displayed");
+		Assert.assertTrue(generalInfo.homeDisplayed1(), "Home&Away is not displayed");
+		Assert.assertTrue(generalInfo.homeDisplayed2(), "Home&Away is not displayed");
+		Assert.assertTrue(generalInfo.homeDisplayed3(), "Home&Away is not displayed");
 		driver.switchTo().defaultContent();
 	}
 
@@ -243,8 +241,8 @@ public class HomeTest {
 		homePage.dataCheckInClicked();
 		Thread.sleep(3000);
 
-		homePage.frameWixHotels1();
-		Assert.assertEquals(homePage.actualDateCheckIn(), "29 Jun 2021");
+		homePage.frameWixHotels();
+		Assert.assertEquals(homePage.actualDateCheckIn(), "12 Jul 2021");
 
 		//switch to default
 		driver.switchTo().defaultContent();
@@ -255,15 +253,15 @@ public class HomeTest {
 		homePage.dataCheckOutClicked();
 
 		Thread.sleep(1000);
-
+		
 		homePage.frameWixHotels();
-		Assert.assertEquals(homePage.actualDateCheckOut(), "6 Jul 2021");
+		Assert.assertEquals(homePage.actualDateCheckOut(), "24 Jul 2021");
 
 		Thread.sleep(1000);
 		driver.switchTo().defaultContent();
 
 		Thread.sleep(1000);
-		homePage.frameWixHotels1();
+		homePage.frameWixHotels();
 
 		Thread.sleep(1000);
 
@@ -278,7 +276,7 @@ public class HomeTest {
 		homePage.switchTo(0);
 
 		Assert.assertTrue(homePage.getUrl().contains("rooms"), "Rooms page is not displayed");	
-		homePage.closeDriver();
+		driver.close();
 
 		Thread.sleep(3000);
 	}
@@ -309,8 +307,8 @@ public class HomeTest {
 		homePage.dataCheckInClicked();
 		Thread.sleep(3000);
 
-		homePage.frameWixHotels1();
-		Assert.assertEquals(homePage.actualDateCheckIn(), "30 Jun 2021");
+		homePage.frameWixHotels();
+		Assert.assertEquals(homePage.actualDateCheckIn(), "12 Jul 2021");
 
 
 		Thread.sleep(1000);
@@ -333,8 +331,8 @@ public class HomeTest {
 		homePage.dataCheckIn1Clicked();
 		Thread.sleep(3000);
 
-		homePage.frameWixHotels1();
-		Assert.assertEquals(homePage.actualDateCheckIn(), "30 Jul 2021");
+		homePage.frameWixHotels();
+		Assert.assertEquals(homePage.actualDateCheckIn(), "17 Aug 2021");
 
 		//switch to default
 		driver.switchTo().defaultContent();
@@ -347,7 +345,7 @@ public class HomeTest {
 		Thread.sleep(1000);
 
 		homePage.frameWixHotels();
-		Assert.assertEquals(homePage.actualDateCheckOut(), "6 Aug 2021");
+		Assert.assertEquals(homePage.actualDateCheckOut(), "24 Aug 2021");
 
 		homePage.adultsUpClicked();
 		homePage.kidsUpClicked();
@@ -356,7 +354,7 @@ public class HomeTest {
 		driver.switchTo().defaultContent();
 
 		Thread.sleep(1000);
-		homePage.frameWixHotels1();
+		homePage.frameWixHotels();
 
 		Thread.sleep(1000);
 
@@ -371,7 +369,7 @@ public class HomeTest {
 		homePage.switchTo(0);
 
 		Assert.assertTrue(homePage.getUrl().contains("rooms"), "Rooms page is not displayed");	
-		homePage.closeDriver();
+		driver.close();
 
 		Thread.sleep(3000);
 	}

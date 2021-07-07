@@ -26,12 +26,11 @@ public class TestBase {
 
 	@BeforeMethod(alwaysRun = true)
 	public void setUpDriver() {
-		System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver", "C:\\Users\\z004c2sx\\Downloads\\chromedriver.exe");
 		driver = new ChromeDriver();
         driver.manage().window().maximize();
     	driver.get("https://ancabota09.wixsite.com/intern");
     	driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-
 	}
 	
 	
@@ -54,6 +53,10 @@ public class TestBase {
 		return driver.getCurrentUrl();
 	}
 	
+	public boolean display(WebElement element) {
+		return element.isDisplayed();
+	}
+	
 	public boolean checkTextOnPage(String textToCheck){
 		return driver.getPageSource().contains(textToCheck);
 	}
@@ -71,6 +74,9 @@ public class TestBase {
 		element.click();
 	}
 	
+//	public WebDriver switchToFrame(WebElement element) {
+//		return driver.switchTo().frame(element);
+//	}
 	
 	// DropDown select
 
@@ -141,5 +147,8 @@ public class TestBase {
 		});
 		return fluentElement;
 	}
+
+
+
 	
 }
