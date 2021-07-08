@@ -185,7 +185,7 @@ public class HomePage extends TestBase{
 	}
 
 	public TestBase checkInClicked() {
-		waitElementIsClickable(100, By.xpath("//button[@id='check-in'][1]"));
+		//waitElementIsClickable(100, By.xpath("//button[@id='check-in'][1]"));
 		click(dataBtnCheckIn);
 		return this;
 	}
@@ -195,7 +195,7 @@ public class HomePage extends TestBase{
 	}
 
 	public TestBase dataCheckInClicked() {
-		waitElementIsClickable(100, By.xpath("//span[contains(text(),'12')]"));
+		//waitElementIsClickable(100, By.xpath("//span[contains(text(),'12')]"));
 		click(dataCheckIn);
 		return this;
 	}
@@ -205,7 +205,7 @@ public class HomePage extends TestBase{
 	}
 
 	public TestBase dataCheckOutClicked() {
-		waitElementIsClickable(100, By.xpath("//button[@day-button-aria='day']/span[contains(text(),'24')]"));
+		//waitElementIsClickable(100, By.xpath("//button[@day-button-aria='day']/span[contains(text(),'24')]"));
 		click(checkOutData);
 		return this;
 	}

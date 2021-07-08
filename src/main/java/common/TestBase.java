@@ -127,16 +127,16 @@ public class TestBase {
 		wait.until(ExpectedConditions.visibilityOf(element));	
 	}
 	
-	public WebElement waitElementIsClickable(int intervalToWait, By option){
+	public WebElement waitElementIsClickable(int intervalToWait, WebElement emojiBtn){
 		WebElement element = new WebDriverWait(driver, intervalToWait)
-		        .until(ExpectedConditions.elementToBeClickable(option));
+		        .until(ExpectedConditions.elementToBeClickable(emojiBtn));
 		
 		return element;
 	}
 	
-	public void waitForFrameAndSwitch(By by) {
-		WebDriverWait wait = new WebDriverWait(driver, 100);		
-		wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(by));
+	public void waitForFrameAndSwitch(WebElement wixChat) {
+		WebDriverWait wait = new WebDriverWait(driver, 200);		
+		wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(wixChat));
 	}
 		
 	//fluent wait	

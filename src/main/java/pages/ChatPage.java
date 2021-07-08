@@ -63,10 +63,12 @@ public class ChatPage extends TestBase{
 	
 	
 	public void switchToChat() {
-		driver.switchTo().frame(wixChat);
+		waitForFrameAndSwitch(wixChat);
+		//driver.switchTo().frame(wixChat);
 	}
 
 	public boolean chatBtnisDisplayed() {
+		
 		return display(minimizeChat);
 	}
 
@@ -76,6 +78,7 @@ public class ChatPage extends TestBase{
 	}
 
 	public TestBase emojiBtnClicked() {
+		waitElementIsClickable(5,emojiBtn);
 		click(emojiBtn);
 		return this;
 	}
@@ -85,6 +88,7 @@ public class ChatPage extends TestBase{
 	}
 
 	public TestBase emojiClicked() {
+		waitElementIsClickable(5,selectEmoji);
 		click(selectEmoji);
 		return this;
 	}
@@ -94,6 +98,7 @@ public class ChatPage extends TestBase{
 	}
 
 	public TestBase sendEmojiClicked() {
+		waitElementIsClickable(5,sendBtn);
 		click(sendBtn);
 		return this;
 	}
@@ -121,6 +126,7 @@ public class ChatPage extends TestBase{
 	}
 
 	public void emailClicked() {
+		waitElementIsClickable(5,email);
 		email.click();
 	}
 
@@ -134,6 +140,7 @@ public class ChatPage extends TestBase{
 	}
 
 	public TestBase messageClicked() {
+		waitElementIsClickable(5,message);
 		click(message);
 		return this;
 	}
@@ -148,6 +155,7 @@ public class ChatPage extends TestBase{
 	}
 
 	public TestBase submitClicked() {
+		waitElementIsClickable(10,submit);
 		click(submit);
 		return this;
 	}
@@ -157,6 +165,7 @@ public class ChatPage extends TestBase{
 	}
 
 	public boolean attachmentDisplayed() {
+		waitElementIsVisible(attach,5);
 		return display(attach);
 	}
 

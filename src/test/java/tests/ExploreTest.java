@@ -4,7 +4,6 @@ package tests;
 import java.util.ArrayList;
 
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -170,14 +169,11 @@ public class ExploreTest extends TestBase {
 	public void verifyChat() throws InterruptedException {
 		//Click the Explore button
 		explorePage.exploreBtnClicked();
-		Thread.sleep(3000);
-
-		Thread.sleep(3000);
+	
+		waitPageLoad(3000);
 
 		//swich to frame
 		chat.switchToChat();
-
-		Thread.sleep(1000);
 
 		//Validate that the Chat button exists 
 		Assert.assertTrue(chat.chatBtnisDisplayed(), "Chat is not displayed");
@@ -185,17 +181,12 @@ public class ExploreTest extends TestBase {
 		//Click the chat button
 		chat.chatBtnClicked();
 
-		Thread.sleep(1000);
-
 		//Enter a message/emoji 
 		chat.emojiBtnClicked();
 		Assert.assertTrue(chat.emojiBtnDisplayed(), "Emoji button is not selected");
 
-		Thread.sleep(1000);
 		chat.emojiClicked();
 		Assert.assertTrue(chat.emojiDisplayed(), "Emoji is not selected");
-
-		Thread.sleep(1000);
 
 		chat.sendEmojiClicked();
 
@@ -208,31 +199,23 @@ public class ExploreTest extends TestBase {
 		chat.nameSendDisplayed();
 		Assert.assertTrue(chat.nameDisplayed(), "Name is not displayed");
 
-		Thread.sleep(1000);
-
 		chat.emailClicked();
 		chat.emailSendDisplayed();
 		Assert.assertTrue(chat.emailDisplayed(), "Email is not displayed");
-
-		Thread.sleep(1000);
 
 		chat.messageClicked();
 		chat.messageSendDisplayed();
 		Assert.assertTrue(chat.messageDisplayed(), "Name is not displayed");
 
-		Thread.sleep(1000);
-
 		chat.submitClicked();
 		Assert.assertTrue(chat.submitDisplayed(), "Submit has a problem");
-
-		Thread.sleep(3000);
 
 		//Click the attachment button
 		Assert.assertTrue(chat.attachmentDisplayed(), "Chat is not displayed");
 		chat.addFileDisplayed();
 
-		Thread.sleep(5000);
-		driver.switchTo().defaultContent();
+		implicitWait(10);
+
 	}
 
 }
