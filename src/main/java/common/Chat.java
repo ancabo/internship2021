@@ -159,7 +159,7 @@ public class Chat extends TestBase{
 	}
 
 	public TestBase addFileDisplayed() {
-		clear_SendKey(file,"C:\\Users\\z004c2sx\\Documents\\TestCase - Copy.xlsx");
+		clear_SendKey(file,"D:\\hey.png");
 		return this;
 	}
 }

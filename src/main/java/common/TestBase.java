@@ -26,7 +26,7 @@ public class TestBase {
 
 	@BeforeMethod(alwaysRun = true)
 	public void setUpDriver() {
-		System.setProperty("webdriver.chrome.driver", "C:\\Users\\z004c2sx\\Downloads\\chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver", "drivers\\chromedriver.exe");
 		driver = new ChromeDriver();
         driver.manage().window().maximize();
     	driver.get("https://ancabota09.wixsite.com/intern");
@@ -37,7 +37,7 @@ public class TestBase {
 	@AfterTest(alwaysRun = true)
 	public void quitDriver() {
 		if (driver != null)
-			driver.quit();
+			driver.close();
 		}
 	
 	
@@ -59,6 +59,10 @@ public class TestBase {
 	
 	public boolean display(WebElement element) {
 		return element.isDisplayed();
+	}
+	
+	public String getText(WebElement element) {
+		return element.getText();
 	}
 	
 	public boolean checkTextOnPage(String textToCheck){
