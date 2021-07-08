@@ -61,6 +61,10 @@ public class TestBase {
 		return element.isDisplayed();
 	}
 	
+	public String getText(WebElement element) {
+		return element.getText();
+	}
+	
 	public boolean checkTextOnPage(String textToCheck){
 		return driver.getPageSource().contains(textToCheck);
 	}
