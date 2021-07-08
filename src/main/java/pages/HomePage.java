@@ -1,6 +1,8 @@
 package pages;
 
 import java.util.ArrayList;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -85,11 +87,7 @@ public class HomePage extends TestBase{
 	private WebElement nextMonth;
 
 	
-	
 	//Actions on WebElements//
-	public String getPageTitle(){
-		return driver.getTitle();
-	}
 
 	public String getHeaderText(){
 		return header.getText();
@@ -103,11 +101,6 @@ public class HomePage extends TestBase{
 		return display(background);
 	}
 
-	public String getUrl() {
-		String url = driver.getCurrentUrl();
-		return url;
-	}
-
 	public void switchTo(int number) {
 		ArrayList<String> windowH = new ArrayList<String>(driver.getWindowHandles());
 		if(number == 1) {
@@ -119,6 +112,9 @@ public class HomePage extends TestBase{
 	}
 
 	public WebDriver frameWixHotels() {
+		//fluentWait(30, 5, By.xpath("//iframe[@title='Wix Hotels']"));
+		//waitElementIsVisible(wixHotels, 30);
+		//waitForFrameAndSwitch(By.xpath("));
 		return driver.switchTo().frame(wixHotels);
 	}
 
@@ -131,6 +127,7 @@ public class HomePage extends TestBase{
 	}
 	
 	public TestBase adultsUpClicked() {
+		//waitElementIsClickable(1000, By.xpath("//*[@id=\"adults\"]/a[1]"));
 		click(upAdultsBtn);
 		return this;
 	}
@@ -188,6 +185,7 @@ public class HomePage extends TestBase{
 	}
 
 	public TestBase checkInClicked() {
+		waitElementIsClickable(100, By.xpath("//button[@id='check-in'][1]"));
 		click(dataBtnCheckIn);
 		return this;
 	}
@@ -197,6 +195,7 @@ public class HomePage extends TestBase{
 	}
 
 	public TestBase dataCheckInClicked() {
+		waitElementIsClickable(100, By.xpath("//span[contains(text(),'12')]"));
 		click(dataCheckIn);
 		return this;
 	}
@@ -206,10 +205,11 @@ public class HomePage extends TestBase{
 	}
 
 	public TestBase dataCheckOutClicked() {
+		waitElementIsClickable(100, By.xpath("//button[@day-button-aria='day']/span[contains(text(),'24')]"));
 		click(checkOutData);
 		return this;
 	}
-
+	
 	public String actualDateCheckOut() {
 		return actualDateCheckOut.getText();
 	}

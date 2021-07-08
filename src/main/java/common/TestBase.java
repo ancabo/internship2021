@@ -49,6 +49,10 @@ public class TestBase {
 		driver.get(url);
 	}
 	
+	public String getTitle() {
+		return driver.getTitle();
+	}
+	
 	public String getCurrentURL() {
 		return driver.getCurrentUrl();
 	}
@@ -103,13 +107,14 @@ public class TestBase {
 	
 	//Wait methods
 	//implicit wait
-	public void inplicitWait(int sec) {
+	public void implicitWait(int sec) {
 		driver.manage().timeouts().implicitlyWait(sec, TimeUnit.SECONDS);
 	}
 	
 	public void waitPageLoad(int sec) {
 		driver.manage().timeouts().pageLoadTimeout(sec, TimeUnit.SECONDS);
 	}
+	
 	
 	
 	//explicit wait
@@ -125,6 +130,10 @@ public class TestBase {
 		return element;
 	}
 	
+	public void waitForFrameAndSwitch(By by) {
+		WebDriverWait wait = new WebDriverWait(driver, 100);		
+		wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(by));
+	}
 		
 	//fluent wait	
 	public WebElement fluentWaitElementPresentBy(int secTimeOut, int secSearchInterval, By option){ //By.xpath("//a/h3"))

@@ -59,10 +59,6 @@ public class ExplorePage {
 	@FindBy(xpath ="//*[@id=\"i6kvbkw0\"]/p[1]")
 	private WebElement bridge;
 
-	public String getPageTitle() {
-		return driver.getTitle();
-	}
-
 	public boolean exploreBtnDisplayed() {
 		return exploreBtn.isDisplayed();
 	}

@@ -32,7 +32,7 @@ public class HomeTest extends TestBase{
 	@Test
 	public void verifyHomeTab() {
 		//verify page title
-		Assert.assertEquals(homePage.getPageTitle(), "HOME | Intern", "Title is not as expected");
+		Assert.assertEquals(getTitle(), "HOME | Intern", "Title is not as expected");
 		Assert.assertEquals(homePage.getHeaderText(), "HOME & AWAY", "Not as expected");
 		Assert.assertTrue(homePage.homeTabDisplayed(), "Home tab is not displayed"); 
 	}
@@ -70,29 +70,32 @@ public class HomeTest extends TestBase{
 
 	@Test
 	public void verifyAdults() throws InterruptedException { 
-		Thread.sleep(1000);
+		waitPageLoad(1000);
 		homePage.frameWixHotels();
 
+		//implicitWait(20);
 		Assert.assertTrue(homePage.adultsDisplayed(), "Adults field is not displayed");
 		Assert.assertTrue(homePage.adultsUpDisplayed(), "Adults up button is not displayed");
 		
 		homePage.adultsUpClicked();
 		homePage.adultsUpClicked();
-
-		Thread.sleep(1000); 
+		
+		//implicitWait(20);
 		Assert.assertEquals( homePage.adultsgetText(), "Adults" + '\n' +"3");
-		Thread.sleep(1000);
-
+		
+		implicitWait(20);
 		Assert.assertTrue(homePage.adultsDownDisplayed(), "Adults down button is not displayed");
 		homePage.adultsDownClicked();
 
+		implicitWait(20);
 		Assert.assertEquals( homePage.adultsgetText(), "Adults" + '\n' + "2");
-		Thread.sleep(1000);
+		implicitWait(40);
 
 	}
 
 	@Test
 	public void verifyKids() throws InterruptedException { 
+		Thread.sleep(1000);
 		homePage.frameWixHotels();
 
 		Assert.assertTrue(homePage.kidsDisplayed(), "Kids field is not displayed");
@@ -114,7 +117,7 @@ public class HomeTest extends TestBase{
 
 	@Test
 	public void verifyChat() throws InterruptedException {
-		Thread.sleep(3000);
+		waitPageLoad(3000);
 
 		//swich to frame
 		chat.switchToChat();
@@ -211,35 +214,34 @@ public class HomeTest extends TestBase{
 		homePage.bookNowClicked();
 
 		Assert.assertTrue( homePage.roomsDisplayed(), "Rooms page is not displayed");
-
-		Thread.sleep(1000);
 	}
-
+	
 	@Test 
 	public void verifySearch() throws InterruptedException { 
+		//waitPageLoad(4000);
 		Thread.sleep(3000);
-
+		
 		//Validate that frame exists
 		homePage.frameWixHotels();
-		Thread.sleep(3000);
 
 		//Click the check in field
 		homePage.checkInClicked();
-		Thread.sleep(1000);
-
+		implicitWait(100);
+		
 		//switch to default
 		driver.switchTo().defaultContent();
-		Thread.sleep(1000);
+		implicitWait(100);
+		
 
 		//Click on a date (later than today)
 		//switch to check-in frame
 		homePage.switchToframe();
 		Thread.sleep(1000);
+		//implicitWait(100);
 
 		//select a date ->later than today
-		Thread.sleep(1000);
 		homePage.dataCheckInClicked();
-		Thread.sleep(3000);
+		implicitWait(100);
 
 		homePage.frameWixHotels();
 		Assert.assertEquals(homePage.actualDateCheckIn(), "12 Jul 2021");
@@ -249,7 +251,6 @@ public class HomeTest extends TestBase{
 
 		homePage.switchToframe();
 
-		Thread.sleep(1000);
 		homePage.dataCheckOutClicked();
 
 		Thread.sleep(1000);
@@ -275,12 +276,11 @@ public class HomeTest extends TestBase{
 
 		homePage.switchTo(0);
 
-		Assert.assertTrue(homePage.getUrl().contains("rooms"), "Rooms page is not displayed");	
+		Assert.assertTrue(getCurrentURL().contains("rooms"), "Rooms page is not displayed");	
 		driver.close();
 
 		Thread.sleep(3000);
 	}
-
 	@Test 
 	public void verifyCheckIn() throws InterruptedException { 
 		Thread.sleep(3000);
@@ -368,7 +368,7 @@ public class HomeTest extends TestBase{
 
 		homePage.switchTo(0);
 
-		Assert.assertTrue(homePage.getUrl().contains("rooms"), "Rooms page is not displayed");	
+		Assert.assertTrue(getCurrentURL().contains("rooms"), "Rooms page is not displayed");	
 		driver.close();
 
 		Thread.sleep(3000);
