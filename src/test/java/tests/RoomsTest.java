@@ -1,43 +1,34 @@
 package tests;
 
-import java.util.concurrent.TimeUnit;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.BeforeTest;
+import java.util.ArrayList;
+
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import common.Chat;
-import common.GeneralInfo;
-import common.SocialMedia;
 import common.TestBase;
-import pages.ContactPage;
+import pages.ChatPage;
+import pages.GeneralInfoPage;
 import pages.RoomsPage;
+import pages.SocialMediaPage;
 
 public class RoomsTest extends TestBase{
 	
-	private WebDriver driver;
 	private RoomsPage roomsPage;
-	private SocialMedia socialMedia;
-	private GeneralInfo generalInfo;
-	private Chat chat;
+	private SocialMediaPage socialMedia;
+	private GeneralInfoPage generalInfo;
+	private ChatPage chat;
 	
-	@BeforeTest
+	@BeforeMethod
 	public void beforeTest() {
 		
-		setUpDriver();
 		roomsPage = new RoomsPage(driver);
-		socialMedia = new SocialMedia(driver);
-		generalInfo = new GeneralInfo(driver);
-		chat = new Chat(driver);
+		socialMedia = new SocialMediaPage(driver);
+		generalInfo = new GeneralInfoPage(driver);
+		chat = new ChatPage(driver);
         
 	}
 
-	@AfterTest
-	public void AfterTest() {		
-		quitDriver();		
-	}
   
 	
 	@Test
@@ -603,23 +594,31 @@ public void verifyChat() throws InterruptedException{
 	
 	
 	@Test
-	public void verifySocialBar2() throws InterruptedException{
+	public void verifySocialBar() throws InterruptedException{
 		
-		//click the contact button from the home page
-		roomsPage.clickRooms();		
-		Thread.sleep(2000);
+//		//click the contact button from the home page
+//		roomsPage.clickRooms();		
+//		Thread.sleep(2000);
+//		
+//		//facebook
+//		Assert.assertTrue(socialMedia.facebookIconDisplayed(), "Fb icon is not displayed");
+//		//Assert.assertEquals(roomsPage.getFb2Link(), "http://www.facebook.com/wix");
+//		
+//		//twitter
+//		Assert.assertTrue(socialMedia.twiterIconDisplayed(), "Twitter icon is not displayed");
+//		//Assert.assertEquals(roomsPage.getTw2Link(), "http://www.twitter.com/wix");
+//		
+//		//pinterest
+//		Assert.assertTrue(socialMedia.pinterestIconDisplayed(), "Pinterest icon is not displayed");
+//		//Assert.assertEquals(roomsPage.getPint2Link(), "http://pinterest.com/wixcom/");
 		
-		//facebook
-		Assert.assertTrue(socialMedia.facebookIconDisplayed(), "Fb icon is not displayed");
-		//Assert.assertEquals(roomsPage.getFb2Link(), "http://www.facebook.com/wix");
-		
-		//twitter
-		Assert.assertTrue(socialMedia.twiterIconDisplayed(), "Twitter icon is not displayed");
-		//Assert.assertEquals(roomsPage.getTw2Link(), "http://www.twitter.com/wix");
-		
-		//pinterest
-		Assert.assertTrue(socialMedia.pinterestIconDisplayed(), "Pinterest icon is not displayed");
-		//Assert.assertEquals(roomsPage.getPint2Link(), "http://pinterest.com/wixcom/");
+		Assert.assertEquals(socialMedia.getSocialMediaIcons().size(), 3, "There are not 3 icons");
+		Assert.assertEquals(socialMedia.getSocialMediaLinkList().size(), 3, "There are not 3 links");
+	
+		ArrayList<String> socialMediaList = socialMedia.getSocialMediaLinkList() ;
+		Assert.assertEquals(socialMediaList.get(0), "http://www.facebook.com/wix", "The fb link is not ok");
+		Assert.assertEquals(socialMediaList.get(1), "http://www.twitter.com/wix", "The twiter link is not ok");
+		Assert.assertEquals(socialMediaList.get(2), "http://pinterest.com/wixcom/", "The pinterest link is not ok");
 		
 	}
 	
@@ -631,34 +630,44 @@ public void verifyGeneralInfo() throws InterruptedException{
 		roomsPage.clickRooms();		
 		Thread.sleep(1000);
 		
-		//address
-		Assert.assertTrue(generalInfo.addressDisplayed(), "Address title is not displayed"); 
-		//Assert.assertEquals(roomsPage.getAddressTitle(), "ADDRESS");
-		Assert.assertTrue(generalInfo.addressDisplayed1(), "Address line 1 is not displayed");
-		//Assert.assertEquals(roomsPage.getAddress1Text(), "500 Terry Francois Street");
-		Assert.assertTrue(generalInfo.addressDisplayed2(), "Address line 2 is not displayed");
-		//Assert.assertEquals(roomsPage.getAddress2Text(), "San Francisco, CA 94158");
+//		//address
+//		Assert.assertTrue(generalInfo.addressDisplayed(), "Address title is not displayed"); 
+//		//Assert.assertEquals(roomsPage.getAddressTitle(), "ADDRESS");
+//		Assert.assertTrue(generalInfo.addressDisplayed1(), "Address line 1 is not displayed");
+//		//Assert.assertEquals(roomsPage.getAddress1Text(), "500 Terry Francois Street");
+//		Assert.assertTrue(generalInfo.addressDisplayed2(), "Address line 2 is not displayed");
+//		//Assert.assertEquals(roomsPage.getAddress2Text(), "San Francisco, CA 94158");
+//		
+//		//contact
+//		Assert.assertTrue(generalInfo.contactDisplayed(), "Contact title is not displayed"); 
+//		//Assert.assertEquals(roomsPage.getContactTitle(), "CONTACT");
+//		Assert.assertTrue(generalInfo.contactDisplayed1(), "Contact line 1 is not displayed");
+//		//Assert.assertEquals(roomsPage.getContact1Text(), "info@mysite.com");
+//		Assert.assertTrue(generalInfo.contactDisplayed2(), "Contact line 2 is not displayed");
+//		//Assert.assertEquals(roomsPage.getContact2Text(), "Tel: 123-456-7890");
+//		
+//		//home&away 
+//		Assert.assertTrue(generalInfo.homeDisplayed1(), "Home&Away title is not displayed"); 
+//		//Assert.assertEquals(roomsPage.getHaTitle(), "HOME & AWAY");
+//		Assert.assertTrue(generalInfo.homeDisplayed2(), "Home&Away line 1 is not displayed");
+//		//Assert.assertEquals(roomsPage.getHa1Text(), "© 2023 by HOME & AWAY");
+//		Assert.assertTrue(generalInfo.homeDisplayed3(), "Home&Away line 2 is not displayed");
+//		//Assert.assertEquals(roomsPage.getHa2Text(), "Proudly created with Wix.com");
+//		
+//		//payment
+//		//Assert.assertTrue(roomsPage.payTitleDisplayed(), "Payment title is not displayed"); 
+//		//Assert.assertEquals(roomsPage.getPayTitle(), "WE ACCEPT");
+//		//Assert.assertTrue(roomsPage.paymentDisplayed(), "Payment methods are not displayed");
 		
-		//contact
-		Assert.assertTrue(generalInfo.contactDisplayed(), "Contact title is not displayed"); 
-		//Assert.assertEquals(roomsPage.getContactTitle(), "CONTACT");
-		Assert.assertTrue(generalInfo.contactDisplayed1(), "Contact line 1 is not displayed");
-		//Assert.assertEquals(roomsPage.getContact1Text(), "info@mysite.com");
-		Assert.assertTrue(generalInfo.contactDisplayed2(), "Contact line 2 is not displayed");
-		//Assert.assertEquals(roomsPage.getContact2Text(), "Tel: 123-456-7890");
 		
-		//home&away 
-		Assert.assertTrue(generalInfo.homeDisplayed1(), "Home&Away title is not displayed"); 
-		//Assert.assertEquals(roomsPage.getHaTitle(), "HOME & AWAY");
-		Assert.assertTrue(generalInfo.homeDisplayed2(), "Home&Away line 1 is not displayed");
-		//Assert.assertEquals(roomsPage.getHa1Text(), "© 2023 by HOME & AWAY");
-		Assert.assertTrue(generalInfo.homeDisplayed3(), "Home&Away line 2 is not displayed");
-		//Assert.assertEquals(roomsPage.getHa2Text(), "Proudly created with Wix.com");
-		
-		//payment
-		//Assert.assertTrue(roomsPage.payTitleDisplayed(), "Payment title is not displayed"); 
-		//Assert.assertEquals(roomsPage.getPayTitle(), "WE ACCEPT");
-		//Assert.assertTrue(roomsPage.paymentDisplayed(), "Payment methods are not displayed");
+		Assert.assertEquals(generalInfo.getGeneralInfoTitles().size(), 4, "There are not 4 titles");
+		Assert.assertEquals(generalInfo.getGeneralInfoTitleText().size(), 4, "There are not 4 titles");
+	
+		ArrayList<String> generalInfoList = generalInfo.getGeneralInfoTitleText() ;
+		Assert.assertEquals(generalInfoList.get(0), "ADDRESS", "The Adress title is not ok");
+		Assert.assertEquals(generalInfoList.get(1), "CONTACT", "The Contact title is not ok");
+		Assert.assertEquals(generalInfoList.get(2), "HOME & AWAY", "The Home&Away title is not ok");
+		Assert.assertEquals(generalInfoList.get(3), "WE ACCEPT", "The accept title is not ok");
 		
 	}
   		

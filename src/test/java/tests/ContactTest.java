@@ -1,43 +1,34 @@
 package tests;
 
-import org.openqa.selenium.WebDriver;
+import java.util.ArrayList;
+
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import pages.ChatPage;
 import pages.ContactPage;
+import pages.GeneralInfoPage;
+import pages.SocialMediaPage;
 import common.TestBase;
-import common.Chat;
-import common.GeneralInfo;
-import common.SocialMedia;
 
 public class ContactTest extends TestBase{
 	
-	private WebDriver driver;
 	private ContactPage contactPage;
-	private SocialMedia socialMedia;
-	private GeneralInfo generalInfo;
-	private Chat chat;
+	private SocialMediaPage socialMedia;
+	private GeneralInfoPage generalInfo;
+	private ChatPage chat;
 	
-	@BeforeTest
+	@BeforeMethod
 	public void BeforeTest() {
 		
-		setUpDriver();
 		contactPage = new ContactPage(driver);
-		socialMedia = new SocialMedia(driver);
-		generalInfo = new GeneralInfo(driver);
-		chat = new Chat(driver);
+		socialMedia = new SocialMediaPage(driver);
+		generalInfo = new GeneralInfoPage(driver);
+		chat = new ChatPage(driver);
         
 	  }
-	
-	@AfterTest
-	public void AfterTest() {
-		
-		quitDriver();
-		
-	}
 	
 	
 	@Test
@@ -81,50 +72,6 @@ public class ContactTest extends TestBase{
 		
 		//verify the background image
 		Assert.assertTrue(contactPage.backgroundImgDisplayed(), "background img is not displayed"); 
-		
-	}
-	
-	
-	@Test
-	public void verifyMap() throws InterruptedException{
-		
-		//click the contact button from the home page
-		contactPage.clickContact();		
-		Thread.sleep(1000);
-		
-		//change the frame
-		contactPage.changeFrame();
-		
-		//check the visibility of the map
-		Assert.assertTrue(contactPage.mapDisplayed(), "The map is not displayed");
-		
-		//click and hold the map
-		contactPage.clickAndHoldMap();
-		
-		//check the visibility of the full screen button
-		Assert.assertTrue(contactPage.fullScreenBDisplayed(), "The full screen button of the map is not displayed");
-		
-		//check the visibility of the map after click the full screen button
-		contactPage.clickFullScreenB();
-		Assert.assertTrue(contactPage.mapDisplayed(), "The map is not displayed");
-		
-		//click and hold the maximized map
-		contactPage.clickAndHoldMap();
-		
-		//minimize the map and then check the visibility
-		contactPage.clickFullScreenB();
-		Assert.assertTrue(contactPage.mapDisplayed(), "The map is not displayed");
-		
-		//terms of use
-		Assert.assertTrue(contactPage.mapTermsDisplayed(), "Map terms of use button is not displayed");
-		Assert.assertEquals(contactPage.getMapTermsLink(), "https://www.google.com/intl/en_US/help/terms_maps.html");
-		
-		//report a map error
-		Assert.assertTrue(contactPage.mapErrorDisplayed(), "Report a map error button is not displayed");
-		Assert.assertEquals(contactPage.getMapErrorLink(), "https://www.google.com/maps/@37.77065,-122.387301,14z/data=!5m1!1e4!10m1!1e1!12b1?source=apiv3&rapsrc=apiv3");
-		
-		//change the frame
-		driver.switchTo().defaultContent();
 		
 	}
 	
@@ -308,26 +255,79 @@ public class ContactTest extends TestBase{
 	
 	@Test
 	public void verifySocialBar2() throws InterruptedException{
+//		
+//		//click the contact button from the home page
+//		contactPage.clickContact();		
+//		Thread.sleep(2000);
+//		
+//		//facebook
+//		Assert.assertTrue(socialMedia.facebookIconDisplayed(), "Fb icon is not displayed");
+//		//Assert.assertEquals(contactPage.getFb2Link(), "http://www.facebook.com/wix");
+//		
+//		//twitter
+//		Assert.assertTrue(socialMedia.twiterIconDisplayed(), "Twitter icon is not displayed");
+//		//Assert.assertEquals(contactPage.getTw2Link(), "http://www.twitter.com/wix");
+//		
+//		//pinterest
+//		Assert.assertTrue(socialMedia.pinterestIconDisplayed(), "Pinterest icon is not displayed");
+//		//Assert.assertEquals(contactPage.getPint2Link(), "http://pinterest.com/wixcom/");
+//		
 		
-		//click the contact button from the home page
-		contactPage.clickContact();		
-		Thread.sleep(2000);
-		
-		//facebook
-		Assert.assertTrue(socialMedia.facebookIconDisplayed(), "Fb icon is not displayed");
-		//Assert.assertEquals(contactPage.getFb2Link(), "http://www.facebook.com/wix");
-		
-		//twitter
-		Assert.assertTrue(socialMedia.twiterIconDisplayed(), "Twitter icon is not displayed");
-		//Assert.assertEquals(contactPage.getTw2Link(), "http://www.twitter.com/wix");
-		
-		//pinterest
-		Assert.assertTrue(socialMedia.pinterestIconDisplayed(), "Pinterest icon is not displayed");
-		//Assert.assertEquals(contactPage.getPint2Link(), "http://pinterest.com/wixcom/");
-		
+
+		Assert.assertEquals(socialMedia.getSocialMediaIcons().size(), 3, "There are not 3 icons");
+		Assert.assertEquals(socialMedia.getSocialMediaLinkList().size(), 3, "There are not 3 links");
+	
+		ArrayList<String> socialMediaList = socialMedia.getSocialMediaLinkList() ;
+		Assert.assertEquals(socialMediaList.get(0), "http://www.facebook.com/wix", "The fb link is not ok");
+		Assert.assertEquals(socialMediaList.get(1), "http://www.twitter.com/wix", "The twiter link is not ok");
+		Assert.assertEquals(socialMediaList.get(2), "http://pinterest.com/wixcom/", "The pinterest link is not ok");
 	}
 	
 	
+	@Test
+	public void verifyMap() throws InterruptedException{
+		
+		//click the contact button from the home page
+		contactPage.clickContact();		
+		Thread.sleep(1000);
+		
+		//change the frame
+		contactPage.changeFrame();
+		
+		//check the visibility of the map
+		Assert.assertTrue(contactPage.mapDisplayed(), "The map is not displayed");
+		
+		//click and hold the map
+		contactPage.clickAndHoldMap();
+		
+		//check the visibility of the full screen button
+		Assert.assertTrue(contactPage.fullScreenBDisplayed(), "The full screen button of the map is not displayed");
+		
+		//check the visibility of the map after click the full screen button
+		contactPage.clickFullScreenB();
+		Assert.assertTrue(contactPage.mapDisplayed(), "The map is not displayed");
+		
+		//click and hold the maximized map
+		contactPage.clickAndHoldMap();
+		
+		//minimize the map and then check the visibility
+		contactPage.clickFullScreenB();
+		Assert.assertTrue(contactPage.mapDisplayed(), "The map is not displayed");
+		
+		//terms of use
+		Assert.assertTrue(contactPage.mapTermsDisplayed(), "Map terms of use button is not displayed");
+		Assert.assertEquals(contactPage.getMapTermsLink(), "https://www.google.com/intl/en_US/help/terms_maps.html");
+		
+		//report a map error
+		Assert.assertTrue(contactPage.mapErrorDisplayed(), "Report a map error button is not displayed");
+		Assert.assertEquals(contactPage.getMapErrorLink(), "https://www.google.com/maps/@37.77065,-122.387301,14z/data=!5m1!1e4!10m1!1e1!12b1?source=apiv3&rapsrc=apiv3");
+		
+		//change the frame
+		driver.switchTo().defaultContent();
+		
+	}
+
+
 	@Test
 	public void verifyGeneralInfo() throws InterruptedException{
 		
@@ -335,34 +335,45 @@ public class ContactTest extends TestBase{
 		contactPage.clickContact();		
 		Thread.sleep(1000);
 		
-		//address
-		Assert.assertTrue(generalInfo.addressDisplayed(), "Address title is not displayed"); 
-		//Assert.assertEquals(contactPage.getAddressTitle(), "ADDRESS");
-		Assert.assertTrue(generalInfo.addressDisplayed1(), "Address line 1 is not displayed");
-		//Assert.assertEquals(contactPage.getAddress1Text(), "500 Terry Francois Street");
-		Assert.assertTrue(generalInfo.addressDisplayed2(), "Address line 2 is not displayed");
-		//Assert.assertEquals(contactPage.getAddress2Text(), "San Francisco, CA 94158");
+//		//address
+//		Assert.assertTrue(generalInfo.addressDisplayed(), "Address title is not displayed"); 
+//		//Assert.assertEquals(contactPage.getAddressTitle(), "ADDRESS");
+//		Assert.assertTrue(generalInfo.addressDisplayed1(), "Address line 1 is not displayed");
+//		//Assert.assertEquals(contactPage.getAddress1Text(), "500 Terry Francois Street");
+//		Assert.assertTrue(generalInfo.addressDisplayed2(), "Address line 2 is not displayed");
+//		//Assert.assertEquals(contactPage.getAddress2Text(), "San Francisco, CA 94158");
+//		
+//		//contact
+//		Assert.assertTrue(generalInfo.contactDisplayed(), "Contact title is not displayed"); 
+//		//Assert.assertEquals(contactPage.getContactTitle(), "CONTACT");
+//		Assert.assertTrue(generalInfo.contactDisplayed1(), "Contact line 1 is not displayed");
+//		//Assert.assertEquals(contactPage.getContact1Text(), "info@mysite.com");
+//		Assert.assertTrue(generalInfo.contactDisplayed2(), "Contact line 2 is not displayed");
+//		//Assert.assertEquals(contactPage.getContact2Text(), "Tel: 123-456-7890");
+//		
+//		//home&away 
+//		Assert.assertTrue(generalInfo.homeDisplayed1(), "Home&Away title is not displayed"); 
+//		//Assert.assertEquals(contactPage.getHaTitle(), "HOME & AWAY");
+//		Assert.assertTrue(generalInfo.homeDisplayed2(), "Home&Away line 1 is not displayed");
+//		//Assert.assertEquals(contactPage.getHa1Text(), "© 2023 by HOME & AWAY");
+//		Assert.assertTrue(generalInfo.homeDisplayed3(), "Home&Away line 2 is not displayed");
+//		//Assert.assertEquals(contactPage.getHa2Text(), "Proudly created with Wix.com");
+//		
+//		//payment
+//		//Assert.assertTrue(contactPage.payTitleDisplayed(), "Payment title is not displayed"); 
+//		//Assert.assertEquals(contactPage.getPayTitle(), "WE ACCEPT");
+//		//Assert.assertTrue(contactPage.paymentDisplayed(), "Payment methods are not displayed");
 		
-		//contact
-		Assert.assertTrue(generalInfo.contactDisplayed(), "Contact title is not displayed"); 
-		//Assert.assertEquals(contactPage.getContactTitle(), "CONTACT");
-		Assert.assertTrue(generalInfo.contactDisplayed1(), "Contact line 1 is not displayed");
-		//Assert.assertEquals(contactPage.getContact1Text(), "info@mysite.com");
-		Assert.assertTrue(generalInfo.contactDisplayed2(), "Contact line 2 is not displayed");
-		//Assert.assertEquals(contactPage.getContact2Text(), "Tel: 123-456-7890");
 		
-		//home&away 
-		Assert.assertTrue(generalInfo.homeDisplayed1(), "Home&Away title is not displayed"); 
-		//Assert.assertEquals(contactPage.getHaTitle(), "HOME & AWAY");
-		Assert.assertTrue(generalInfo.homeDisplayed2(), "Home&Away line 1 is not displayed");
-		//Assert.assertEquals(contactPage.getHa1Text(), "© 2023 by HOME & AWAY");
-		Assert.assertTrue(generalInfo.homeDisplayed3(), "Home&Away line 2 is not displayed");
-		//Assert.assertEquals(contactPage.getHa2Text(), "Proudly created with Wix.com");
 		
-		//payment
-		//Assert.assertTrue(contactPage.payTitleDisplayed(), "Payment title is not displayed"); 
-		//Assert.assertEquals(contactPage.getPayTitle(), "WE ACCEPT");
-		//Assert.assertTrue(contactPage.paymentDisplayed(), "Payment methods are not displayed");
+		Assert.assertEquals(generalInfo.getGeneralInfoTitles().size(), 5, "There are not 5 titles");//in plus Thanks for submiting
+		Assert.assertEquals(generalInfo.getGeneralInfoTitleText().size(), 4, "There are not 4 titles");
+	
+		ArrayList<String> generalInfoList = generalInfo.getGeneralInfoTitleText() ;
+		Assert.assertEquals(generalInfoList.get(0), "ADDRESS", "The Adress title is not ok");
+		Assert.assertEquals(generalInfoList.get(1), "CONTACT", "The Contact title is not ok");
+		Assert.assertEquals(generalInfoList.get(2), "HOME & AWAY", "The Home&Away title is not ok");
+		Assert.assertEquals(generalInfoList.get(3), "WE ACCEPT", "The accept title is not ok");
 		
 	}
   		

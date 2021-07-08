@@ -1,36 +1,32 @@
 package tests;
 
 
+import java.util.ArrayList;
+
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import common.Chat;
-import common.GeneralInfo;
-import common.SocialMedia;
 import common.TestBase;
+import pages.ChatPage;
 import pages.ExplorePage;
+import pages.GeneralInfoPage;
+import pages.SocialMediaPage;
 
 public class ExploreTest extends TestBase {
 	ExplorePage explorePage;
-	SocialMedia socialMedia;
-	GeneralInfo generalInfo;
-	Chat chat;
+	SocialMediaPage socialMedia;
+	GeneralInfoPage generalInfo;
+	ChatPage chat;
 	
 	@BeforeMethod
 	public void beforeMethod() {
 		explorePage = new ExplorePage(driver);
-		socialMedia = new SocialMedia(driver);
-		generalInfo = new GeneralInfo(driver);
-		chat = new Chat(driver);
+		socialMedia = new SocialMediaPage(driver);
+		generalInfo = new GeneralInfoPage(driver);
+		chat = new ChatPage(driver);
 	}
-
-	@AfterTest 
-	public void afterClass() { 
-		driver.quit(); 
-	} 
-
 
 	@Test
 	public void verifyExploreButton() {
@@ -95,31 +91,39 @@ public class ExploreTest extends TestBase {
 
 	@Test 
 	public void verifySocialMedia() throws InterruptedException { 
-		//Click the Explore button
-		explorePage.exploreBtnClicked();
-		Thread.sleep(3000);
-
-		Assert.assertTrue(socialMedia.facebookIconDisplayed(), "Facebook icon is not displayed");
-		Assert.assertTrue(socialMedia.twiterIconDisplayed(), "Twiter icon is not displayed");
-		Assert.assertTrue(socialMedia.pinterestIconDisplayed(), "Pinterest icon is not displayed");
-		socialMedia.facebookClicked();
-		socialMedia.switchTo(1);
-		Assert.assertTrue(socialMedia.getUrl().contains("facebook"), "Facebook page is not displayed");
-		driver.close();
-		socialMedia.switchTo(0);
-
-
-		socialMedia.twitterClicked();
-		socialMedia.switchTo(1);
-		Assert.assertTrue(socialMedia.getUrl().contains("twitter"), "Twiter page is not displayed");
-		driver.close();
-		socialMedia.switchTo(0);
-
-		//Click the Pinterest icon
-		socialMedia.pinterestClicked();
-		socialMedia.switchTo(1);
-		Assert.assertTrue(socialMedia.getUrl().contains("pinterest"), "Pinterest page is not displayed");
-		driver.close();
+//		//Click the Explore button
+//		explorePage.exploreBtnClicked();
+//		Thread.sleep(3000);
+//
+//		Assert.assertTrue(socialMedia.facebookIconDisplayed(), "Facebook icon is not displayed");
+//		Assert.assertTrue(socialMedia.twiterIconDisplayed(), "Twiter icon is not displayed");
+//		Assert.assertTrue(socialMedia.pinterestIconDisplayed(), "Pinterest icon is not displayed");
+//		socialMedia.facebookClicked();
+//		socialMedia.switchTo(1);
+//		Assert.assertTrue(socialMedia.getUrl().contains("facebook"), "Facebook page is not displayed");
+//		driver.close();
+//		socialMedia.switchTo(0);
+//
+//
+//		socialMedia.twitterClicked();
+//		socialMedia.switchTo(1);
+//		Assert.assertTrue(socialMedia.getUrl().contains("twitter"), "Twiter page is not displayed");
+//		driver.close();
+//		socialMedia.switchTo(0);
+//
+//		//Click the Pinterest icon
+//		socialMedia.pinterestClicked();
+//		socialMedia.switchTo(1);
+//		Assert.assertTrue(socialMedia.getUrl().contains("pinterest"), "Pinterest page is not displayed");
+//		driver.close();
+		
+		Assert.assertEquals(socialMedia.getSocialMediaIcons().size(), 3, "There are not 3 icons");
+		Assert.assertEquals(socialMedia.getSocialMediaLinkList().size(), 3, "There are not 3 links");
+	
+		ArrayList<String> socialMediaList = socialMedia.getSocialMediaLinkList() ;
+		Assert.assertEquals(socialMediaList.get(0), "http://www.facebook.com/wix", "The fb link is not ok");
+		Assert.assertEquals(socialMediaList.get(1), "http://www.twitter.com/wix", "The twiter link is not ok");
+		Assert.assertEquals(socialMediaList.get(2), "http://pinterest.com/wixcom/", "The pinterest link is not ok");
 
 	}
 
@@ -130,27 +134,36 @@ public class ExploreTest extends TestBase {
 		explorePage.exploreBtnClicked();
 		Thread.sleep(3000);
 
-		//Validate that the address exists at the bottom of the page
-		Assert.assertTrue(generalInfo.addressDisplayed(), "Address is not displayed");
-		Assert.assertTrue(generalInfo.addressDisplayed1(), "Address is not displayed");
-		Assert.assertTrue(generalInfo.addressDisplayed2(), "Address is not displayed");
-
-
-		//Validate that the contact information exist at the bottom of the page
-		Assert.assertTrue(generalInfo.addressDisplayed(), "Contact is not displayed");
-		Assert.assertTrue(generalInfo.addressDisplayed1(), "Contact is not displayed");
-
-		generalInfo.contactAcceptDisplayed2();
-		driver.switchTo().defaultContent();
-
-		Assert.assertTrue(generalInfo.contactDisplayed2(), "Contact is not displayed");
-
-
-		//Validate that the site information exist at the bottom of the page
-		Assert.assertTrue(generalInfo.homeDisplayed1(), "Home&Away is not displayed");
-		Assert.assertTrue(generalInfo.homeDisplayed2(), "Home&Away is not displayed");
-		Assert.assertTrue(generalInfo.homeDisplayed3(), "Home&Away is not displayed");
-		driver.switchTo().defaultContent();
+//		//Validate that the address exists at the bottom of the page
+//		Assert.assertTrue(generalInfo.addressDisplayed(), "Address is not displayed");
+//		Assert.assertTrue(generalInfo.addressDisplayed1(), "Address is not displayed");
+//		Assert.assertTrue(generalInfo.addressDisplayed2(), "Address is not displayed");
+//
+//
+//		//Validate that the contact information exist at the bottom of the page
+//		Assert.assertTrue(generalInfo.addressDisplayed(), "Contact is not displayed");
+//		Assert.assertTrue(generalInfo.addressDisplayed1(), "Contact is not displayed");
+//
+//		generalInfo.contactAcceptDisplayed2();
+//		driver.switchTo().defaultContent();
+//
+//		Assert.assertTrue(generalInfo.contactDisplayed2(), "Contact is not displayed");
+//
+//
+//		//Validate that the site information exist at the bottom of the page
+//		Assert.assertTrue(generalInfo.homeDisplayed1(), "Home&Away is not displayed");
+//		Assert.assertTrue(generalInfo.homeDisplayed2(), "Home&Away is not displayed");
+//		Assert.assertTrue(generalInfo.homeDisplayed3(), "Home&Away is not displayed");
+//		driver.switchTo().defaultContent();
+		
+		Assert.assertEquals(generalInfo.getGeneralInfoTitles().size(), 9, "There are not 9 titles");
+		Assert.assertEquals(generalInfo.getGeneralInfoTitleText().size(), 9, "There are not 9 titles");
+	
+		ArrayList<String> generalInfoList = generalInfo.getGeneralInfoTitleText() ;
+		Assert.assertEquals(generalInfoList.get(5), "ADDRESS", "The Adress title is not ok");
+		Assert.assertEquals(generalInfoList.get(6), "CONTACT", "The Contact title is not ok");
+		Assert.assertEquals(generalInfoList.get(7), "HOME & AWAY", "The Home&Away title is not ok");
+		Assert.assertEquals(generalInfoList.get(8), "WE ACCEPT", "The accept title is not ok");
 	}
 
 	@Test
