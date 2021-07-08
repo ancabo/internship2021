@@ -73,10 +73,6 @@ public class TestBase {
 		return element.getAttribute(attribute);
 	}
 	
-	public String getText(WebElement element) {
-		return element.getText();
-	}
-	
 	public void clear_SendKey(WebElement element, String txt) {
 		element.clear();
 		element.sendKeys(txt);
