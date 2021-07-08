@@ -509,6 +509,7 @@ public class RoomsTest extends TestBase{
 		//click the contact button from the home page
 		roomsPage.clickRooms();		
 
+
 		
 //		Thread.sleep(2000);
 //		
@@ -591,7 +592,6 @@ public class RoomsTest extends TestBase{
 //		
 //		//check the emoji is sent
 //		//Assert.assertEquals(roomsPage.getSentMessage(), "Sent");
-		
 		waitPageLoad(5000);
 
 		//swich to frame
@@ -637,90 +637,6 @@ public class RoomsTest extends TestBase{
 		chat.addFileDisplayed();
 
 		implicitWait(10);
-
-		Thread.sleep(2000);
-
-		//change the frame
-		chat.switchToChat();
-
-		//check the chat button visibility
-		Assert.assertTrue(chat.chatBtnisDisplayed(), "The chat button is not displayed");
-		chat.chatBtnClicked();
-
-		//send a text
-		//Assert.assertTrue(roomsPage.textareDisplayed(), "Textare field is not displayed");
-		//roomsPage.sendTextChat();
-
-		Thread.sleep(2000);
-
-		//visibility of chat message response
-		//Assert.assertTrue(roomsPage.chatMsgDisplayed(), "Chat message box is not displayed");
-
-		//submit button
-		Assert.assertTrue(chat.submitDisplayed(), "Submit button is not displayed");
-		chat.submitClicked();
-
-		//check the visibility of the name error
-		//Assert.assertTrue(roomsPage.nameErrDisplayed(), "Name error is not displayed");
-
-		//check the visibility of the email error
-		//Assert.assertTrue(roomsPage.emailErrDisplayed(), "Email error is not displayed");
-
-		//name field visibility + type a name
-		Assert.assertTrue(chat.nameDisplayed(), "Name field is not displayed");
-		//roomsPage.completeName();
-
-		//email field visibility + type wrong format email
-		Assert.assertTrue(chat.emailDisplayed(), "Email field is not displayed");
-		//roomsPage.completeWrongEmailChat();
-
-		//message field visibility + type message
-		Assert.assertTrue(chat.messageDisplayed(), "Message field is not displayed");
-		chat.messageClicked();
-		chat.messageSendDisplayed();
-
-		//email error message visibility + clear the email field
-		//Assert.assertTrue(roomsPage.emailErrChatDisplayed(), "Email error message is not displayed");
-		//roomsPage.clearEmail();
-
-		//type the correct format of email
-		chat.emailSendDisplayed();
-
-		//click the submit button
-		chat.submitClicked();
-
-		//check the visibility thank you message
-		//Assert.assertTrue(roomsPage.thxMsgDisplayed(), "Thank you message box is not displayed");
-
-		//visibility of the attachment button
-		Assert.assertTrue(chat.attachmentDisplayed(), "Attachment button is not displayed");
-
-		//send an attachment
-		chat.addFileDisplayed();
-
-		Thread.sleep(5000);
-
-		//check the attachment is sent
-		//Assert.assertEquals(roomsPage.getSentMessage(), "Sent");
-
-		//visibility of emoji button
-		Assert.assertTrue(chat.emojiBtnDisplayed(),"Emoji button is not displayed");
-		chat.emojiBtnClicked();
-
-		//visibility of emojis box
-		//Assert.assertTrue(roomsPage.emojiBoxDisplayed(),"Emoji box is not displayed");
-
-		//choose and send an emoji
-		Assert.assertTrue(chat.emojiDisplayed(),"Emoji is not displayed");
-		chat.emojiClicked();
-		//roomsPage.enter();
-
-		Thread.sleep(2000);
-
-		//check the emoji is sent
-		//Assert.assertEquals(roomsPage.getSentMessage(), "Sent");
-
-
 	}
 
 
