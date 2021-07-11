@@ -7,7 +7,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class ExplorePage {
+import common.TestBase;
+
+public class ExplorePage extends TestBase {
 
 	protected WebDriver driver;
 
@@ -60,11 +62,13 @@ public class ExplorePage {
 	private WebElement bridge;
 
 	public boolean exploreBtnDisplayed() {
-		return exploreBtn.isDisplayed();
+		return display(exploreBtn);
 	}
 
-	public void exploreBtnClicked() {
-		 exploreBtn.click();
+	public TestBase exploreBtnClicked() {
+		waitElementIsClickable(5,exploreBtn);
+		click(exploreBtn);
+		return this;
 	}
 
 	public String amentiesGetText() {
@@ -108,7 +112,7 @@ public class ExplorePage {
 	}
 
 	public boolean backgroundDisplayed() {
-		return background.isDisplayed();
+		return display(background);
 	}
 
 	public String getUrl() {

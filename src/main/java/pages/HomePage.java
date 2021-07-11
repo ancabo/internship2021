@@ -111,11 +111,9 @@ public class HomePage extends TestBase{
 		}
 	}
 
-	public WebDriver frameWixHotels() {
-		//fluentWait(30, 5, By.xpath("//iframe[@title='Wix Hotels']"));
-		//waitElementIsVisible(wixHotels, 30);
-		//waitForFrameAndSwitch(By.xpath("));
-		return driver.switchTo().frame(wixHotels);
+	public void frameWixHotels() {
+		//waitElementIsVisible(wixHotels, 10);
+		waitForFrameAndSwitch(wixHotels);
 	}
 
 	public boolean adultsDisplayed() {
@@ -185,17 +183,17 @@ public class HomePage extends TestBase{
 	}
 
 	public TestBase checkInClicked() {
-		//waitElementIsClickable(100, By.xpath("//button[@id='check-in'][1]"));
+		waitElementIsClickable(20, dataBtnCheckIn);
 		click(dataBtnCheckIn);
-		return this;
+		return this; 
 	}
 
 	public void switchToframe() {
-		driver.switchTo().frame(frame1);
+		waitForFrameAndSwitch(frame1);
 	}
 
 	public TestBase dataCheckInClicked() {
-		//waitElementIsClickable(100, By.xpath("//span[contains(text(),'12')]"));
+		waitElementIsClickable(20, dataCheckIn);
 		click(dataCheckIn);
 		return this;
 	}
@@ -205,7 +203,7 @@ public class HomePage extends TestBase{
 	}
 
 	public TestBase dataCheckOutClicked() {
-		//waitElementIsClickable(100, By.xpath("//button[@day-button-aria='day']/span[contains(text(),'24')]"));
+		waitElementIsClickable(10,checkOutData);
 		click(checkOutData);
 		return this;
 	}
@@ -215,6 +213,7 @@ public class HomePage extends TestBase{
 	}
 
 	public boolean searchBtnDisplayed() {
+		waitElementIsVisible(searchButton, 10);
 		return display(searchButton);
 	}
 
@@ -224,11 +223,13 @@ public class HomePage extends TestBase{
 	}
 
 	public TestBase dataCheckIn1Clicked() {
+		//waitElementIsClickable(5,dataCheckIn2);
 		click(dataCheckIn2);
 		return this;
 	}
 
 	public TestBase nextMonthClicked() {
+		//waitElementIsClickable(5,nextMonth);
 		click(nextMonth);
 		return this;
 	}

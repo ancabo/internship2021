@@ -37,7 +37,7 @@ public class TestBase {
 	@AfterTest(alwaysRun = true)
 	public void quitDriver() {
 		if (driver != null)
-			driver.close();
+			driver.quit();
 		}
 	
 	
@@ -135,7 +135,7 @@ public class TestBase {
 	}
 	
 	public void waitForFrameAndSwitch(WebElement wixChat) {
-		WebDriverWait wait = new WebDriverWait(driver, 200);		
+		WebDriverWait wait = new WebDriverWait(driver, 400);		
 		wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(wixChat));
 	}
 		

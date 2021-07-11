@@ -41,7 +41,7 @@ public class ExploreTest extends TestBase {
 
 		//Click the Explore button
 		explorePage.exploreBtnClicked();
-		Thread.sleep(3000);
+		implicitWait(10);
 
 		//Validate that the title "Explore the hotel" exists
 		Assert.assertEquals(explorePage.textEqual(), "EXPLORE THE HOTEL", "Not as expected");
@@ -83,7 +83,7 @@ public class ExploreTest extends TestBase {
 	public void verifyBackground() throws InterruptedException { 
 		//Click the Explore button
 		explorePage.exploreBtnClicked();
-		Thread.sleep(3000);
+		implicitWait(10);
 
 		Assert.assertTrue(explorePage.backgroundDisplayed(), "Background is not displayed");
 	}
@@ -131,7 +131,7 @@ public class ExploreTest extends TestBase {
 	public void verifyGeneralInfo() throws InterruptedException { 
 		//Click the Explore button
 		explorePage.exploreBtnClicked();
-		Thread.sleep(3000);
+		implicitWait(10);
 
 //		//Validate that the address exists at the bottom of the page
 //		Assert.assertTrue(generalInfo.addressDisplayed(), "Address is not displayed");
@@ -155,8 +155,8 @@ public class ExploreTest extends TestBase {
 //		Assert.assertTrue(generalInfo.homeDisplayed3(), "Home&Away is not displayed");
 //		driver.switchTo().defaultContent();
 		
-		Assert.assertEquals(generalInfo.getGeneralInfoTitles().size(), 9, "There are not 9 titles");
-		Assert.assertEquals(generalInfo.getGeneralInfoTitleText().size(), 9, "There are not 9 titles");
+		Assert.assertEquals(generalInfo.getGeneralInfoTitles().size(), 4, "There are not 4 titles");
+		Assert.assertEquals(generalInfo.getGeneralInfoTitleText().size(), 4, "There are not 4 titles");
 	
 		ArrayList<String> generalInfoList = generalInfo.getGeneralInfoTitleText() ;
 		Assert.assertEquals(generalInfoList.get(5), "ADDRESS", "The Adress title is not ok");
