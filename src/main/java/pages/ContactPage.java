@@ -84,10 +84,12 @@ public class ContactPage extends TestBase{
 	}
 	
 	public void clickContact() {
+		//waitElementIsClickable(5, contactButton);
 		click(contactButton);
 	}
 	
 	public String getPageTitle() {
+		waitPageLoad(3000);
 		return driver.getTitle();
 	}
 	
