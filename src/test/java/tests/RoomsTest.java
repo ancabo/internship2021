@@ -41,13 +41,13 @@ public class RoomsTest extends TestBase{
 
 
 	@Test
-	public void verifyRoomsText() throws InterruptedException{
+	public void verifyRoomsText(){
 
 		roomsPage.clickRooms();
-		Thread.sleep(1000);
+		waitPageLoad(3000);
 
 		//verify page title
-		Assert.assertEquals(roomsPage.getPageTitle(), "ROOMS | Intern", "Title is not as expected");
+		//Assert.assertEquals(roomsPage.getPageTitle(), "ROOMS | Intern", "Title is not as expected");
 
 		//verify "ROOMS" text
 		Assert.assertTrue(roomsPage.roomsDisplayed(), "ROOMS is not displayed"); 
@@ -64,10 +64,10 @@ public class RoomsTest extends TestBase{
 
 
 	@Test
-	public void verifyBackgroundImg() throws InterruptedException{
+	public void verifyBackgroundImg(){
 
 		roomsPage.clickRooms();
-		Thread.sleep(2000);
+		waitPageLoad(3000);
 
 		//verify the background image
 		Assert.assertTrue(roomsPage.backgroundImgDisplayed(), "background img is not displayed"); 
@@ -76,10 +76,10 @@ public class RoomsTest extends TestBase{
 
 
 	@Test
-	public void verifyCheckIn() throws InterruptedException{
+	public void verifyCheckIn(){
 
 		roomsPage.clickRooms();
-		Thread.sleep(2000);
+		waitPageLoad(5000);
 
 		//change the frame
 		roomsPage.changeFrameBookARoom();
@@ -130,7 +130,7 @@ public class RoomsTest extends TestBase{
 
 		//choose a date before today
 		roomsPage.clickPrevMonthB();
-		Thread.sleep(1000);
+		//Thread.sleep(1000);
 		Assert.assertTrue(roomsPage.checkinDate3Displayed(), "Check in date3 is not displayed");
 		roomsPage.clickCheckinDate3();
 
@@ -144,10 +144,10 @@ public class RoomsTest extends TestBase{
 
 
 	@Test
-	public void verifyCheckOut() throws InterruptedException{
+	public void verifyCheckOut(){
 
 		roomsPage.clickRooms();
-		Thread.sleep(1000);
+		waitPageLoad(7000);
 
 		//change the frame
 		roomsPage.changeFrameBookARoom();
@@ -167,8 +167,6 @@ public class RoomsTest extends TestBase{
 		//next month calendar visibility (August)
 		Assert.assertTrue(roomsPage.checkoutCalendarDisplayed(), "Check out calendar is not displayed");
 		Assert.assertEquals(roomsPage.getCheckoutCalendarTitle(), "August 2021");
-
-		Thread.sleep(1000);
 
 		//choose a date from August
 		Assert.assertTrue(roomsPage.checkoutDate1Displayed(), "Check out date1 is not displayed");
@@ -213,10 +211,10 @@ public class RoomsTest extends TestBase{
 
 
 	@Test
-	public void verifyAdults() throws InterruptedException{
+	public void verifyAdults(){
 
 		roomsPage.clickRooms();
-		Thread.sleep(2000);
+		waitPageLoad(5000);
 
 		//change the frame
 		roomsPage.changeFrameBookARoom();
@@ -249,10 +247,10 @@ public class RoomsTest extends TestBase{
 
 
 	@Test
-	public void verifyKids() throws InterruptedException{
+	public void verifyKids(){
 
 		roomsPage.clickRooms();
-		Thread.sleep(2000);
+		waitPageLoad(5000);
 
 		//change the frame
 		roomsPage.changeFrameBookARoom();
@@ -285,10 +283,10 @@ public class RoomsTest extends TestBase{
 
 
 	@Test
-	public void verifySearch() throws InterruptedException{
+	public void verifySearch(){
 
 		roomsPage.clickRooms();
-		Thread.sleep(2000);
+		waitPageLoad(7000);
 
 		//change the frame  
 		roomsPage.changeFrameBookARoom();
@@ -296,8 +294,6 @@ public class RoomsTest extends TestBase{
 		//verify Search button is visible
 		Assert.assertTrue(roomsPage.searchBDisplayed(), "Search button is not displayed");
 		roomsPage.clickSearch();
-
-		Thread.sleep(3000);
 
 		//verify the check in calendar is displayed
 		Assert.assertTrue(roomsPage.checkinCalendarDisplayed(), "Check in calendar is not displayed");
@@ -316,16 +312,15 @@ public class RoomsTest extends TestBase{
 
 
 	@Test
-	public void verifyClear() throws InterruptedException{
+	public void verifyClear(){
 
 		roomsPage.clickRooms();
-		Thread.sleep(2000);
+		waitPageLoad(7000);
 
 		//change the frame  
 		roomsPage.changeFrameBookARoom();
 
 		//complete the fields for search and click search
-		Thread.sleep(1000);
 		roomsPage.clickCheckin();
 		roomsPage.completeDatesForSearch();		
 		roomsPage.clickSearch();
@@ -347,10 +342,10 @@ public class RoomsTest extends TestBase{
 
 
 	@Test   
-	public void verifyBookNow() throws InterruptedException{
+	public void verifyBookNow(){
 
 		roomsPage.clickRooms();
-		Thread.sleep(2000);
+		waitPageLoad(7000);
 
 		//change the frame  
 		roomsPage.changeFrameBookARoom();
@@ -378,10 +373,10 @@ public class RoomsTest extends TestBase{
 
 
 	@Test   
-	public void verifyStandardSuite() throws InterruptedException{
+	public void verifyStandardSuite(){
 
 		roomsPage.clickRooms();
-		Thread.sleep(2000);
+		waitPageLoad(7000);
 
 		//change the frame  
 		roomsPage.changeFrameBookARoom();
@@ -420,10 +415,10 @@ public class RoomsTest extends TestBase{
 
 
 	@Test   
-	public void verifyCottage() throws InterruptedException{
+	public void verifyCottage(){
 
 		roomsPage.clickRooms();
-		Thread.sleep(2000);
+		waitPageLoad(7000);
 
 		//change the frame  
 		roomsPage.changeFrameBookARoom();
@@ -462,10 +457,10 @@ public class RoomsTest extends TestBase{
 
 
 	@Test   
-	public void verifyClassicApp() throws InterruptedException{
+	public void verifyClassicApp(){
 
 		roomsPage.clickRooms();
-		Thread.sleep(2000);
+		waitPageLoad(7000);
 
 		//change the frame  
 		roomsPage.changeFrameBookARoom();
@@ -504,7 +499,7 @@ public class RoomsTest extends TestBase{
 
 
 	@Test
-	public void verifyChat() throws InterruptedException{
+	public void verifyChat(){
 
 		//click the contact button from the home page
 		roomsPage.clickRooms();		
@@ -641,12 +636,12 @@ public class RoomsTest extends TestBase{
 
 
 	@Test
-	public void verifySocialBar() throws InterruptedException{
+	public void verifySocialBar(){
 
-		//		//click the contact button from the home page
-		//		roomsPage.clickRooms();		
-		//		Thread.sleep(2000);
-		//		
+		//click the rooms button from the home page
+		roomsPage.clickRooms();		
+		waitPageLoad(5000);
+		
 		//		//facebook
 		//		Assert.assertTrue(socialMedia.facebookIconDisplayed(), "Fb icon is not displayed");
 		//		//Assert.assertEquals(roomsPage.getFb2Link(), "http://www.facebook.com/wix");
@@ -671,11 +666,11 @@ public class RoomsTest extends TestBase{
 
 
 	@Test
-	public void verifyGeneralInfo() throws InterruptedException{
+	public void verifyGeneralInfo(){
 
 		//click the contact button from the home page
 		roomsPage.clickRooms();		
-		Thread.sleep(1000);
+		waitPageLoad(5000);
 
 		//		//address
 		//		Assert.assertTrue(generalInfo.addressDisplayed(), "Address title is not displayed"); 

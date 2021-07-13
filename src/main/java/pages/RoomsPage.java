@@ -215,10 +215,11 @@ public class RoomsPage extends TestBase{
 	}
 	
 	public void changeFrameBookARoom() {
-		driver.switchTo().frame(frameBookARoom);
+		waitForFrameAndSwitch(frameBookARoom);
 	}
 	
 	public boolean checkinDisplayed() {
+		waitElementIsVisible(checkin, 7);
 		return display(checkin);
 	}
 	
@@ -251,6 +252,7 @@ public class RoomsPage extends TestBase{
 	}
 	
 	public boolean checkinDate1Displayed() {
+		waitElementIsVisible(checkinDate1, 10);
 		return display(checkinDate1);
 	}
 	
@@ -275,6 +277,7 @@ public class RoomsPage extends TestBase{
 	}
 	
 	public boolean checkinDate2Displayed() {
+		waitElementIsVisible(checkinDate2, 5);
 		return display(checkinDate2);
 	}
 	
@@ -287,6 +290,7 @@ public class RoomsPage extends TestBase{
 	}
 	
 	public boolean checkinDate3Displayed() {
+		waitElementIsVisible(checkinDate3, 5);
 		return display(checkinDate3);
 	}
 	
@@ -485,6 +489,7 @@ public class RoomsPage extends TestBase{
 	}
 	
 	public boolean standardSuiteDisplayed() {
+		waitElementIsVisible(standardSuite,5);
 		return display(standardSuite);
 	}
 	
@@ -493,6 +498,7 @@ public class RoomsPage extends TestBase{
 	}
 	
 	public boolean cottageDisplayed() {
+		waitElementIsVisible(cottage,5);
 		return display(cottage);
 	}
 	
@@ -501,6 +507,7 @@ public class RoomsPage extends TestBase{
 	}
 	
 	public boolean classicAppDisplayed() {
+		waitElementIsVisible(classicApp,5);
 		return display(classicApp);
 	}
 	
@@ -581,10 +588,12 @@ public class RoomsPage extends TestBase{
 	}
 	
 	public boolean backBDisplayed() {
+		waitElementIsVisible(back,5);
 		return display(back);
 	} 
 	
 	public void clickBack() {
+		waitElementIsClickable(10,back);
 		click(back);
 	}
 
