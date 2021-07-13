@@ -183,7 +183,7 @@ public class RoomsPage extends TestBase{
 	}
 	
 	public void clickRooms() {
-		roomsButton.click();
+		click(roomsButton);
 	}
 	
 	public String getPageTitle() {
@@ -191,27 +191,27 @@ public class RoomsPage extends TestBase{
 	}
 	
 	public boolean roomsDisplayed() {
-		return rooms.isDisplayed();
+		return display(rooms);
 	}
 	
 	public String getRoomsText() {
-		return rooms.getText();
+		return getText(rooms);
 	}
 	
 	public boolean paragraphDisplayed() {
-		return paragraph.isDisplayed();
+		return display(paragraph);
 	}
 	
 	public boolean stayInTheCityDisplayed() { 
-		return stayInTheCity.isDisplayed();
+		return display(stayInTheCity);
 	}
 	
 	public String getStayInTheCityText() {
-		return stayInTheCity.getText();
+		return getText(stayInTheCity);
 	}
 	
 	public boolean backgroundImgDisplayed() { 
-		return backgroundImg.isDisplayed();
+		return display(backgroundImg);
 	}
 	
 	public void changeFrameBookARoom() {
@@ -219,224 +219,224 @@ public class RoomsPage extends TestBase{
 	}
 	
 	public boolean checkinDisplayed() {
-		return checkin.isDisplayed();
+		return display(checkin);
 	}
 	
 	public void clickCheckin() {
-		checkin.click();
+		click(checkin);
 	}
 	
 	public String getCheckinText() {
-		return checkin.getText();
+		return getText(checkin);
 	}
 	
 	public boolean checkinCalendarDisplayed() {
-		return checkinCalendar.isDisplayed();
+		return display(checkinCalendar);
 	}
 	
 	public String getCheckinCalendarTitle() {
-		return checkinCalendarTitle.getText();
+		return getText(checkinCalendarTitle);
 	}
 	
 	public boolean nextMonthBDisplayed() {
-		return nextMonthB.isDisplayed();
+		return display(nextMonthB);
 	}
 	
 	public void clicknextMonthB() {
-		nextMonthB.click();
+		click(nextMonthB);
 	}
 	
 	public String getNextMonthCheckinCalendarText() {
-		return checkinCalendar.getText();
+		return getText(checkinCalendar);
 	}
 	
 	public boolean checkinDate1Displayed() {
-		return checkinDate1.isDisplayed();
+		return display(checkinDate1);
 	}
 	
 	public String getCheckinDate1Text() {
-		return checkinDate1.getText();
+		return getText(checkinDate1);
 	}
 	
 	public void clickCheckinDate1() {
-		checkinDate1.click();
+		click(checkinDate1);
 	}
 	
 	public boolean prevMonthBDisplayed() {
-		return previousMonthB.isDisplayed();
+		return display(previousMonthB);
 	}
 	
 	public void clickPrevMonthB() {
-		previousMonthB.click();
+		click(previousMonthB);
 	}
 	
 	public String getPrevMonthCheckinCalendarText() {
-		return checkinCalendarTitle.getText();
+		return getText(checkinCalendarTitle);
 	}
 	
 	public boolean checkinDate2Displayed() {
-		return checkinDate2.isDisplayed();
+		return display(checkinDate2);
 	}
 	
 	public String getCheckinDate2Text() {
-		return checkinDate2.getText();
+		return getText(checkinDate2);
 	}
 	
 	public void clickCheckinDate2() {
-		checkinDate2.click();
+		click(checkinDate2);
 	}
 	
 	public boolean checkinDate3Displayed() {
-		return checkinDate3.isDisplayed();
+		return display(checkinDate3);
 	}
 	
 	public String getCheckinDate3Text() {
-		return checkinDate3.getText();
+		return getText(checkinDate3);
 	}
 	
 	public void clickCheckinDate3() {
-		checkinDate3.click();
+		click(checkinDate3);
 	}
 	
 	public boolean checkoutDisplayed() {
-		return checkout.isDisplayed();
+		return display(checkout);
 	}
 	
 	public void clickCheckout() {
-		checkout.click();
+		click(checkout);
 	}
 	
 	public String getCheckoutText() {
-		return checkout.getText();
+		return getText(checkout);
 	}
 	
 	public boolean checkoutCalendarDisplayed() {
-		return checkoutCalendar.isDisplayed();
+		return display(checkoutCalendar);
 	}
 	
 	public String getCheckoutCalendarTitle() {
-		return checkoutCalendarTitle.getText();
+		return getText(checkoutCalendarTitle);
 	}
 	
 	public boolean nextMonthB2Displayed() {
-		return nextMonthB2.isDisplayed();
+		return display(nextMonthB2);
 	}
 	
 	public void clicknextMonthB2() {
-		nextMonthB2.click();
+		click(nextMonthB2);
 	}
 	
 	public String getNextMonthCheckoutCalendarText() {
-		return checkoutCalendar.getText();
+		return getText(checkoutCalendar);
 	}
 	
 	public boolean checkoutDate1Displayed() {
-		return checkoutDate1.isDisplayed();
+		return display(checkoutDate1);
 	}
 	
 	public String getCheckoutDate1Text() {
-		return checkoutDate1.getText();
+		return getText(checkoutDate1);
 	}
 	
 	public void clickCheckoutDate1() {
-		checkoutDate1.click();
+		click(checkoutDate1);
 	}
 	
 	public boolean prevMonthB2Displayed() {
-		return previousMonthB2.isDisplayed();
+		return display(previousMonthB2);
 	}
 	
 	public void clickPrevMonthB2() {
-		previousMonthB2.click();
+		click(previousMonthB2);
 	}
 	
 	public String getPrevMonthCheckoutCalendarText() {
-		return checkoutCalendarTitle.getText();
+		return getText(checkoutCalendarTitle);
 	}
 	
 	public boolean checkoutDate2Displayed() {
-		return checkoutDate2.isDisplayed();
+		return display(checkoutDate2);
 	}
 	
 	public String getCheckoutDate2Text() {
-		return checkoutDate2.getText();
+		return getText(checkoutDate2);
 	}
 	
 	public void clickCheckoutDate2() {
-		checkoutDate2.click();
+		click(checkoutDate2);
 	}
 	
 	public void setCheckInDate() {
-		checkin.click();
-		checkinDate2.click();
+		click(checkin);
+		click(checkinDate2);
 	}
 	
 	public boolean checkoutDate3Displayed() {
-		return checkoutDate3.isDisplayed();
+		return display(checkoutDate3);
 	}
 	
 	public String getCheckoutDate3Text() {
-		return checkoutDate3.getText();
+		return getText(checkoutDate3);
 	}
 	
 	public void clickCheckoutDate3() {
-		checkoutDate3.click();
+		click(checkoutDate3);
 	}
 	
 	public boolean adultsDisplayed() {
-		return adults.isDisplayed();
+		return display(adults);
 	}
 	
 	public boolean adultsUpDisplayed() {
-		return adultsUp.isDisplayed();
+		return display(adultsUp);
 	}
 	
 	public void clickAdultsUp() {
-		adultsUp.click();
+		click(adultsUp);
 	}
 	
 	public String getAdultsText() {
-		return adults.getText();
+		return getText(adults);
 	}
 	
 	public boolean adultsDownDisplayed() {
-		return adultsDown.isDisplayed();
+		return display(adultsDown);
 	}
 	
 	public void clickAdultsDown() {
-		adultsDown.click();
+		click(adultsDown);
 	}
 	
 	public boolean kidsDisplayed() {
-		return kids.isDisplayed();
+		return display(kids);
 	}
 	
 	public boolean kidsUpDisplayed() {
-		return kidsUp.isDisplayed();
+		return display(kidsUp);
 	}
 	
 	public void clickKidsUp() {
-		kidsUp.click();
+		click(kidsUp);
 	}
 	
 	public String getKidsText() {
-		return kids.getText();
+		return getText(kids);
 	}
 	
 	public boolean kidsDownDisplayed() {
-		return kidsDown.isDisplayed();
+		return display(kidsDown);
 	}
 	
 	public void clickKidsDown() {
-		kidsDown.click();
+		click(kidsDown);
 	}
 	
 	public boolean searchBDisplayed() {
-		return search.isDisplayed();
+		return display(search);
 	}
 	
 	public void clickSearch() {
-		search.click();
+		click(search);
 	}
 	
 	public void completeDatesForSearch() {
@@ -445,147 +445,147 @@ public class RoomsPage extends TestBase{
 	}
 	
 	public boolean searchResultDisplayed() {
-		return searchResult.isDisplayed();
+		return display(searchResult);
 	}
 	
 	public boolean clearBDisplayed() {
-		return clear.isDisplayed();
+		return display(clear);
 	}
 	
 	public void clickClear() {
-		clear.click();
+		click(clear);
 	}
 	
 	public boolean ourRoomsDisplayed() {
-		return ourRooms.isDisplayed();
+		return display(ourRooms);
 	}
 	
 	public boolean bookNow1Displayed() {
-		return bookNow1.isDisplayed();
+		return display(bookNow1);
 	}
 	
 	public void clickBookNow1() {
-		bookNow1.click();
+		click(bookNow1);
 	}
 	
 	public boolean bookNow2Displayed() {
-		return bookNow2.isDisplayed();
+		return display(bookNow2);
 	}
 	
 	public void clickBookNow2() {
-		bookNow2.click();
+		click(bookNow2);
 	}
 	
 	public boolean bookNow3Displayed() {
-		return bookNow3.isDisplayed();
+		return display(bookNow3);
 	}
 	
 	public void clickBookNow3() {
-		bookNow3.click();
+		click(bookNow3);
 	}
 	
 	public boolean standardSuiteDisplayed() {
-		return standardSuite.isDisplayed();
+		return display(standardSuite);
 	}
 	
 	public void clickStandardSuite() {
-		standardSuite.click();
+		click(standardSuite);
 	}
 	
 	public boolean cottageDisplayed() {
-		return cottage.isDisplayed();
+		return display(cottage);
 	}
 	
 	public void clickCottage() {
-		cottage.click();
+		click(cottage);
 	}
 	
 	public boolean classicAppDisplayed() {
-		return classicApp.isDisplayed();
+		return display(classicApp);
 	}
 	
 	public void clickClassicApp() {
-		classicApp.click();
+		click(classicApp);
 	}
 	
 	public boolean img1Displayed() {
-		return img1.isDisplayed();
+		return display(img1);
 	}
 	
 	public boolean img2Displayed() {
-		return img2.isDisplayed();
+		return display(img2);
 	}
 	
 	public boolean img3Displayed() {
-		return img3.isDisplayed();
+		return display(img3);
 	}
 	
 	public boolean price1Displayed() {
-		return price1.isDisplayed();
+		return display(price1);
 	}
 	
 	public boolean price2Displayed() {
-		return price2.isDisplayed();
+		return display(price2);
 	}
 	
 	public boolean price3Displayed() {
-		return price3.isDisplayed();
+		return display(price3);
 	}
 	
 	public boolean moreInfo1Displayed() {
-		return moreInfo1.isDisplayed();
+		return display(moreInfo1);
 	}
 	
 	public void clickMoreInfo1() {
-		moreInfo1.click();
+		click(moreInfo1);
 	}
 	
 	public boolean moreInfo2Displayed() {
-		return moreInfo2.isDisplayed();
+		return display(moreInfo2);
 	}
 	
 	public void clickMoreInfo2() {
-		moreInfo2.click();
+		click(moreInfo2);
 	}
 	
 	public boolean moreInfo3Displayed() {
-		return moreInfo3.isDisplayed();
+		return display(moreInfo3);
 	}
 	
 	public void clickMoreInfo3() {
-		moreInfo3.click();
+		click(moreInfo3);
 	}
 	
 	public boolean standardSuite2Displayed() {
-		return standardSuite2.isDisplayed();
+		return display(standardSuite2);
 	}
 	
 	public boolean cottage2Displayed() {
-		return cottage2.isDisplayed();
+		return display(cottage2);
 	}
 	
 	public boolean classicApp2Displayed() {
-		return classicApp2.isDisplayed();
+		return display(classicApp2);
 	}
 	
 	public boolean politiciesDisplayed() {
-		return policies.isDisplayed();
+		return display(policies);
 	}
 	
 	public String getPoliciesText() {
-		return policies.getText();
+		return getText(policies);
 	}
 	
 	public String getPoliciesLink() {
-		return policies.getAttribute("href");
+		return getAttributeValue(policies, "href");
 	}
 	
 	public boolean backBDisplayed() {
-		return back.isDisplayed();
+		return display(back);
 	} 
 	
 	public void clickBack() {
-		back.click();
+		click(back);
 	}
 
 }
