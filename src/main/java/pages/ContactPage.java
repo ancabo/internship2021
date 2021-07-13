@@ -98,7 +98,7 @@ public class ContactPage extends TestBase{
 	}
 	
 	public String getContactUsText() {
-		return contact.getText();
+		return getText(contact);
 	}
 	
 	public boolean paragraphDisplayed() {
@@ -110,7 +110,7 @@ public class ContactPage extends TestBase{
 	}
 	
 	public String getTalkToUsText() {
-		return talkToUs.getText();
+		return getText(talkToUs);
 	}
 	
 	public boolean backgroundImgDisplayed() { 
