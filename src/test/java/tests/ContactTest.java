@@ -39,7 +39,7 @@ public class ContactTest extends TestBase{
 	}
 	
 	@Test
-	public void verifyContactText() throws InterruptedException{
+	public void verifyContactText(){
 		
 		//click the contact button from the home page
 		contactPage.clickContact();		
@@ -63,7 +63,7 @@ public class ContactTest extends TestBase{
 	
 	
 	@Test
-	public void verifyBackgroundImg() throws InterruptedException{
+	public void verifyBackgroundImg(){
 		
 		//click the contact button from the home page
 		contactPage.clickContact();		
@@ -76,7 +76,7 @@ public class ContactTest extends TestBase{
 	
 	
 	@Test
-	public void verifyMessage() throws InterruptedException{
+	public void verifyMessage(){
 		
 		//click the contact button from the home page
 		contactPage.clickContact();		
@@ -106,7 +106,7 @@ public class ContactTest extends TestBase{
 	}
 	
 	@Test
-	public void verifyEmptySubmit() throws InterruptedException{
+	public void verifyEmptySubmit(){
 		
 		//click the contact button from the home page
 		contactPage.clickContact();		
@@ -122,7 +122,7 @@ public class ContactTest extends TestBase{
 	}
 	
 	@Test
-	public void verifyWrongSubmit() throws InterruptedException{
+	public void verifyWrongSubmit(){
 		
 		//click the contact button from the home page
 		contactPage.clickContact();		
@@ -142,7 +142,7 @@ public class ContactTest extends TestBase{
 	
 	
 	@Test
-	public void verifyChat() throws InterruptedException{
+	public void verifyChat(){
 		
 //		//click the contact button from the home page
 		contactPage.clickContact();		
@@ -279,7 +279,7 @@ public class ContactTest extends TestBase{
 	}
 	
 	@Test
-	public void verifySocialBar1() throws InterruptedException{
+	public void verifySocialBar1(){
 		
 		//click the contact button from the home page
 		contactPage.clickContact();		
@@ -301,7 +301,7 @@ public class ContactTest extends TestBase{
 	
 	
 	@Test
-	public void verifySocialBar2() throws InterruptedException{
+	public void verifySocialBar2(){
 		
 		//click the contact button from the home page
 		contactPage.clickContact();		
@@ -332,7 +332,7 @@ public class ContactTest extends TestBase{
 	
 	
 	@Test
-	public void verifyMap() throws InterruptedException{
+	public void verifyMap(){
 		
 		//click the contact button from the home page
 		contactPage.clickContact();		
@@ -376,7 +376,7 @@ public class ContactTest extends TestBase{
 
 
 	@Test
-	public void verifyGeneralInfo() throws InterruptedException{
+	public void verifyGeneralInfo(){
 		
 		//click the contact button from the home page
 		contactPage.clickContact();		
