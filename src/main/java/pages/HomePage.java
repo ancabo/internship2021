@@ -2,7 +2,6 @@ package pages;
 
 import java.util.ArrayList;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -68,10 +67,10 @@ public class HomePage extends TestBase{
 	@FindBy(xpath = "//*[@id='check-in-value']")
 	private WebElement actualDateCheckIn;
 
-	@FindBy(xpath = "//span[contains(text(),'12')]")
+	@FindBy(xpath = "//span[contains(text(),'20')]")
 	private WebElement dataCheckIn;
 
-	@FindBy(xpath = "//button[@day-button-aria='day']/span[contains(text(),'24')]")
+	@FindBy(xpath = "//button[@day-button-aria='day']/span[contains(text(),'30')]")
 	private WebElement checkOutData;
 
 	@FindBy(xpath = "//*[@id='check-out-value']")
@@ -80,12 +79,14 @@ public class HomePage extends TestBase{
 	@FindBy(xpath = "//button[@wix-bi='SEARCH']")
 	private WebElement searchButton;
 	
-	@FindBy(xpath ="//button[@day-button-aria='day']/span[contains(text(),'17')]")
+	@FindBy(xpath ="//button[@day-button-aria='day']/span[contains(text(),'21')]")
 	private WebElement dataCheckIn2;
 
 	@FindBy(xpath ="/html/body/div/main/div/nav/button[2]")
 	private WebElement nextMonth;
 
+	@FindBy(xpath ="//button[@id='check-in'][1]")
+	private WebElement dataBtn;
 	
 	//Actions on WebElements//
 
@@ -193,11 +194,16 @@ public class HomePage extends TestBase{
 	}
 
 	public TestBase dataCheckInClicked() {
-		waitElementIsClickable(20, dataCheckIn);
+		waitElementIsClickable(400, dataCheckIn);
 		click(dataCheckIn);
 		return this;
 	}
 
+	public TestBase dataBtnClicked() {
+		waitElementIsClickable(30, dataBtn);
+		click(dataBtn);
+		return this;
+	}
 	public String actualDateCheckIn() {
 		return actualDateCheckIn.getText();
 	}
@@ -223,7 +229,7 @@ public class HomePage extends TestBase{
 	}
 
 	public TestBase dataCheckIn1Clicked() {
-		//waitElementIsClickable(5,dataCheckIn2);
+		waitElementIsClickable(10,dataCheckIn2);
 		click(dataCheckIn2);
 		return this;
 	}

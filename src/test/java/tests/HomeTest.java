@@ -2,11 +2,6 @@ package tests;
 
 import java.util.ArrayList;
 
-import org.openqa.selenium.By;
-
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -253,7 +248,7 @@ public class HomeTest extends TestBase{
 	
 
 		homePage.frameWixHotels();
-		Assert.assertEquals(homePage.actualDateCheckIn(), "12 Jul 2021");
+		Assert.assertEquals(homePage.actualDateCheckIn(), "20 Jul 2021");
 
 		implicitWait(30);
 		
@@ -268,7 +263,7 @@ public class HomeTest extends TestBase{
 		Thread.sleep(200);
 
 		homePage.frameWixHotels();
-		Assert.assertEquals(homePage.actualDateCheckOut(), "24 Jul 2021");
+		Assert.assertEquals(homePage.actualDateCheckOut(), "30 Jul 2021");
 
 		implicitWait(10);
 		driver.switchTo().defaultContent();
@@ -290,11 +285,13 @@ public class HomeTest extends TestBase{
 	}
 	@Test 
 	public void verifyCheckIn() throws InterruptedException { 
-		Thread.sleep(3000);
+		//Thread.sleep(3000);
+		waitPageLoad(4000);
 
 		//Validate that frame exists
 		homePage.frameWixHotels();
-		Thread.sleep(3000);
+		//Thread.sleep(3000);
+		implicitWait(50);
 
 		//Click the check in field
 		homePage.checkInClicked();
@@ -302,26 +299,24 @@ public class HomeTest extends TestBase{
 
 		//switch to default
 		driver.switchTo().defaultContent();
-		Thread.sleep(1000);
+		//Thread.sleep(1000);
 
 		//Click on a date (later than today)
 		//switch to check-in frame
 		homePage.switchToframe();
-		Thread.sleep(1000);
+		//Thread.sleep(1000);
 
 		//select a date ->later than today
 		Thread.sleep(1000);
+		//implicitWait(20);
 		homePage.dataCheckInClicked();
-		Thread.sleep(3000);
+		//Thread.sleep(3000);
+		implicitWait(50);
 
 		homePage.frameWixHotels();
-		Assert.assertEquals(homePage.actualDateCheckIn(), "12 Jul 2021");
+		Assert.assertEquals(homePage.actualDateCheckIn(), "20 Jul 2021");
 
-
-		Thread.sleep(1000);
-		WebDriverWait wait1 = new WebDriverWait(driver, 3000);
-		WebElement dataBtn = wait1.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@id='check-in'][1]")));
-		dataBtn.click();
+		homePage.dataBtnClicked();
 
 		//switch to default
 		driver.switchTo().defaultContent();
@@ -331,15 +326,16 @@ public class HomeTest extends TestBase{
 
 		Thread.sleep(1000);
 
+		//implicitWait(15);
 		homePage.switchToframe();
-		homePage.nextMonthClicked();
 
-		Thread.sleep(1000);
+		//Thread.sleep(1000);
 		homePage.dataCheckIn1Clicked();
-		Thread.sleep(3000);
+		//Thread.sleep(3000);
+		implicitWait(15);
 
 		homePage.frameWixHotels();
-		Assert.assertEquals(homePage.actualDateCheckIn(), "17 Aug 2021");
+		Assert.assertEquals(homePage.actualDateCheckIn(), "21 Jul 2021");
 
 		//switch to default
 		driver.switchTo().defaultContent();
@@ -347,23 +343,25 @@ public class HomeTest extends TestBase{
 		homePage.switchToframe();
 
 		Thread.sleep(1000);
+		//implicitWait(20);
 		homePage.dataCheckOutClicked();
 
 		Thread.sleep(1000);
 
 		homePage.frameWixHotels();
-		Assert.assertEquals(homePage.actualDateCheckOut(), "24 Aug 2021");
+		Assert.assertEquals(homePage.actualDateCheckOut(), "30 Jul 2021");
 
 		homePage.adultsUpClicked();
 		homePage.kidsUpClicked();
-
-		Thread.sleep(1000);
+		
+		//Thread.sleep(1000);
+		implicitWait(10);
 		driver.switchTo().defaultContent();
 
 		Thread.sleep(1000);
 		homePage.frameWixHotels();
 
-		Thread.sleep(1000);
+		//Thread.sleep(1000);
 
 		//Validate that the Search button exists
 		Assert.assertTrue(homePage.searchBtnDisplayed(), "Search button is not displayed");
@@ -371,14 +369,14 @@ public class HomeTest extends TestBase{
 		//Click the Search button (after the other fields are completed)
 		homePage.searchBtnClicked();
 
-		Thread.sleep(2000);
+		//Thread.sleep(2000);
+		implicitWait(20);
 
 		homePage.switchTo(0);
 
 		Assert.assertTrue(getCurrentURL().contains("rooms"), "Rooms page is not displayed");	
 		driver.close();
 
-		Thread.sleep(3000);
-
+		//Thread.sleep(3000);
 	}
 }
