@@ -1,5 +1,6 @@
 package pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -115,59 +116,59 @@ public class RoomsPage extends TestBase{
 	@FindBy(xpath = "//span[contains(text(),'Our Rooms')]")
 	private WebElement ourRooms;
 	
-	@FindBy(xpath = "(//button[@stranslate=\"booking.BOOK_NOW\"])[1]")
-	private WebElement bookNow1;
+	//@FindBy(xpath = "(//button[@stranslate=\"booking.BOOK_NOW\"])[1]")
+	//private WebElement bookNow1;
 	
-	@FindBy(xpath = "(//button[@stranslate=\"booking.BOOK_NOW\"])[2]")
-	private WebElement bookNow2;
+	//@FindBy(xpath = "(//button[@stranslate=\"booking.BOOK_NOW\"])[2]")
+	//private WebElement bookNow2;
 	
-	@FindBy(xpath = "(//button[@stranslate=\"booking.BOOK_NOW\"])[3]")
-	private WebElement bookNow3;
+	//@FindBy(xpath = "(//button[@stranslate=\"booking.BOOK_NOW\"])[3]")
+	//private WebElement bookNow3;	
 	
-	@FindBy(xpath = "(//a[@wix-bi=\"ROOM_DETAILS\"])[1]")
-	private WebElement standardSuite;
+	//@FindBy(xpath = "(//a[@wix-bi=\"ROOM_DETAILS\"])[1]")
+	//private WebElement standardSuite;
 	
-	@FindBy(xpath = "(//a[@wix-bi=\"ROOM_DETAILS\"])[2]")
-	private WebElement cottage;
+	//@FindBy(xpath = "(//a[@wix-bi=\"ROOM_DETAILS\"])[2]")
+	//private WebElement cottage;
 	
-	@FindBy(xpath = "(//a[@wix-bi=\"ROOM_DETAILS\"])[3]")
-	private WebElement classicApp;
+	//@FindBy(xpath = "(//a[@wix-bi=\"ROOM_DETAILS\"])[3]")
+	//private WebElement classicApp;
 	
-	@FindBy(xpath = "(//img[@role=\"presentation\"])[1]")
-	private WebElement img1;
+	//@FindBy(xpath = "(//img[@role=\"presentation\"])[1]")
+	//private WebElement img1;
 	
-	@FindBy(xpath = "(//img[@role=\"presentation\"])[2]")
-	private WebElement img2;
+	//@FindBy(xpath = "(//img[@role=\"presentation\"])[2]")
+	//private WebElement img2;
 	
-	@FindBy(xpath = "(//img[@role=\"presentation\"])[3]")
-	private WebElement img3;
+	//@FindBy(xpath = "(//img[@role=\"presentation\"])[3]")
+	//private WebElement img3;
 	
-	@FindBy(xpath = "(//span[@class=\"value\"])[3]")
-	private WebElement price1;
+	//@FindBy(xpath = "(//span[@class=\"value\"])[3]")
+	//private WebElement price1;
 	
-	@FindBy(xpath = "(//span[@class=\"value\"])[4]")
-	private WebElement price2;
+	//@FindBy(xpath = "(//span[@class=\"value\"])[4]")
+	//private WebElement price2;
 	
-	@FindBy(xpath = "(//span[@class=\"value\"])[5]")
-	private WebElement price3;
+	//@FindBy(xpath = "(//span[@class=\"value\"])[5]")
+	//private WebElement price3;
 	
-	@FindBy(xpath = "(//button[@wix-bi=\"ROOM_DETAILS\"])[1]")
-	private WebElement moreInfo1;
+	//@FindBy(xpath = "(//button[@wix-bi=\"ROOM_DETAILS\"])[1]")
+	//private WebElement moreInfo1;
 	
-	@FindBy(xpath = "(//button[@wix-bi=\"ROOM_DETAILS\"])[2]")
-	private WebElement moreInfo2;
+	//@FindBy(xpath = "(//button[@wix-bi=\"ROOM_DETAILS\"])[2]")
+	//private WebElement moreInfo2;
 	
-	@FindBy(xpath = "(//button[@wix-bi=\"ROOM_DETAILS\"])[3]")
-	private WebElement moreInfo3;
+	//@FindBy(xpath = "(//button[@wix-bi=\"ROOM_DETAILS\"])[3]")
+	//private WebElement moreInfo3;
 	
-	@FindBy(xpath = "//span[@stranslate=\"Standard Suite\"]")
-	private WebElement standardSuite2;
+	//@FindBy(xpath = "//span[@stranslate=\"Standard Suite\"]")
+	//private WebElement standardSuite2;
 	
-	@FindBy(xpath = "//span[@stranslate=\"Cottage\"]")
-	private WebElement cottage2;
+	//@FindBy(xpath = "//span[@stranslate=\"Cottage\"]")
+	//private WebElement cottage2;
 	
-	@FindBy(xpath = "//span[@stranslate=\"Classic App\"]")
-	private WebElement classicApp2;
+	//@FindBy(xpath = "//span[@stranslate=\"Classic App\"]")
+	//private WebElement classicApp2;
 	
 	@FindBy(xpath = "//a[@class=\"policies\"]")
 	private WebElement policies;
@@ -464,115 +465,157 @@ public class RoomsPage extends TestBase{
 		return display(ourRooms);
 	}
 	
+	public WebElement bookNow(int no) {
+		String xpath = "(//button[@stranslate=\"booking.BOOK_NOW\"])[" + no + "]";
+		WebElement element = null;
+		element = driver.findElement(By.xpath(xpath));
+		return element;
+	}
+	
 	public boolean bookNow1Displayed() {
-		return display(bookNow1);
+		return display(bookNow(1));
 	}
 	
 	public void clickBookNow1() {
-		click(bookNow1);
+		click(bookNow(1));
 	}
 	
 	public boolean bookNow2Displayed() {
-		return display(bookNow2);
+		return display(bookNow(2));
 	}
 	
 	public void clickBookNow2() {
-		click(bookNow2);
+		click(bookNow(2));
 	}
 	
 	public boolean bookNow3Displayed() {
-		return display(bookNow3);
+		return display(bookNow(3));
 	}
 	
 	public void clickBookNow3() {
-		click(bookNow3);
+		click(bookNow(3));
+	}
+	
+	public WebElement roomsType(int no) {
+		String xpath = "(//a[@wix-bi=\"ROOM_DETAILS\"])[" + no + "]";
+		WebElement element = null;
+		element = driver.findElement(By.xpath(xpath));
+		return element;
 	}
 	
 	public boolean standardSuiteDisplayed() {
-		waitElementIsVisible(standardSuite,5);
-		return display(standardSuite);
+		waitElementIsVisible(roomsType(1),10);
+		return display(roomsType(1));
 	}
 	
 	public void clickStandardSuite() {
-		click(standardSuite);
+		click(roomsType(1));
 	}
 	
 	public boolean cottageDisplayed() {
-		waitElementIsVisible(cottage,5);
-		return display(cottage);
+		waitElementIsVisible(roomsType(2),10);
+		return display(roomsType(2));
 	}
 	
 	public void clickCottage() {
-		click(cottage);
+		click(roomsType(2));
 	}
 	
 	public boolean classicAppDisplayed() {
-		waitElementIsVisible(classicApp,5);
-		return display(classicApp);
+		waitElementIsVisible(roomsType(3),10);
+		return display(roomsType(3));
 	}
 	
 	public void clickClassicApp() {
-		click(classicApp);
+		click(roomsType(3));
+	}
+	
+	public WebElement image(int no) {
+		String xpath = "(//img[@role=\"presentation\"])[" + no + "]";
+		WebElement element = null;
+		element = driver.findElement(By.xpath(xpath));
+		return element;
 	}
 	
 	public boolean img1Displayed() {
-		return display(img1);
+		return display(image(1));
 	}
 	
 	public boolean img2Displayed() {
-		return display(img2);
+		return display(image(2));
 	}
 	
 	public boolean img3Displayed() {
-		return display(img3);
+		return display(image(3));
+	}
+	
+	public WebElement price(int no) {
+		String xpath = "(//span[@class=\"value\"])[" + no + "]";
+		WebElement element = null;
+		element = driver.findElement(By.xpath(xpath));
+		return element;
 	}
 	
 	public boolean price1Displayed() {
-		return display(price1);
+		return display(price(3));
 	}
 	
 	public boolean price2Displayed() {
-		return display(price2);
+		return display(price(4));
 	}
 	
 	public boolean price3Displayed() {
-		return display(price3);
+		return display(price(5));
+	}
+	
+	public WebElement moreInfo(int no) {
+		String xpath = "(//button[@wix-bi=\"ROOM_DETAILS\"])[" + no + "]";
+		WebElement element = null;
+		element = driver.findElement(By.xpath(xpath));
+		return element;
 	}
 	
 	public boolean moreInfo1Displayed() {
-		return display(moreInfo1);
+		return display(moreInfo(1));
 	}
 	
 	public void clickMoreInfo1() {
-		click(moreInfo1);
+		click(moreInfo(1));
 	}
 	
 	public boolean moreInfo2Displayed() {
-		return display(moreInfo2);
+		return display(moreInfo(2));
 	}
 	
 	public void clickMoreInfo2() {
-		click(moreInfo2);
+		click(moreInfo(2));
 	}
 	
 	public boolean moreInfo3Displayed() {
-		return display(moreInfo3);
+		return display(moreInfo(3));
 	}
 	
 	public void clickMoreInfo3() {
-		click(moreInfo3);
+		click(moreInfo(3));
+	}
+	
+	public WebElement roomsType2(String name) {
+		String xpath = "//span[@stranslate=\"" + name + "\"]";
+		WebElement element = null;
+		element = driver.findElement(By.xpath(xpath));
+		return element;
 	}
 	
 	public boolean standardSuite2Displayed() {
-		return display(standardSuite2);
+		return display(roomsType2("Standard Suite"));
 	}
 	
 	public boolean cottage2Displayed() {
-		return display(cottage2);
+		return display(roomsType2("Cottage"));
 	}
 	
 	public boolean classicApp2Displayed() {
-		return display(classicApp2);
+		return display(roomsType2("Classic App"));
 	}
 	
 	public boolean politiciesDisplayed() {
