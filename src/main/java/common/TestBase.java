@@ -1,5 +1,6 @@
 package common;
 
+import java.lang.reflect.Method;
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
@@ -15,22 +16,48 @@ import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.ITestResult;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeTest;
+
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
+import com.aventstack.extentreports.markuputils.ExtentColor;
+import com.aventstack.extentreports.markuputils.MarkupHelper;
+import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 
 
 
 public class TestBase {
 	public static WebDriver driver;
+	public static ExtentHtmlReporter htmlReporter;
+	public static ExtentReports extent;
+	public static ExtentTest test;
 	
-
+	@BeforeTest(alwaysRun = true)
+	public void setUp() {
+		//setup report
+		htmlReporter = new ExtentHtmlReporter("./InternshipReport.html");
+		htmlReporter.config().setDocumentTitle("Internship Test Automation Report");
+		htmlReporter.config().setReportName("Internship Test Automation Report");
+		extent = new ExtentReports();
+		extent.attachReporter(htmlReporter);
+	}
+	
 	@BeforeMethod(alwaysRun = true)
-	public void setUpDriver() {
+	public void setUpBeforeMethod(Method method) {
+		//setup driver
 		System.setProperty("webdriver.chrome.driver", "drivers\\chromedriver.exe");
 		driver = new ChromeDriver();
         driver.manage().window().maximize();
     	driver.get("https://ancabota09.wixsite.com/intern");
     	driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+    	
+    	//setup report
+    	test = extent.createTest(method.getName());
 	}
 	
 	
@@ -40,8 +67,25 @@ public class TestBase {
 			driver.quit();
 		}
 	
+	@AfterMethod(alwaysRun = true)
+	public void afterMethod(ITestResult result){
+		  if (result.getStatus() == ITestResult.FAILURE) {
+	        	System.out.println("FAILED: " + result.getName());
+	        	System.out.println(result.getThrowable().toString());
+	        	test.log(Status.FAIL, MarkupHelper.createLabel(result.getThrowable().toString(), ExtentColor.RED));
+	        }
+	        else if (result.getStatus() == ITestResult.SKIP){
+	        	System.out.println("SKIPPED");       
+	        	test.log(Status.SKIP, MarkupHelper.createLabel("Skipped", ExtentColor.ORANGE));
+	        }		
+	        else{
+	          	System.out.println("PASSED: " + result.getName());
+	        	test.log(Status.PASS, MarkupHelper.createLabel("Passed", ExtentColor.GREEN));
+	        }	        
+	        extent.flush();
+	}
 	
-	
+		
 	
 	// Selenium Helpers
 	
@@ -148,7 +192,7 @@ public class TestBase {
 		return fluentElement;		
 	}
 		
-	public WebElement fluentWait(int secTimeOut, int secSearchInterval, final By option) {
+	public WebElement fluentWait(int secTimeOut, int secSearchInterval, By option) {
 
 		Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(Duration.ofSeconds(secTimeOut))
 				.pollingEvery(Duration.ofSeconds(secSearchInterval)).ignoring(NoSuchElementException.class);
@@ -160,8 +204,23 @@ public class TestBase {
 		});
 		return fluentElement;
 	}
+	
+		
 
+	// Extent Reports Helper
+	public void logReport(String logType, String logDetails) {
 
-
+		switch (logType) {
+		case "Pass":
+			test.log(Status.PASS, logDetails);
+			break;
+		case "Fail":
+			test.log(Status.FAIL, logDetails);
+			break;
+		case "Info":
+			test.log(Status.INFO, logDetails);
+			break;
+		}	
+	}
 	
 }

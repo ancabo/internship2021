@@ -30,8 +30,11 @@ public class HomeTest extends TestBase{
 	public void verifyHomeTab() {
 		//verify page title
 		Assert.assertEquals(getTitle(), "HOME | Intern", "Title is not as expected");
+		logReport("Info", "Home title ok");
 		Assert.assertEquals(homePage.getHeaderText(), "HOME & AWAY", "Not as expected");
+		logReport("Info", "Home header ok");
 		Assert.assertTrue(homePage.homeTabDisplayed(), "Home tab is not displayed"); 
+		logReport("Info", "Home tab ok");
 	}
 
 	@Test

@@ -9,3 +9,6 @@ output.txt
 /target/
 /logs/
 /test-output/
+
+# report file
+InternshipReport.html
