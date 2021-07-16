@@ -20,14 +20,14 @@ public class SocialMediaPage extends TestBase{
 		PageFactory.initElements(driver, this);
 	}
 	
-//	@FindBy(xpath = "//*[@id='img_0_i6rlbitx']/img")
-//	private WebElement facebookIcon;
-//
-//	@FindBy(xpath = "//*[@id='img_1_i6rlbitx']/img")
-//	private WebElement twiterIcon;
-//
-//	@FindBy(xpath = "//*[@id='img_2_i6rlbitx']/img")
-//	private WebElement pinterestIcon;
+	@FindBy(xpath = "//*[@id='img_0_i6rlbitx']/img")
+	private WebElement facebookIcon;
+
+	@FindBy(xpath = "//*[@id='img_1_i6rlbitx']/img")
+	private WebElement twiterIcon;
+
+	@FindBy(xpath = "//*[@id='img_2_i6rlbitx']/img")
+	private WebElement pinterestIcon;
 	
 	@FindBy(xpath = "//li[@class='_2-pBe']/a")
 	private List<WebElement> listSocialMedia;
@@ -71,20 +71,20 @@ public class SocialMediaPage extends TestBase{
 //		return display(pinterestIcon);
 //	}
 //
-//	public TestBase facebookClicked() {
-//		click(facebookIcon);
-//		return this;
-//	}
-//
-//	public TestBase twitterClicked() {
-//		click(twiterIcon);
-//		return this;
-//	} 
-//
-//	public TestBase pinterestClicked() {
-//		click(pinterestIcon);
-//		return this;
-//	} 
+	public TestBase facebookClicked() {
+		click(facebookIcon);
+		return this;
+	}
+
+	public TestBase twitterClicked() {
+		click(twiterIcon);
+		return this;
+	} 
+
+	public TestBase pinterestClicked() {
+		click(pinterestIcon);
+		return this;
+	} 
 
 	public String getUrl() {
 		String url = driver.getCurrentUrl();
@@ -92,7 +92,7 @@ public class SocialMediaPage extends TestBase{
 	}
 
 
-	public void switchTo(int number) {
+	public void switchToTab(int number) {
 		ArrayList<String> windowH = new ArrayList<String>(driver.getWindowHandles());
 		if(number == 1) {
 			driver.switchTo().window(windowH.get(1));

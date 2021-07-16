@@ -326,8 +326,26 @@ public class ContactTest extends TestBase{
 	
 		ArrayList<String> socialMediaList = socialMedia.getSocialMediaLinkList() ;
 		Assert.assertEquals(socialMediaList.get(0), "http://www.facebook.com/wix", "The fb link is not ok");
+		
+		socialMedia.facebookClicked();
+		socialMedia.switchToTab(1);
+		Assert.assertTrue(socialMedia.getUrl().contains("facebook"), "Facebook page is not displayed");
+		driver.close();
+		socialMedia.switchToTab(0);
+		
 		Assert.assertEquals(socialMediaList.get(1), "http://www.twitter.com/wix", "The twiter link is not ok");
+		socialMedia.twitterClicked();
+		socialMedia.switchToTab(1);
+		Assert.assertTrue(socialMedia.getUrl().contains("twitter"), "Twiter page is not displayed");
+		driver.close();
+		socialMedia.switchToTab(0);
+		
 		Assert.assertEquals(socialMediaList.get(2), "http://pinterest.com/wixcom/", "The pinterest link is not ok");
+		socialMedia.pinterestClicked();
+		socialMedia.switchToTab(1);
+		Assert.assertTrue(socialMedia.getUrl().contains("pinterest"), "Pinterest page is not displayed");
+		driver.close();
+	
 	}
 	
 	

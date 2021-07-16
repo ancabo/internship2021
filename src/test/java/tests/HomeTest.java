@@ -17,7 +17,7 @@ public class HomeTest extends TestBase{
 	SocialMediaPage socialMedia;
 	GeneralInfoPage generalInfo;
 	ChatPage chat;
-	
+
 	@BeforeMethod
 	public void beforeMethod() {
 		homePage = new HomePage(driver);
@@ -44,55 +44,50 @@ public class HomeTest extends TestBase{
 
 	@Test  // //span[.='ADDRESS']/../../following-sibling::*[2]/p
 	public void verifySocialMedia() throws InterruptedException { 
-		
-//		Assert.assertTrue(socialMedia.facebookIconDisplayed(), "Facebook icon is not displayed");
-//		Assert.assertTrue(socialMedia.twiterIconDisplayed(), "Twiter icon is not displayed");
-//		Assert.assertTrue(socialMedia.pinterestIconDisplayed(), "Pinterest icon is not displayed");
-//		socialMedia.facebookClicked();
-//		socialMedia.switchTo(1);
-//		Assert.assertTrue(socialMedia.getUrl().contains("facebook"), "Facebook page is not displayed");
-//		driver.close();
-//		socialMedia.switchTo(0);
-//
-//
-//		socialMedia.twitterClicked();
-//		socialMedia.switchTo(1);
-//		Assert.assertTrue(socialMedia.getUrl().contains("twitter"), "Twiter page is not displayed");
-//		driver.close();
-//		socialMedia.switchTo(0);
-//
-//		//Click the Pinterest icon
-//		socialMedia.pinterestClicked();
-//		socialMedia.switchTo(1);
-//		Assert.assertTrue(socialMedia.getUrl().contains("pinterest"), "Pinterest page is not displayed");
-//		driver.close();
-		
+
 		Assert.assertEquals(socialMedia.getSocialMediaIcons().size(), 3, "There are not 3 icons");
 		Assert.assertEquals(socialMedia.getSocialMediaLinkList().size(), 3, "There are not 3 links");
-	
+
 		ArrayList<String> socialMediaList = socialMedia.getSocialMediaLinkList() ;
 		Assert.assertEquals(socialMediaList.get(0), "http://www.facebook.com/wix", "The fb link is not ok");
+
+		socialMedia.facebookClicked();
+		socialMedia.switchToTab(1);
+		Assert.assertTrue(socialMedia.getUrl().contains("facebook"), "Facebook page is not displayed");
+		driver.close();
+		socialMedia.switchToTab(0);
+
 		Assert.assertEquals(socialMediaList.get(1), "http://www.twitter.com/wix", "The twiter link is not ok");
+		socialMedia.twitterClicked();
+		socialMedia.switchToTab(1);
+		Assert.assertTrue(socialMedia.getUrl().contains("twitter"), "Twiter page is not displayed");
+		driver.close();
+		socialMedia.switchToTab(0);
+
 		Assert.assertEquals(socialMediaList.get(2), "http://pinterest.com/wixcom/", "The pinterest link is not ok");
+		socialMedia.pinterestClicked();
+		socialMedia.switchToTab(1);
+		Assert.assertTrue(socialMedia.getUrl().contains("pinterest"), "Pinterest page is not displayed");
+		driver.close();
 
 	}
 
 	@Test
 	public void verifyAdults() throws InterruptedException { 
 		waitPageLoad(1000);
+		implicitWait(10);
 		homePage.frameWixHotels();
 
 		Assert.assertTrue(homePage.adultsDisplayed(), "Adults field is not displayed");
 		Assert.assertTrue(homePage.adultsUpDisplayed(), "Adults up button is not displayed");
-		
-		homePage.adultsUpClicked();
-		homePage.adultsUpClicked();
-		
+
+		homePage.upClickedAdults(2);
+
 		Assert.assertEquals( homePage.adultsgetText(), "Adults" + '\n' +"3");
-		
+
 		implicitWait(20);
 		Assert.assertTrue(homePage.adultsDownDisplayed(), "Adults down button is not displayed");
-		homePage.adultsDownClicked();
+		homePage.downClickedAdults(1);
 
 		implicitWait(20);
 		Assert.assertEquals( homePage.adultsgetText(), "Adults" + '\n' + "2");
@@ -107,18 +102,17 @@ public class HomeTest extends TestBase{
 
 		Assert.assertTrue(homePage.kidsDisplayed(), "Kids field is not displayed");
 		Assert.assertTrue(homePage.kidsUpDisplayed(), "Kids up button is not displayed");
-		homePage.kidsUpClicked();
-		homePage.kidsUpClicked();
+		homePage.upClickedKids(2);
 
 		Assert.assertEquals( homePage.kidsGetText(), "2");
 		implicitWait(20);
 
 		Assert.assertTrue(homePage.kidsDownDisplayed(), "Kids down button is not displayed");
-		homePage.kidsDownClicked();
-		
+		homePage.downClickedKids(1);
+
 		implicitWait(20);
 		Assert.assertEquals( homePage.kidsGetText(), "1");
-		
+
 		implicitWait(10);
 
 	}
@@ -176,38 +170,38 @@ public class HomeTest extends TestBase{
 
 	@Test 
 	public void verifyGeneralInfo() { 
-//		//Validate that the address exists at the bottom of the page
-//		Assert.assertTrue(generalInfo.addressDisplayed(), "Address is not displayed");
-//		Assert.assertTrue(generalInfo.addressDisplayed1(), "Address is not displayed");
-//		Assert.assertTrue(generalInfo.addressDisplayed2(), "Address is not displayed");
-//
-//
-//		//Validate that the contact information exist at the bottom of the page
-//		Assert.assertTrue(generalInfo.addressDisplayed(), "Contact is not displayed");
-//		Assert.assertTrue(generalInfo.addressDisplayed1(), "Contact is not displayed");
-//
-//		generalInfo.contactAcceptDisplayed2();
-//		driver.switchTo().defaultContent();
-//
-//		Assert.assertTrue(generalInfo.contactDisplayed2(), "Contact is not displayed");
-//
-//
-//		//Validate that the site information exist at the bottom of the page
-//		Assert.assertTrue(generalInfo.homeDisplayed1(), "Home&Away is not displayed");
-//		Assert.assertTrue(generalInfo.homeDisplayed2(), "Home&Away is not displayed");
-//		Assert.assertTrue(generalInfo.homeDisplayed3(), "Home&Away is not displayed");
-//		driver.switchTo().defaultContent();
-		
+		//		//Validate that the address exists at the bottom of the page
+		//		Assert.assertTrue(generalInfo.addressDisplayed(), "Address is not displayed");
+		//		Assert.assertTrue(generalInfo.addressDisplayed1(), "Address is not displayed");
+		//		Assert.assertTrue(generalInfo.addressDisplayed2(), "Address is not displayed");
+		//
+		//
+		//		//Validate that the contact information exist at the bottom of the page
+		//		Assert.assertTrue(generalInfo.addressDisplayed(), "Contact is not displayed");
+		//		Assert.assertTrue(generalInfo.addressDisplayed1(), "Contact is not displayed");
+		//
+		//		generalInfo.contactAcceptDisplayed2();
+		//		driver.switchTo().defaultContent();
+		//
+		//		Assert.assertTrue(generalInfo.contactDisplayed2(), "Contact is not displayed");
+		//
+		//
+		//		//Validate that the site information exist at the bottom of the page
+		//		Assert.assertTrue(generalInfo.homeDisplayed1(), "Home&Away is not displayed");
+		//		Assert.assertTrue(generalInfo.homeDisplayed2(), "Home&Away is not displayed");
+		//		Assert.assertTrue(generalInfo.homeDisplayed3(), "Home&Away is not displayed");
+		//		driver.switchTo().defaultContent();
+
 		Assert.assertEquals(generalInfo.getGeneralInfoTitles().size(), 4, "There are not 4 titles");
 		Assert.assertEquals(generalInfo.getGeneralInfoTitleText().size(), 4, "There are not 4 titles");
-	
+
 		ArrayList<String> generalInfoList = generalInfo.getGeneralInfoTitleText() ;
 		Assert.assertEquals(generalInfoList.get(0), "ADDRESS", "The Adress title is not ok");
 		Assert.assertEquals(generalInfoList.get(1), "CONTACT", "The Contact title is not ok");
 		Assert.assertEquals(generalInfoList.get(2), "HOME & AWAY", "The Home&Away title is not ok");
 		Assert.assertEquals(generalInfoList.get(3), "WE ACCEPT", "The accept title is not ok");
-		
-		
+
+
 	}
 
 	@Test
@@ -220,16 +214,16 @@ public class HomeTest extends TestBase{
 
 		Assert.assertTrue( homePage.roomsDisplayed(), "Rooms page is not displayed");
 	}
-	
+
 	@Test 
 	public void verifySearch() throws InterruptedException { 
 		waitPageLoad(3000);
-		
+
 		//Validate that frame exists
 		homePage.frameWixHotels();
 		//implicitWait(50);
 		Thread.sleep(100);
-		
+
 		//Click the check in field
 		homePage.checkInClicked();
 		implicitWait(20);
@@ -245,16 +239,17 @@ public class HomeTest extends TestBase{
 		//select a date ->later than today
 		//implicitWait(50);
 		Thread.sleep(1000);
-	
+
+
 		homePage.dataCheckInClicked();
 		implicitWait(50);
-	
+
 
 		homePage.frameWixHotels();
 		Assert.assertEquals(homePage.actualDateCheckIn(), "20 Jul 2021");
 
 		implicitWait(30);
-		
+
 		//switch to default
 		driver.switchTo().defaultContent();
 
@@ -354,9 +349,9 @@ public class HomeTest extends TestBase{
 		homePage.frameWixHotels();
 		Assert.assertEquals(homePage.actualDateCheckOut(), "30 Jul 2021");
 
-		homePage.adultsUpClicked();
-		homePage.kidsUpClicked();
-		
+		homePage.upClickedAdults(1);
+		homePage.upClickedKids(1);
+
 		//Thread.sleep(1000);
 		implicitWait(10);
 		driver.switchTo().defaultContent();

@@ -2,6 +2,7 @@ package pages;
 
 import java.util.ArrayList;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -33,7 +34,7 @@ public class HomePage extends TestBase{
 
 	@FindBy(xpath = "//li[@class='adults']")
 	private WebElement adults;
-	
+
 	@FindBy(xpath = "//*[@id=\"adults\"]/a[1]")
 	private WebElement upAdultsBtn;
 
@@ -78,7 +79,7 @@ public class HomePage extends TestBase{
 
 	@FindBy(xpath = "//button[@wix-bi='SEARCH']")
 	private WebElement searchButton;
-	
+
 	@FindBy(xpath ="//button[@day-button-aria='day']/span[contains(text(),'21')]")
 	private WebElement dataCheckIn2;
 
@@ -87,7 +88,7 @@ public class HomePage extends TestBase{
 
 	@FindBy(xpath ="//button[@id='check-in'][1]")
 	private WebElement dataBtn;
-	
+
 	//Actions on WebElements//
 
 	public String getHeaderText(){
@@ -124,25 +125,52 @@ public class HomePage extends TestBase{
 	public boolean adultsUpDisplayed() {
 		return display(upAdultsBtn);
 	}
-	
-	public TestBase adultsUpClicked() {
-		//waitElementIsClickable(1000, By.xpath("//*[@id=\"adults\"]/a[1]"));
-		click(upAdultsBtn);
+
+
+	public TestBase upClickedAdults(int number) {
+		int i=0;
+		while(i<number) {
+			click(upAdultsBtn);
+			i++;
+		}
+		return this;
+	}
+
+	public TestBase upClickedKids(int number) {
+		int i=0;
+		while(i<number) {
+			click(upKidsClick);
+			i++;
+		}
+		return this;
+	}
+
+	public TestBase downClickedKids(int number) {
+		int i=0;
+		while(i<number) {
+			click(downKids);
+			i++;
+		}
+		return this;
+	}
+
+	public TestBase downClickedAdults(int number) {
+		int i=0;
+		while(i<number) {
+			click(downAdultsBtn);
+			i++;
+		}
 		return this;
 	}
 
 	public String adultsgetText() {
 		return adults.getText();
 	}
-	
+
 	public boolean adultsDownDisplayed() {
 		return display(downAdultsBtn);
 	}
 
-	public TestBase adultsDownClicked() {
-		click(downAdultsBtn);
-		return this;
-	}
 
 	public boolean kidsDisplayed() {
 		return display(kids);
@@ -151,23 +179,13 @@ public class HomePage extends TestBase{
 	public boolean kidsDownDisplayed() {
 		return display(downKids);
 	}
-	
+
 	public boolean kidsUpDisplayed() {
 		return display(upKidsClick);
-	}
-	
-	public TestBase kidsUpClicked() {
-		click(upKidsClick);
-		return this;
 	}
 
 	public String kidsGetText() {
 		return kids.getText();
-	}
-
-	public TestBase kidsDownClicked() {
-		click(downKids);
-		return this;
 	}
 
 
@@ -213,7 +231,7 @@ public class HomePage extends TestBase{
 		click(checkOutData);
 		return this;
 	}
-	
+
 	public String actualDateCheckOut() {
 		return actualDateCheckOut.getText();
 	}
@@ -236,6 +254,7 @@ public class HomePage extends TestBase{
 
 	public TestBase nextMonthClicked() {
 		//waitElementIsClickable(5,nextMonth);
+		fluentWaitElementPresentBy(5,1, By.xpath("/html/body/div/main/div/nav/button[2]"));
 		click(nextMonth);
 		return this;
 	}
