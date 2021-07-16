@@ -1,6 +1,9 @@
 package tests;
 
+
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Vector;
 
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
@@ -458,8 +461,88 @@ public class HomeTest extends TestBase{
 		driver.close();
 	}
 
+	@Test
+	public void checkInText() throws InterruptedException, IOException {
 
+		int i = 0;
+		int nrTeste = 3;
+		while(nrTeste != 0) {
+			nrTeste--;
+			waitPageLoad(4000);
+			Thread.sleep(2000);
 
+			//Validate that frame exists
+			homePage.frameWixHotels();
+			implicitWait(100);
 
+			//Click the check in field
+			homePage.checkInClicked();
+			//Thread.sleep(1000);
+			implicitWait(100);
 
+			//switch to default
+			driver.switchTo().defaultContent();
+
+			//Click on a date (later than today)
+			//switch to check-in frame
+			homePage.switchToframe();
+
+			//select a date ->later than today
+			Thread.sleep(1000);
+
+			Vector<String> info = homePage.ReadFromFile();
+
+			homePage.setCheckInAndClick(info.get(i));
+			
+			implicitWait(50);
+			Thread.sleep(3000);
+
+			homePage.frameWixHotels();
+			//Assert.assertEquals(homePage.actualDateCheckIn(), "20 Jul 2021");
+
+			//switch to default
+			driver.switchTo().defaultContent();
+
+			homePage.switchToframe();
+
+			//Thread.sleep(1000);
+			implicitWait(20);
+			homePage.setCheckOutAndClick(info.get(++i));
+
+			Thread.sleep(1000);
+
+			homePage.frameWixHotels();
+			//Assert.assertEquals(homePage.actualDateCheckOut(), "30 Jul 2021");
+
+			//homePage.upClickedAdults(1);
+
+			int getNrAdults = Integer.parseInt(info.get(++i));
+			int getNrKids = Integer.parseInt(info.get(++i));
+
+			homePage.upClickedAdults(getNrAdults-1);
+			homePage.upClickedKids(getNrKids);
+
+			implicitWait(10);
+			driver.switchTo().defaultContent();
+
+			Thread.sleep(1000);
+			homePage.frameWixHotels();
+
+			//Validate that the Search button exists
+			Assert.assertTrue(homePage.searchBtnDisplayed(), "Search button is not displayed");
+
+			//Click the Search button (after the other fields are completed)
+			homePage.searchBtnClicked();
+
+			implicitWait(20);
+
+			homePage.switchTo(0);
+
+			Assert.assertTrue(getCurrentURL().contains("rooms"), "Rooms page is not displayed");	
+			//driver.close();
+			i++;
+			if (nrTeste != 0) 
+				navigateToURL("https://ancabota09.wixsite.com/intern");
+		}
+	}
 }

@@ -1,6 +1,10 @@
 package pages;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Vector;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -258,16 +262,16 @@ public class HomePage extends TestBase{
 		click(nextMonth);
 		return this;
 	}
-	
-	
+
+
 	//////////////////////Provider updates
-	
+
 	private WebElement in_day, out_day;
-	
+
 	private void inData(String zi) throws InterruptedException {
 		in_day = driver.findElement(By.xpath("//span[contains(text(), " + zi + ")]"));
 	}
-	
+
 	public TestBase setCheckInAndClick(String zi) throws InterruptedException {
 		inData(zi);
 		click(in_day);
@@ -277,11 +281,39 @@ public class HomePage extends TestBase{
 	private void outData(String zi) throws InterruptedException {
 		out_day = driver.findElement(By.xpath("//button[@day-button-aria='day']/span[contains(text(), " + zi + ")]"));
 	}
-	
+
 	public TestBase setCheckOutAndClick(String zi) throws InterruptedException {
 		outData(zi);
 		click(out_day);
 		return this;
 	}
-	
+
+
+	///////////////Read from Text File
+
+
+	public Vector<String> ReadFromFile() throws IOException, InterruptedException {
+		String TestFile = "C:\\Users\\z004c2sx\\eclipse-workspace\\internship2021\\testData\\testData.txt";
+		FileReader FR = new FileReader(TestFile);
+		try (BufferedReader BR = new BufferedReader(FR)) {
+			String Content = "";
+			String checkInData = "", checkOutData = "", nrAdults = "", nrKids = "";
+			Vector<String> info = new Vector<>();
+
+			while((Content = BR.readLine())!= null){
+				String[] var = Content.split(";");
+				checkInData = var[0];	
+				checkOutData = var[1];
+				nrAdults = var[2];	
+				nrKids = var[3];
+				info.add(checkInData);
+				info.add(checkOutData);
+				info.add(nrAdults);
+				info.add(nrKids) ;
+				//System.out.println(chechInData + checkOutData);
+			}
+			return info;
+		}
+	}
+
 }
