@@ -266,11 +266,25 @@ public class HomePage extends TestBase{
 
 	//////////////////////Provider updates
 
-	private WebElement in_day, out_day;
+	private WebElement in_day, out_day, in_luna;
+	
 
-	private void inData(String zi) throws InterruptedException {
-		in_day = driver.findElement(By.xpath("//span[contains(text(), " + zi + ")]"));
+	private void inData(String zi1) throws InterruptedException {
+//		String zi ="", luna ="", an ="";
+//		String[] var = zi1.split(" ");
+//		zi = var[0];	
+//		luna = var[1];
+//		an = var[2];
+		in_day = driver.findElement(By.xpath("//span[contains(text(), " + zi1 +")]"));
+//		in_luna = driver.findElement(By.xpath("//div[contains(text(), '" + luna +"')]"));
+//		
+//		System.out.println(luna +" "+ an);
+//		System.out.println(in_luna.getText());
+//		if((luna +" "+ an) == in_luna.getText()) {
+//			click(nextMonth);
+//		}
 	}
+	
 
 	public TestBase setCheckInAndClick(String zi) throws InterruptedException {
 		inData(zi);
@@ -297,17 +311,25 @@ public class HomePage extends TestBase{
 		FileReader FR = new FileReader(TestFile);
 		try (BufferedReader BR = new BufferedReader(FR)) {
 			String Content = "";
-			String checkInData = "", checkOutData = "", nrAdults = "", nrKids = "";
+			String checkInData = "", checkInData1 = " ", checkOutData = "", checkOutData1 = "", nrAdults = "", nrKids = "";
 			Vector<String> info = new Vector<>();
 
 			while((Content = BR.readLine())!= null){
 				String[] var = Content.split(";");
-				checkInData = var[0];	
+				
+				checkInData = var[0];
+				String[] var1 = checkInData.split(" ");
+				checkInData1 = var1[0];
+				
 				checkOutData = var[1];
+				String[] var2 = checkOutData.split(" ");
+				checkOutData1 = var2[0];
+				
 				nrAdults = var[2];	
 				nrKids = var[3];
-				info.add(checkInData);
-				info.add(checkOutData);
+				
+				info.add(checkInData1);
+				info.add(checkOutData1);
 				info.add(nrAdults);
 				info.add(nrKids) ;
 				//System.out.println(chechInData + checkOutData);
