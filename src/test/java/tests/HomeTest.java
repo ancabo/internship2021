@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import common.TestBase;
@@ -24,6 +25,14 @@ public class HomeTest extends TestBase{
 		socialMedia = new SocialMediaPage(driver);
 		generalInfo = new GeneralInfoPage(driver);
 		chat = new ChatPage(driver);
+	}
+
+	@DataProvider(name = "Check-In")
+	public Object[][] dataProvFunc(){
+		return new Object[][]{
+			{"20", "30", 3, 5},
+			//{"22", "28", 2, 1}
+		};
 	}
 
 	@Test
@@ -377,4 +386,77 @@ public class HomeTest extends TestBase{
 
 		//Thread.sleep(3000);
 	}
+
+	@Test(dataProvider = "Check-In")
+	public void checkIn(String checkInDate, String checkOutDate, int nrAdults, int nrKids) throws InterruptedException {
+
+		waitPageLoad(4000);
+
+		//Validate that frame exists
+		homePage.frameWixHotels();
+		implicitWait(50);
+		Thread.sleep(1000);
+
+		//Click the check in field
+		homePage.checkInClicked();
+		Thread.sleep(1000);
+
+		//switch to default
+		driver.switchTo().defaultContent();
+
+		//Click on a date (later than today)
+		//switch to check-in frame
+		homePage.switchToframe();
+
+		//select a date ->later than today
+		Thread.sleep(1000);
+
+		homePage.setCheckInAndClick(checkInDate);
+		implicitWait(50);
+		Thread.sleep(3000);
+
+		homePage.frameWixHotels();
+		Assert.assertEquals(homePage.actualDateCheckIn(), "20 Jul 2021");
+
+		//switch to default
+		driver.switchTo().defaultContent();
+
+		homePage.switchToframe();
+
+		Thread.sleep(1000);
+		homePage.setCheckOutAndClick(checkOutDate);
+
+		Thread.sleep(1000);
+
+		homePage.frameWixHotels();
+		Assert.assertEquals(homePage.actualDateCheckOut(), "30 Jul 2021");
+
+		//homePage.upClickedAdults(1);
+		homePage.upClickedAdults(nrAdults);
+		homePage.upClickedKids(nrKids);
+
+		implicitWait(10);
+		driver.switchTo().defaultContent();
+
+		Thread.sleep(1000);
+		homePage.frameWixHotels();
+
+		//Validate that the Search button exists
+		Assert.assertTrue(homePage.searchBtnDisplayed(), "Search button is not displayed");
+
+		//Click the Search button (after the other fields are completed)
+		homePage.searchBtnClicked();
+
+		implicitWait(20);
+
+		homePage.switchTo(0);
+
+		Assert.assertTrue(getCurrentURL().contains("rooms"), "Rooms page is not displayed");	
+		driver.close();
+	}
+
+
+
+
+
 }

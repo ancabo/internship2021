@@ -258,4 +258,30 @@ public class HomePage extends TestBase{
 		click(nextMonth);
 		return this;
 	}
+	
+	
+	//////////////////////Provider updates
+	
+	private WebElement in_day, out_day;
+	
+	private void inData(String zi) throws InterruptedException {
+		in_day = driver.findElement(By.xpath("//span[contains(text(), " + zi + ")]"));
+	}
+	
+	public TestBase setCheckInAndClick(String zi) throws InterruptedException {
+		inData(zi);
+		click(in_day);
+		return this;
+	}
+
+	private void outData(String zi) throws InterruptedException {
+		out_day = driver.findElement(By.xpath("//button[@day-button-aria='day']/span[contains(text(), " + zi + ")]"));
+	}
+	
+	public TestBase setCheckOutAndClick(String zi) throws InterruptedException {
+		outData(zi);
+		click(out_day);
+		return this;
+	}
+	
 }
