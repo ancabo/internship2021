@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import common.TestBase;
@@ -94,7 +95,7 @@ public class RoomsTest extends TestBase{
 
 		//next month icon
 		Assert.assertTrue(roomsPage.nextMonthBDisplayed(), "Next month button is not displayed");
-		roomsPage.clicknextMonthB();
+		roomsPage.clicknextMonthB(1);
 
 		//next month calendar visibility
 		Assert.assertTrue(roomsPage.checkinCalendarDisplayed(), "Check in calendar is not displayed");
@@ -114,7 +115,7 @@ public class RoomsTest extends TestBase{
 
 		//previous month icon
 		Assert.assertTrue(roomsPage.prevMonthBDisplayed(), "Previous month button is not displayed");
-		roomsPage.clickPrevMonthB();
+		roomsPage.clickPrevMonthB(1);
 
 		//verify the check in calendar is displayed for July
 		Assert.assertTrue(roomsPage.checkinCalendarDisplayed(), "Check in calendar is not displayed");
@@ -129,7 +130,7 @@ public class RoomsTest extends TestBase{
 		roomsPage.clickCheckin();
 
 		//choose a date before today
-		roomsPage.clickPrevMonthB();
+		roomsPage.clickPrevMonthB(1);
 		//Thread.sleep(1000);
 		Assert.assertTrue(roomsPage.checkinDate3Displayed(), "Check in date3 is not displayed");
 		roomsPage.clickCheckinDate3();
@@ -162,7 +163,7 @@ public class RoomsTest extends TestBase{
 
 		//next month icon
 		Assert.assertTrue(roomsPage.nextMonthB2Displayed(), "Next month button is not displayed");
-		roomsPage.clicknextMonthB2();
+		roomsPage.clicknextMonthB2(1);
 
 		//next month calendar visibility (August)
 		Assert.assertTrue(roomsPage.checkoutCalendarDisplayed(), "Check out calendar is not displayed");
@@ -182,7 +183,7 @@ public class RoomsTest extends TestBase{
 
 		//previous month icon  
 		Assert.assertTrue(roomsPage.prevMonthB2Displayed(), "Previous month button is not displayed");
-		roomsPage.clickPrevMonthB2();
+		roomsPage.clickPrevMonthB2(1);
 
 		//June month calendar visibility
 		Assert.assertTrue(roomsPage.checkoutCalendarDisplayed(), "Check out calendar is not displayed");
@@ -224,18 +225,18 @@ public class RoomsTest extends TestBase{
 
 		//verify Adults Up icon is visible
 		Assert.assertTrue(roomsPage.adultsUpDisplayed(), "Adults up icon is not displayed");
-		roomsPage.clickAdultsUp();
+		roomsPage.clickAdultsUp(2);
 
 		//verify that the no. of Adults has increased
-		Assert.assertEquals(roomsPage.getAdultsText(), "2 Adults");
-		roomsPage.clickAdultsUp();
+		//Assert.assertEquals(roomsPage.getAdultsText(), "2 Adults");
+		//roomsPage.clickAdultsUp(2);
 
 		//verify that the no. of Adults has increased
 		Assert.assertEquals(roomsPage.getAdultsText(), "3 Adults");
 
 		//verify Adults Down icon is visible
 		Assert.assertTrue(roomsPage.adultsDownDisplayed(), "Adults down icon is not displayed");
-		roomsPage.clickAdultsDown();
+		roomsPage.clickAdultsDown(1);
 
 		//verify that the no. of Adults has dropped
 		Assert.assertEquals(roomsPage.getAdultsText(), "2 Adults");
@@ -260,18 +261,18 @@ public class RoomsTest extends TestBase{
 
 		//verify Kids Up icon is visible
 		Assert.assertTrue(roomsPage.kidsUpDisplayed(), "Kids up icon is not displayed");
-		roomsPage.clickKidsUp();
+		roomsPage.clickKidsUp(2);
 
 		//verify that the no. of Kids has increased
-		Assert.assertEquals(roomsPage.getKidsText(), "1 Kids");
-		roomsPage.clickKidsUp();
+		//Assert.assertEquals(roomsPage.getKidsText(), "2 Kids");
+		//roomsPage.clickKidsUp();
 
 		//verify that the no. of Kids has increased
 		Assert.assertEquals(roomsPage.getKidsText(), "2 Kids");
 
 		//verify Kids Down icon is visible
 		Assert.assertTrue(roomsPage.kidsDownDisplayed(), "Kids down icon is not displayed");
-		roomsPage.clickKidsDown();
+		roomsPage.clickKidsDown(1);
 
 		//verify that the no. of Kids has dropped
 		Assert.assertEquals(roomsPage.getKidsText(), "1 Kids");
@@ -308,6 +309,54 @@ public class RoomsTest extends TestBase{
 		//change the frame
 		driver.switchTo().defaultContent();
 
+	}
+	
+	@DataProvider(name = "completeData")
+	public Object[][] createData() {
+	 return new Object[][] {
+	   //{ "25, Sunday July 2021", "30, Friday July 2021", 2, 3 },
+	   //{ "28, Wednesday July 2021", "31, Saturday July 2021", 3, 1 },
+	   { "17, Tuesday August 2021", "27, Friday August 2021", 4, 2 },
+	   //{ "12, Sunday September 2021", "18, Saturday September 2021", 3, 3 },
+	   //{ "20, Wednesday October 2021", "23, Saturday October 2021", 2, 0 },
+	 };
+	}
+	
+	@Test(dataProvider = "completeData")
+	public void checkinDataProvider(String checkinDate, String checkoutDate, int adultsNr, int kidsNr){ //check in, check out, adults, kids
+		
+		roomsPage.clickRooms();
+		waitPageLoad(8000);
+
+		//change the frame  
+		roomsPage.changeFrameBookARoom();
+		
+		//complete check in field
+		roomsPage.clickCheckin();
+		roomsPage.clicknextMonthB(1);
+		roomsPage.clickCheckinDate(checkinDate);
+		
+		//complete check out field
+		roomsPage.clickCheckoutDate(checkoutDate);
+		
+		//complete the aduls field
+		roomsPage.clickAdultsUp(adultsNr - 1);
+		
+		//complete the kids field
+		roomsPage.clickKidsUp(kidsNr);
+		
+		//click search button
+		roomsPage.clickSearch();
+		
+		Assert.assertEquals(roomsPage.getCheckinText(), "17 Aug 2021");
+		Assert.assertEquals(roomsPage.getCheckoutText(), "27 Aug 2021");
+		Assert.assertEquals(roomsPage.getAdultsText(), "4 Adults");
+		Assert.assertEquals(roomsPage.getKidsText(), "2 Kids");
+		
+		//verify that the results are displayed
+		Assert.assertTrue(roomsPage.searchResultDisplayed(), "Results for search are not displayed");
+
+		
 	}
 
 

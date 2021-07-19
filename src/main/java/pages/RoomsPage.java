@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.annotations.DataProvider;
 
 import common.TestBase;
 
@@ -220,7 +221,8 @@ public class RoomsPage extends TestBase{
 	}
 	
 	public boolean checkinDisplayed() {
-		waitElementIsVisible(checkin, 7);
+		//waitElementIsVisible(checkin, 7);
+		fluentWait(7,2, By.id("check-in"));
 		return display(checkin);
 	}
 	
@@ -244,8 +246,9 @@ public class RoomsPage extends TestBase{
 		return display(nextMonthB);
 	}
 	
-	public void clicknextMonthB() {
-		click(nextMonthB);
+	public void clicknextMonthB(int nr) {
+		for (int i=0; i<nr; i++)
+			click(nextMonthB);
 	}
 	
 	public String getNextMonthCheckinCalendarText() {
@@ -253,7 +256,7 @@ public class RoomsPage extends TestBase{
 	}
 	
 	public boolean checkinDate1Displayed() {
-		waitElementIsVisible(checkinDate1, 10);
+		fluentWait(10,2, By.xpath("//button[@aria-label=\"17, Tuesday August 2021\"]"));
 		return display(checkinDate1);
 	}
 	
@@ -262,6 +265,7 @@ public class RoomsPage extends TestBase{
 	}
 	
 	public void clickCheckinDate1() {
+		fluentWait(8,2, By.xpath("//button[@aria-label=\"17, Tuesday August 2021\"]"));
 		click(checkinDate1);
 	}
 	
@@ -269,8 +273,9 @@ public class RoomsPage extends TestBase{
 		return display(previousMonthB);
 	}
 	
-	public void clickPrevMonthB() {
-		click(previousMonthB);
+	public void clickPrevMonthB(int nr) {
+		for (int i=0; i<nr; i++)
+			click(previousMonthB);
 	}
 	
 	public String getPrevMonthCheckinCalendarText() {
@@ -287,6 +292,7 @@ public class RoomsPage extends TestBase{
 	}
 	
 	public void clickCheckinDate2() {
+		fluentWait(8,2, By.xpath("//button[@aria-label=\"28, Wednesday July 2021\"]"));
 		click(checkinDate2);
 	}
 	
@@ -300,6 +306,7 @@ public class RoomsPage extends TestBase{
 	}
 	
 	public void clickCheckinDate3() {
+		fluentWait(8,2, By.xpath("//button[@aria-label=\"6, Sunday June 2021\"]"));
 		click(checkinDate3);
 	}
 	
@@ -327,8 +334,9 @@ public class RoomsPage extends TestBase{
 		return display(nextMonthB2);
 	}
 	
-	public void clicknextMonthB2() {
-		click(nextMonthB2);
+	public void clicknextMonthB2(int nr) {
+		for (int i=0; i<nr; i++)
+			click(nextMonthB2);
 	}
 	
 	public String getNextMonthCheckoutCalendarText() {
@@ -351,8 +359,9 @@ public class RoomsPage extends TestBase{
 		return display(previousMonthB2);
 	}
 	
-	public void clickPrevMonthB2() {
-		click(previousMonthB2);
+	public void clickPrevMonthB2(int nr) {
+		for (int i=0; i<nr; i++)
+			click(previousMonthB2);
 	}
 	
 	public String getPrevMonthCheckoutCalendarText() {
@@ -396,8 +405,9 @@ public class RoomsPage extends TestBase{
 		return display(adultsUp);
 	}
 	
-	public void clickAdultsUp() {
-		click(adultsUp);
+	public void clickAdultsUp(int nr) {
+		for (int i=0; i<nr; i++)
+			click(adultsUp);
 	}
 	
 	public String getAdultsText() {
@@ -408,8 +418,9 @@ public class RoomsPage extends TestBase{
 		return display(adultsDown);
 	}
 	
-	public void clickAdultsDown() {
-		click(adultsDown);
+	public void clickAdultsDown(int nr) {
+		for (int i=0; i<nr; i++)
+			click(adultsDown);
 	}
 	
 	public boolean kidsDisplayed() {
@@ -420,8 +431,9 @@ public class RoomsPage extends TestBase{
 		return display(kidsUp);
 	}
 	
-	public void clickKidsUp() {
-		click(kidsUp);
+	public void clickKidsUp(int nr) {
+		for (int i=0; i<nr; i++)
+			click(kidsUp);
 	}
 	
 	public String getKidsText() {
@@ -432,8 +444,9 @@ public class RoomsPage extends TestBase{
 		return display(kidsDown);
 	}
 	
-	public void clickKidsDown() {
-		click(kidsDown);
+	public void clickKidsDown(int nr) {
+		for (int i=0; i<nr; i++)
+			click(kidsDown);
 	}
 	
 	public boolean searchBDisplayed() {
@@ -639,5 +652,27 @@ public class RoomsPage extends TestBase{
 		waitElementIsClickable(10,back);
 		click(back);
 	}
+	
+	
+	//actions for data provider
+	
+	public void clickCheckinDate(String checkin) {
+		
+		String xpath = "//button[@aria-label=\"" + checkin + "\"]";
+		WebElement checkinDate = driver.findElement(By.xpath(xpath));
+		waitElementIsClickable(10,checkinDate);
+		click(checkinDate);
+		
+	}
+	
+	public void clickCheckoutDate(String checkout) {
+		
+		String xpath = "(//button[@aria-label=\"" + checkout + "\"])[2]";
+		WebElement checkoutDate = driver.findElement(By.xpath(xpath));
+		waitElementIsClickable(10,checkoutDate);
+		click(checkoutDate);
+		
+	}
+	
 
 }
