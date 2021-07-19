@@ -55,6 +55,7 @@ public class HomeTest extends TestBase{
 	@Test
 	public void verifyBackground() { 
 		Assert.assertTrue(homePage.backgroundDisplayed(), "Background is not displayed");
+		logReport("Pass", "Background ok");
 	}
 
 	@Test  // //span[.='ADDRESS']/../../following-sibling::*[2]/p
@@ -491,8 +492,9 @@ public class HomeTest extends TestBase{
 			Thread.sleep(1000);
 
 			Vector<String> info = homePage.ReadFromFile();
-
-			homePage.setCheckInAndClick(info.get(i));
+			
+			homePage.setCheckInAndChangeMonthText(info.get(i), info.get(++i) );
+			
 			
 			implicitWait(50);
 			Thread.sleep(3000);
@@ -507,7 +509,7 @@ public class HomeTest extends TestBase{
 
 			//Thread.sleep(1000);
 			implicitWait(20);
-			homePage.setCheckOutAndClick(info.get(++i));
+			homePage.setCheckOutAndClickText(info.get(++i));
 
 			Thread.sleep(1000);
 
