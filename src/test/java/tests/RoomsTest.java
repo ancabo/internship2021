@@ -32,13 +32,13 @@ public class RoomsTest extends TestBase{
 	}
 
 
-
 	@Test
 	public void verifyRoomsButton() {
 
 		//verify that the ROOMS button is displayed on Home Page
 		Assert.assertTrue(roomsPage.roomsButtonDisplayed(), "Rooms button is not displayed on Home Page");
-
+		logReport("Pass", "Rooms button ok");
+		
 	}
 
 
@@ -54,14 +54,17 @@ public class RoomsTest extends TestBase{
 		//verify "ROOMS" text
 		Assert.assertTrue(roomsPage.roomsDisplayed(), "ROOMS is not displayed"); 
 		Assert.assertEquals(roomsPage.getRoomsText(), "ROOMS");
-
+		logReport("Info", "Rooms text ok");
+		
 		//verify the paragraph
 		Assert.assertTrue(roomsPage.paragraphDisplayed(), "Paragraph is not displayed");
-
+		logReport("Info", "Paragraph ok");
+		
 		//verify STAY IN THE CITY
 		Assert.assertTrue(roomsPage.stayInTheCityDisplayed(), "STAY IN THE CITY is not displayed");
 		Assert.assertEquals(roomsPage.getStayInTheCityText(), "STAY IN THE CITY");
-
+		logReport("Info", "Stay in the city text ok");
+		
 	}
 
 
@@ -73,7 +76,8 @@ public class RoomsTest extends TestBase{
 
 		//verify the background image
 		Assert.assertTrue(roomsPage.backgroundImgDisplayed(), "background img is not displayed"); 
-
+		logReport("Pass", "Background image ok");
+		
 	}
 
 
@@ -88,26 +92,32 @@ public class RoomsTest extends TestBase{
 
 		//verify check in field is visible
 		Assert.assertTrue(roomsPage.checkinDisplayed(), "Check in field is not displayed"); 
+		logReport("Pass", "The check in field is displayed ok");
 		roomsPage.clickCheckin();
 
 		//verify the check in calendar is displayed for July
 		Assert.assertTrue(roomsPage.checkinCalendarDisplayed(), "Check in calendar is not displayed");
 		Assert.assertEquals(roomsPage.getCheckinCalendarTitle(), "July 2021");
-
+		logReport("Pass", "The check in calendar is displayed ok");
+		
 		//next month icon
 		Assert.assertTrue(roomsPage.nextMonthBDisplayed(), "Next month button is not displayed");
+		logReport("Pass", "The next month icon is displayed ok");
 		roomsPage.clicknextMonthB(1);
 
 		//next month calendar visibility
 		Assert.assertTrue(roomsPage.checkinCalendarDisplayed(), "Check in calendar is not displayed");
 		Assert.assertEquals(roomsPage.getCheckinCalendarTitle(), "August 2021");
-
+		logReport("Pass", "The next month calendar is displayed ok");
+		
 		//choose a date from August
 		Assert.assertTrue(roomsPage.checkinDate1Displayed(), "Check in date1 is not displayed");
+		logReport("Pass", "The first date is displayed ok in the calendar");
 		roomsPage.clickCheckinDate1();
 
 		//check the date is displayed in check in field
 		Assert.assertEquals(roomsPage.getCheckinText(), "17 Aug 2021");
+		logReport("Info", "The first date is displayed ok in the check in field");
 		roomsPage.clickCheckin();
 
 		//verify the check in calendar is displayed for August
@@ -116,28 +126,34 @@ public class RoomsTest extends TestBase{
 
 		//previous month icon
 		Assert.assertTrue(roomsPage.prevMonthBDisplayed(), "Previous month button is not displayed");
+		logReport("Pass", "The prev month button is displayed ok");
 		roomsPage.clickPrevMonthB(1);
 
 		//verify the check in calendar is displayed for July
 		Assert.assertTrue(roomsPage.checkinCalendarDisplayed(), "Check in calendar is not displayed");
+		logReport("Pass", "The prev month calendar is displayed ok");
 		Assert.assertEquals(roomsPage.getCheckinCalendarTitle(), "July 2021");
 
 		//choose a date from July
 		Assert.assertTrue(roomsPage.checkinDate2Displayed(), "Check in date2 is not displayed");
+		logReport("Pass", "The second date is displayed ok in the calendar");
 		roomsPage.clickCheckinDate2();
 
 		//check the date is displayed in check in field
 		Assert.assertEquals(roomsPage.getCheckinText(), "28 Jul 2021");
+		logReport("Info", "The second date is displayed ok in the check in field");
 		roomsPage.clickCheckin();
 
 		//choose a date before today
 		roomsPage.clickPrevMonthB(1);
 		//Thread.sleep(1000);
 		Assert.assertTrue(roomsPage.checkinDate3Displayed(), "Check in date3 is not displayed");
+		logReport("Pass", "The third date is displayed ok in the calendar");
 		roomsPage.clickCheckinDate3();
 
 		//check the date is not displayed in check in field
 		Assert.assertEquals(roomsPage.getCheckinText(), "28 Jul 2021");
+		logReport("Info", "The third date is displayed ok in the check in field");
 
 		//change the frame
 		driver.switchTo().defaultContent();
@@ -156,26 +172,32 @@ public class RoomsTest extends TestBase{
 
 		//verify check out field is visible
 		Assert.assertTrue(roomsPage.checkoutDisplayed(), "Check out field is not displayed"); 
+		logReport("Pass", "The check out field is displayed ok");
 		roomsPage.clickCheckout();
 
 		//verify the check out calendar is displayed 
 		Assert.assertTrue(roomsPage.checkoutCalendarDisplayed(), "Check out calendar is not displayed");
 		Assert.assertEquals(roomsPage.getCheckoutCalendarTitle(), "July 2021");
+		logReport("Pass", "The check out calendar is displayed ok");
 
 		//next month icon
 		Assert.assertTrue(roomsPage.nextMonthB2Displayed(), "Next month button is not displayed");
+		logReport("Pass", "The next month icon is displayed ok");
 		roomsPage.clicknextMonthB2(1);
 
 		//next month calendar visibility (August)
 		Assert.assertTrue(roomsPage.checkoutCalendarDisplayed(), "Check out calendar is not displayed");
 		Assert.assertEquals(roomsPage.getCheckoutCalendarTitle(), "August 2021");
+		logReport("Pass", "The next month calendar is displayed ok");
 
 		//choose a date from August
 		Assert.assertTrue(roomsPage.checkoutDate1Displayed(), "Check out date1 is not displayed");
+		logReport("Pass", "The first date is displayed ok in the calendar");
 		roomsPage.clickCheckoutDate1();
 
 		//check the date is displayed in check out field 
 		Assert.assertEquals(roomsPage.getCheckoutText(), "30 Aug 2021");
+		logReport("Info", "The first date is displayed ok in the check in field");
 		roomsPage.clickCheckout();
 
 		//July month calendar visibility 
@@ -184,27 +206,33 @@ public class RoomsTest extends TestBase{
 
 		//previous month icon  
 		Assert.assertTrue(roomsPage.prevMonthB2Displayed(), "Previous month button is not displayed");
+		logReport("Pass", "The prev month button is displayed ok");
 		roomsPage.clickPrevMonthB2(1);
 
-		//June month calendar visibility
+		//Previous month calendar visibility
 		Assert.assertTrue(roomsPage.checkoutCalendarDisplayed(), "Check out calendar is not displayed");
+		logReport("Pass", "The prev month calendar is displayed ok");
 		Assert.assertEquals(roomsPage.getCheckoutCalendarTitle(), "July 2021");
 
 		//choose a date from July
 		Assert.assertTrue(roomsPage.checkoutDate2Displayed(), "Check out date2 is not displayed");
+		logReport("Pass", "The second date is displayed ok in the calendar");
 		roomsPage.clickCheckoutDate2();
 
 		//check the date is displayed in check out field 
 		Assert.assertEquals(roomsPage.getCheckoutText(), "31 Jul 2021");
+		logReport("Info", "The second date is displayed ok in the check in field");
 		roomsPage.clickCheckout();
 
 		//choose a date before check in
 		roomsPage.setCheckInDate();
 		Assert.assertTrue(roomsPage.checkoutDate3Displayed(), "Check out date3 is not displayed");
+		logReport("Pass", "The third date is displayed ok in the calendar");
 		roomsPage.clickCheckoutDate3();
 
 		//check the date is not displayed in check in field
 		Assert.assertEquals(roomsPage.getCheckoutText(), "31 Jul 2021");
+		logReport("Info", "The third date is displayed ok in the check in field");
 
 		//change the frame
 		driver.switchTo().defaultContent();
@@ -223,9 +251,13 @@ public class RoomsTest extends TestBase{
 
 		//verify Adults field is visible
 		Assert.assertTrue(roomsPage.adultsDisplayed(), "Adults field is not displayed");
+		logReport("Pass", "The aduls field is displayed ok");
 
 		//verify Adults Up icon is visible
 		Assert.assertTrue(roomsPage.adultsUpDisplayed(), "Adults up icon is not displayed");
+		logReport("Pass", "The adults up icon is displayed ok");
+
+		//increase the adults no.
 		roomsPage.clickAdultsUp(2);
 
 		//verify that the no. of Adults has increased
@@ -234,14 +266,19 @@ public class RoomsTest extends TestBase{
 
 		//verify that the no. of Adults has increased
 		Assert.assertEquals(roomsPage.getAdultsText(), "3 Adults");
+		logReport("Info", "The adults number after increase is ok");
 
 		//verify Adults Down icon is visible
 		Assert.assertTrue(roomsPage.adultsDownDisplayed(), "Adults down icon is not displayed");
+		logReport("Pass", "The adults down icon is displayed ok");
+
+		//decrease the adults no.
 		roomsPage.clickAdultsDown(1);
 
-		//verify that the no. of Adults has dropped
+		//verify that the no. of Adults has decreased
 		Assert.assertEquals(roomsPage.getAdultsText(), "2 Adults");
-
+		logReport("Info", "The adults number after decrease is ok");
+		
 		//change the frame
 		driver.switchTo().defaultContent();
 
@@ -259,9 +296,13 @@ public class RoomsTest extends TestBase{
 
 		//verify Kids field is visible
 		Assert.assertTrue(roomsPage.kidsDisplayed(), "Kids field is not displayed");
+		logReport("Pass", "The kids field is displayed ok");
 
 		//verify Kids Up icon is visible
 		Assert.assertTrue(roomsPage.kidsUpDisplayed(), "Kids up icon is not displayed");
+		logReport("Pass", "The kids up icon is displayed ok");
+		
+		//increase the kids number
 		roomsPage.clickKidsUp(2);
 
 		//verify that the no. of Kids has increased
@@ -270,13 +311,18 @@ public class RoomsTest extends TestBase{
 
 		//verify that the no. of Kids has increased
 		Assert.assertEquals(roomsPage.getKidsText(), "2 Kids");
+		logReport("Info", "The kids number after increase is ok");
 
 		//verify Kids Down icon is visible
 		Assert.assertTrue(roomsPage.kidsDownDisplayed(), "Kids down icon is not displayed");
+		logReport("Pass", "The kids down icon is displayed ok");
+		
+		//decrease the kids no.
 		roomsPage.clickKidsDown(1);
 
-		//verify that the no. of Kids has dropped
+		//verify that the no. of Kids has decreased
 		Assert.assertEquals(roomsPage.getKidsText(), "1 Kids");
+		logReport("Info", "The kids number after decrease is ok");
 
 		//change the frame
 		driver.switchTo().defaultContent();
@@ -295,10 +341,12 @@ public class RoomsTest extends TestBase{
 
 		//verify Search button is visible
 		Assert.assertTrue(roomsPage.searchBDisplayed(), "Search button is not displayed");
+		logReport("Pass", "Search button is displayed ok");
 		roomsPage.clickSearch();
 
 		//verify the check in calendar is displayed
 		Assert.assertTrue(roomsPage.checkinCalendarDisplayed(), "Check in calendar is not displayed");
+		logReport("Pass", "Check in calendar is displayed ok");
 
 		//complete the fields for search and click search
 		roomsPage.completeDatesForSearch();
@@ -306,6 +354,7 @@ public class RoomsTest extends TestBase{
 
 		//verify that the results are displayed
 		Assert.assertTrue(roomsPage.searchResultDisplayed(), "Results for search are not displayed");
+		logReport("Pass", "The results are displayed ok");
 
 		//change the frame
 		driver.switchTo().defaultContent();
@@ -353,10 +402,19 @@ public class RoomsTest extends TestBase{
 		
 		//verify that the results are displayed
 		Assert.assertTrue(roomsPage.searchResultDisplayed(), "Results for search are not displayed");
+		logReport("Pass", "The results text is displayed ok");
+		
 		Assert.assertEquals(roomsPage.getCheckinText(), "17 Aug 2021");
+		logReport("Info", "Check in date is displayed ok");
+		
 		Assert.assertEquals(roomsPage.getCheckoutText(), "27 Aug 2021");
+		logReport("Info", "Check out date is displayed ok");
+
 		Assert.assertEquals(roomsPage.getAdultsText(), "4 Adults");
+		logReport("Info", "Adults number is displayed ok");
+
 		Assert.assertEquals(roomsPage.getKidsText(), "2 Kids");
+		logReport("Info", "Kids number is displayed ok");
 		
 	}
 	
@@ -398,10 +456,15 @@ public class RoomsTest extends TestBase{
 		
 			//verify that the results are displayed
 			Assert.assertTrue(roomsPage.searchResultDisplayed(), "Results for search are not displayed");
+			logReport("Pass", "The results text is displayed ok");
+
 			String adults = data.get(k-2) + " Adults";
 			Assert.assertEquals(roomsPage.getAdultsText(), adults);
+			logReport("Info", "Adults number is displayed ok");
+			
 			String kids = data.get(k-1) + " Kids";
 			Assert.assertEquals(roomsPage.getKidsText(), kids);
+			logReport("Info", "Kids number is displayed ok");
 			
 			if (i<n)
 				navigateToURL("https://ancabota09.wixsite.com/intern");
@@ -427,13 +490,16 @@ public class RoomsTest extends TestBase{
 
 		//verify that the results are displayed
 		Assert.assertTrue(roomsPage.searchResultDisplayed(), "Results for search are not displayed");
+		logReport("Pass", "The results are displayed ok");
 
 		//verify that the clear button is displayed and click clear
 		Assert.assertTrue(roomsPage.clearBDisplayed(), "Clear button is not displayed");
+		logReport("Pass", "The clear button is displayed ok");
 		roomsPage.clickClear();
 
 		//verify that all the rooms are displayed again 
 		Assert.assertTrue(roomsPage.ourRoomsDisplayed(), "All the Rooms are not displayed after clear");
+		logReport("Pass", "All the rooms are displayed ok after clicked clear button ");
 
 		//change the frame
 		driver.switchTo().defaultContent();
@@ -457,13 +523,17 @@ public class RoomsTest extends TestBase{
 
 		//verify that the results are displayed
 		Assert.assertTrue(roomsPage.searchResultDisplayed(), "Results for search are not displayed");
+		logReport("Pass", "The results are displayed ok");
 
 		//verify that the book now buttons are displayed
 		Assert.assertTrue(roomsPage.bookNow1Displayed(), "Book Now button 1 is not displayed");
+		logReport("Pass", "First book now button is displayed ok");
 		roomsPage.clickBookNow1();
 		Assert.assertTrue(roomsPage.bookNow2Displayed(), "Book Now button 2 is not displayed");
+		logReport("Pass", "Second book now button is displayed ok");
 		roomsPage.clickBookNow2();
 		Assert.assertTrue(roomsPage.bookNow3Displayed(), "Book Now button 3 is not displayed");
+		logReport("Pass", "Third book now button is displayed ok");
 		roomsPage.clickBookNow3();
 
 		//change the frame
@@ -483,30 +553,39 @@ public class RoomsTest extends TestBase{
 
 		//check the visibility of standard suite title
 		Assert.assertTrue(roomsPage.standardSuiteDisplayed(), "Standard Suite is not displayed");
-
+		logReport("Pass", "Standard suite title is displayed ok");
+		
 		//image
-		Assert.assertTrue(roomsPage.img1Displayed(), "Img 1 is not displayed"); 
+		Assert.assertTrue(roomsPage.img1Displayed(), "Img 1 is not displayed");
+		logReport("Pass", "The image is displayed ok");
 
 		//check the visibility of the price
-		Assert.assertTrue(roomsPage.price1Displayed(), "The price is not displayed");		
+		Assert.assertTrue(roomsPage.price1Displayed(), "The price is not displayed");
+		logReport("Pass", "The price is displayed ok");
 
 		//check the visibility of the More Info button
 		Assert.assertTrue(roomsPage.moreInfo1Displayed(), "More Info1 is not displayed"); 
+		logReport("Pass", "More info button ok is displayed ok");
 		roomsPage.clickMoreInfo1();
 
 		//check the title visibility
 		Assert.assertTrue(roomsPage.standardSuite2Displayed(), "The room title is not dispalyed");
+		logReport("Pass", "Standard suite page title is displayed ok");
 
 		//read our policies
 		Assert.assertTrue(roomsPage.politiciesDisplayed(), "Read our policies button is not displayed");
+		logReport("Pass", "Read our policies button is displayed ok");
 		Assert.assertEquals(roomsPage.getPoliciesText(), "Read Our Policies");
+		logReport("Info", "Read our policies text ok");
 
 		//back to Our Rooms button
 		Assert.assertTrue(roomsPage.backBDisplayed(), "Go back icon is not displayed");
+		logReport("Pass", "Back button is displayed ok");
 		roomsPage.clickBack();
 
 		//check all the rooms are displayed
 		Assert.assertTrue(roomsPage.ourRoomsDisplayed(), "All the Rooms are not displayed after click the back button");
+		logReport("Pass", "All the rooms are displayed ok after clicked the back button");
 
 		//change the frame
 		driver.switchTo().defaultContent();
@@ -525,31 +604,40 @@ public class RoomsTest extends TestBase{
 
 		//check the visibility of cottage title
 		Assert.assertTrue(roomsPage.cottageDisplayed(), "Cottage is not displayed");
+		logReport("Pass", "Cottage title is displayed ok");
 
 		//image
 		Assert.assertTrue(roomsPage.img2Displayed(), "Img 2 is not displayed"); 
+		logReport("Pass", "The image is displayed ok");
 
 		//check the visibility of the price
 		Assert.assertTrue(roomsPage.price2Displayed(), "The price is not displayed");		
+		logReport("Pass", "The price is displayed ok");
 
 		//check the visibility of the More Info button
 		Assert.assertTrue(roomsPage.moreInfo2Displayed(), "More Info2 is not displayed"); 
+		logReport("Pass", "More info button ok is displayed ok");
 		roomsPage.clickMoreInfo2();
 
 		//check the title visibility
 		Assert.assertTrue(roomsPage.cottage2Displayed(), "The room title is not dispalyed");
+		logReport("Pass", "Cottage page title is displayed ok");
 
 		//read our policies
 		Assert.assertTrue(roomsPage.politiciesDisplayed(), "Read our policies button is not displayed");
+		logReport("Pass", "Read our policies button is displayed ok");
 		Assert.assertEquals(roomsPage.getPoliciesText(), "Read Our Policies");
+		logReport("Info", "Read our policies text ok");
 
 		//back to Our Rooms button
 		Assert.assertTrue(roomsPage.backBDisplayed(), "Go back icon is not displayed");
+		logReport("Pass", "Back button is displayed ok");
 		roomsPage.clickBack();
 
 		//check all the rooms are displayed
 		Assert.assertTrue(roomsPage.ourRoomsDisplayed(), "All the Rooms are not displayed after click the back button");
-
+		logReport("Pass", "All the rooms are displayed ok after clicked the back button");
+		
 		//change the frame
 		driver.switchTo().defaultContent();
 
@@ -567,30 +655,39 @@ public class RoomsTest extends TestBase{
 
 		//check the visibility of cottage title
 		Assert.assertTrue(roomsPage.classicAppDisplayed(), "Classic App is not displayed");
+		logReport("Pass", "Classic app title is displayed ok");
 
 		//image
 		Assert.assertTrue(roomsPage.img3Displayed(), "Img 3 is not displayed"); 
+		logReport("Pass", "The image is displayed ok");
 
 		//check the visibility of the price
 		Assert.assertTrue(roomsPage.price3Displayed(), "The price is not displayed");		
+		logReport("Pass", "The price is displayed ok");
 
 		//check the visibility of the More Info button
 		Assert.assertTrue(roomsPage.moreInfo3Displayed(), "More Info3 is not displayed"); 
+		logReport("Pass", "More info button ok is displayed ok");
 		roomsPage.clickMoreInfo3();
 
 		//check the title visibility
 		Assert.assertTrue(roomsPage.classicApp2Displayed(), "The room title is not dispalyed");
+		logReport("Pass", "Classic app page title is displayed ok");
 
 		//read our policies
 		Assert.assertTrue(roomsPage.politiciesDisplayed(), "Read our policies button is not displayed");
+		logReport("Pass", "Read our policies button is displayed ok");
 		Assert.assertEquals(roomsPage.getPoliciesText(), "Read Our Policies");
+		logReport("Info", "Read our policies text ok");
 
 		//back to Our Rooms button
 		Assert.assertTrue(roomsPage.backBDisplayed(), "Go back icon is not displayed");
+		logReport("Pass", "Back button is displayed ok");
 		roomsPage.clickBack();
 
 		//check all the rooms are displayed
 		Assert.assertTrue(roomsPage.ourRoomsDisplayed(), "All the Rooms are not displayed after click the back button");
+		logReport("Pass", "All the rooms are displayed ok after clicked the back button");
 
 		//change the frame
 		driver.switchTo().defaultContent();
@@ -694,42 +791,52 @@ public class RoomsTest extends TestBase{
 
 		//Validate that the Chat button exists 
 		Assert.assertTrue(chat.chatBtnisDisplayed(), "Chat is not displayed");
-
+		logReport("Pass", "Chat button is displayed ok");
+		
 		//Click the chat button
 		chat.chatBtnClicked();
 
 		//Enter a message/emoji 
 		chat.emojiBtnClicked();
 		Assert.assertTrue(chat.emojiBtnDisplayed(), "Emoji button is not selected");
-
+		logReport("Pass", "Emoji button is selected ok");
+		
 		chat.emojiClicked();
 		Assert.assertTrue(chat.emojiDisplayed(), "Emoji is not selected");
+		logReport("Pass", "Emoji is selected ok");
 
 		chat.sendEmojiClicked();
 
 		Assert.assertTrue(chat.expectedEmojiDisplayed(), "Emoji is not dispayed");
+		logReport("Pass", "Emoji is dispayed ok");
 
 		//Enter all the information and click the submit button
 		Assert.assertTrue(chat.formDisplayed(), "Chat is not displayed");
+		logReport("Pass", "Chat is dispayed ok");
 
 		chat.nameClicked();
 		chat.nameSendDisplayed();
 		Assert.assertTrue(chat.nameDisplayed(), "Name is not displayed");
+		logReport("Pass", "Name is dispayed ok");
 
 		chat.emailClicked();
 		chat.emailSendDisplayed();
 		Assert.assertTrue(chat.emailDisplayed(), "Email is not displayed");
+		logReport("Pass", "Email is dispayed ok");
 
 		chat.messageClicked();
 		chat.messageSendDisplayed();
 		Assert.assertTrue(chat.messageDisplayed(), "Name is not displayed");
+		logReport("Pass", "Mesaage is dispayed ok");
 
 		chat.submitClicked();
 		Assert.assertTrue(chat.submitDisplayed(), "Submit has a problem");
+		logReport("Pass", "Submit ok");
 
 		//Click the attachment button
 		Assert.assertTrue(chat.attachmentDisplayed(), "Chat is not displayed");
 		chat.addFileDisplayed();
+		logReport("Pass", "Attachment button is displayed ok");
 
 		implicitWait(10);
 	}
@@ -756,28 +863,36 @@ public class RoomsTest extends TestBase{
 
 
 		Assert.assertEquals(socialMedia.getSocialMediaIcons().size(), 3, "There are not 3 icons");
+		logReport("Info", "The number of icons ok");
 		Assert.assertEquals(socialMedia.getSocialMediaLinkList().size(), 3, "There are not 3 links");
-	
+		logReport("Info", "The number of links ok");
+		
 		ArrayList<String> socialMediaList = socialMedia.getSocialMediaLinkList() ;
 		Assert.assertEquals(socialMediaList.get(0), "http://www.facebook.com/wix", "The fb link is not ok");
+		logReport("Info", "Fb link ok");
 		
 		socialMedia.facebookClicked();
 		socialMedia.switchToTab(1);
 		Assert.assertTrue(socialMedia.getUrl().contains("facebook"), "Facebook page is not displayed");
+		logReport("Pass", "Facebook page is displayed ok");
 		driver.close();
 		socialMedia.switchToTab(0);
 		
 		Assert.assertEquals(socialMediaList.get(1), "http://www.twitter.com/wix", "The twiter link is not ok");
+		logReport("Info", "Twitter link ok");
 		socialMedia.twitterClicked();
 		socialMedia.switchToTab(1);
 		Assert.assertTrue(socialMedia.getUrl().contains("twitter"), "Twiter page is not displayed");
+		logReport("Pass", "Twiter page is displayed ok");
 		driver.close();
 		socialMedia.switchToTab(0);
 		
 		Assert.assertEquals(socialMediaList.get(2), "http://pinterest.com/wixcom/", "The pinterest link is not ok");
 		socialMedia.pinterestClicked();
+		logReport("Info", "Pinterest link ok");
 		socialMedia.switchToTab(1);
 		Assert.assertTrue(socialMedia.getUrl().contains("pinterest"), "Pinterest page is not displayed");
+		logReport("Pass", "Pinterest page is displayed ok");
 		driver.close();
 
 	}
@@ -822,12 +937,17 @@ public class RoomsTest extends TestBase{
 
 		Assert.assertEquals(generalInfo.getGeneralInfoTitles().size(), 4, "There are not 4 titles");
 		Assert.assertEquals(generalInfo.getGeneralInfoTitleText().size(), 4, "There are not 4 titles");
-
+		logReport("Info", "The number of titles ok");
+		
 		ArrayList<String> generalInfoList = generalInfo.getGeneralInfoTitleText() ;
 		Assert.assertEquals(generalInfoList.get(0), "ADDRESS", "The Adress title is not ok");
+		logReport("Info", "Adress title ok");
 		Assert.assertEquals(generalInfoList.get(1), "CONTACT", "The Contact title is not ok");
+		logReport("Info", "Contact title ok");
 		Assert.assertEquals(generalInfoList.get(2), "HOME & AWAY", "The Home&Away title is not ok");
+		logReport("Info", "Home&Away title ok");
 		Assert.assertEquals(generalInfoList.get(3), "WE ACCEPT", "The accept title is not ok");
+		logReport("Info", "Payment title ok");
 
 	}
 
