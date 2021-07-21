@@ -1,5 +1,10 @@
 package pages;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Vector;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -217,16 +222,17 @@ public class RoomsPage extends TestBase{
 	}
 	
 	public void changeFrameBookARoom() {
+		fluentWait(10,2, By.xpath("//iframe[@title='Book a Room']"));
 		waitForFrameAndSwitch(frameBookARoom);
 	}
 	
 	public boolean checkinDisplayed() {
-		//waitElementIsVisible(checkin, 7);
 		fluentWait(7,2, By.id("check-in"));
 		return display(checkin);
 	}
 	
 	public void clickCheckin() {
+		fluentWait(10,2, By.xpath("//div[@id='check-in']"));
 		click(checkin);
 	}
 	
@@ -660,6 +666,7 @@ public class RoomsPage extends TestBase{
 		
 		String xpath = "//button[@aria-label=\"" + checkin + "\"]";
 		WebElement checkinDate = driver.findElement(By.xpath(xpath));
+		//fluentWait(20,2, By.xpath(xpath))
 		waitElementIsClickable(10,checkinDate);
 		click(checkinDate);
 		
@@ -669,10 +676,71 @@ public class RoomsPage extends TestBase{
 		
 		String xpath = "(//button[@aria-label=\"" + checkout + "\"])[2]";
 		WebElement checkoutDate = driver.findElement(By.xpath(xpath));
+		//fluentWait(20,2, By.xpath(xpath));
 		waitElementIsClickable(10,checkoutDate);
 		click(checkoutDate);
 		
 	}
 	
+	//actions for read from text file
+	
+	public Vector<String> readFromFile() {
+		
+		try {
+			BufferedReader file = new BufferedReader(new FileReader("C:\\Users\\z004c2sy\\git\\internship2021\\testData\\testDataRooms.txt"));
+			String lines = "";			
+			Vector<String> data = new Vector<>();
+			
+			while((lines = file.readLine()) != null){
+				
+				String[] testCase = lines.split(";");
+				String checkinDate = testCase[0];
+				String checkoutDate = testCase[1];
+				String adultsNr = testCase[2];
+				String kidsNr = testCase[3];
+				
+				data.add(checkinDate);
+				data.add(checkoutDate);
+				data.add(adultsNr);
+				data.add(kidsNr);
+			}
+			return data;
+		}
+		catch(Exception e) {
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public void changeMonth(String date) {
+		
+
+		if (date.contains("July"))
+			clicknextMonthB(0);
+		if (date.contains("August"))
+			clicknextMonthB(1);
+		if (date.contains("September"))
+			clicknextMonthB(2);
+		if (date.contains("October"))
+			clicknextMonthB(3);
+		if (date.contains("November"))
+			clicknextMonthB(4);
+		if (date.contains("December"))
+			clicknextMonthB(5);
+		if (date.contains("January"))
+			clicknextMonthB(6);
+		if (date.contains("February"))
+			clicknextMonthB(7);
+		if (date.contains("March"))
+			clicknextMonthB(8);
+		if (date.contains("April"))
+			clicknextMonthB(9);
+		if (date.contains("May"))
+			clicknextMonthB(10);		
+		if (date.contains("June"))
+			clicknextMonthB(11);		
+		
+	}
 
 }

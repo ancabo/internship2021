@@ -1,6 +1,7 @@
 package tests;
 
 import java.util.ArrayList;
+import java.util.Vector;
 
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
@@ -323,7 +324,7 @@ public class RoomsTest extends TestBase{
 	}
 	
 	@Test(dataProvider = "completeData")
-	public void checkinDataProvider(String checkinDate, String checkoutDate, int adultsNr, int kidsNr){ //check in, check out, adults, kids
+	public void checkinDataProvider(String checkinDate, String checkoutDate, int adultsNr, int kidsNr) throws InterruptedException{ //check in, check out, adults, kids
 		
 		roomsPage.clickRooms();
 		waitPageLoad(8000);
@@ -333,10 +334,12 @@ public class RoomsTest extends TestBase{
 		
 		//complete check in field
 		roomsPage.clickCheckin();
-		roomsPage.clicknextMonthB(1);
+		roomsPage.changeMonth(checkinDate);
+		Thread.sleep(2000);
 		roomsPage.clickCheckinDate(checkinDate);
 		
 		//complete check out field
+		Thread.sleep(2000);
 		roomsPage.clickCheckoutDate(checkoutDate);
 		
 		//complete the aduls field
@@ -348,14 +351,62 @@ public class RoomsTest extends TestBase{
 		//click search button
 		roomsPage.clickSearch();
 		
+		//verify that the results are displayed
+		Assert.assertTrue(roomsPage.searchResultDisplayed(), "Results for search are not displayed");
 		Assert.assertEquals(roomsPage.getCheckinText(), "17 Aug 2021");
 		Assert.assertEquals(roomsPage.getCheckoutText(), "27 Aug 2021");
 		Assert.assertEquals(roomsPage.getAdultsText(), "4 Adults");
 		Assert.assertEquals(roomsPage.getKidsText(), "2 Kids");
 		
-		//verify that the results are displayed
-		Assert.assertTrue(roomsPage.searchResultDisplayed(), "Results for search are not displayed");
+	}
+	
+	@Test
+	public void checkInTextFile() throws InterruptedException{
 
+		Vector<String> data = roomsPage.readFromFile();
+		int n = data.size()/4;
+		int k = 0;
+		
+		for(int i=0; i<n; i++) {
+					
+			roomsPage.clickRooms();
+			waitPageLoad(10000);
+			Thread.sleep(7000);
+
+			//change the frame  
+			roomsPage.changeFrameBookARoom();
+		
+			//complete check in field
+			Thread.sleep(5000);
+			roomsPage.clickCheckin();
+			roomsPage.changeMonth(data.get(k));
+			Thread.sleep(3000);
+			roomsPage.clickCheckinDate(data.get(k)); k++;
+				
+			//complete check out field
+			Thread.sleep(3000);
+			roomsPage.clickCheckoutDate(data.get(k)); k++;
+		
+			//complete the aduls field
+			roomsPage.clickAdultsUp(Integer.parseInt(data.get(k)) - 1); k++;
+		
+			//complete the kids field
+			roomsPage.clickKidsUp(Integer.parseInt(data.get(k))); k++;
+		
+			//click search button
+			roomsPage.clickSearch();
+		
+			//verify that the results are displayed
+			Assert.assertTrue(roomsPage.searchResultDisplayed(), "Results for search are not displayed");
+			String adults = data.get(k-2) + " Adults";
+			Assert.assertEquals(roomsPage.getAdultsText(), adults);
+			String kids = data.get(k-1) + " Kids";
+			Assert.assertEquals(roomsPage.getKidsText(), kids);
+			
+			if (i<n)
+				navigateToURL("https://ancabota09.wixsite.com/intern");
+			
+		}
 		
 	}
 
