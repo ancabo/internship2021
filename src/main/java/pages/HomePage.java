@@ -267,12 +267,13 @@ public class HomePage extends TestBase{
 	//////////////////////Provider updates
 
 	private WebElement in_day, in_day1, out_day, out_day1;
-	
+
 
 	private void inData(String zi1) throws InterruptedException {
-		in_day = driver.findElement(By.xpath("//span[contains(text(), " + zi1 +")]"));
+		//in_day = driver.findElement(By.xpath("//span[contains(text(), " + zi1 +")]"));
+		in_day = driver.findElement(By.xpath("//button[@aria-label='" + zi1 +"']"));
 	}
-	
+
 	public TestBase setCheckInAndClick(String zi) throws InterruptedException {
 		inData(zi);
 		click(in_day);
@@ -280,7 +281,8 @@ public class HomePage extends TestBase{
 	}
 
 	private void outData(String zi) throws InterruptedException {
-		out_day = driver.findElement(By.xpath("//button[@day-button-aria='day']/span[contains(text(), " + zi + ")]"));
+		//out_day = driver.findElement(By.xpath("//button[@day-button-aria='day']/span[contains(text(), " + zi + ")]"));
+		out_day = driver.findElement(By.xpath("//button[@aria-label='" + zi +"']"));
 	}
 
 	public TestBase setCheckOutAndClick(String zi) throws InterruptedException {
@@ -289,8 +291,8 @@ public class HomePage extends TestBase{
 		return this;
 	}
 
-	
-	
+
+
 	///////////////Read from Text File
 
 
@@ -304,15 +306,15 @@ public class HomePage extends TestBase{
 
 			while((Content = BR.readLine())!= null){
 				String[] var = Content.split(";");
-				
+
 				checkInData = var[0];
 				String[] var1 = Content.split(" ");
 				checkInDataMonth = var1[2];
-				
+
 				checkOutData = var[1];
 				nrAdults = var[2];	
 				nrKids = var[3];
-				
+
 				info.add(checkInData);
 				info.add(checkInDataMonth);
 				info.add(checkOutData);
@@ -323,7 +325,7 @@ public class HomePage extends TestBase{
 			return info;
 		}
 	}
-	
+
 	public TestBase changeClickedMonth(int number) {
 		int i=0;
 		while(i<number) {
@@ -332,7 +334,7 @@ public class HomePage extends TestBase{
 		}
 		return this;
 	}
-	
+
 	private void inDataText(String data) throws InterruptedException {
 		in_day1 = driver.findElement(By.xpath("//button[@aria-label='" + data +"']"));
 	}
@@ -341,40 +343,40 @@ public class HomePage extends TestBase{
 	public TestBase setCheckInAndChangeMonthText(String data, String month) throws InterruptedException {
 
 		switch (month) {
-			case "July":
-				inDataText(data);
-				click(in_day1);
-				break;
-			case "August":
-				changeClickedMonth(1);
-				inDataText(data);
-				click(in_day1);
-				break;
-			case "September":
-				changeClickedMonth(2);
-				inDataText(data);
-				click(in_day1);
-				break;
-			case "October":
-				changeClickedMonth(3);
-				inDataText(data);
-				click(in_day1);
-				break;
-			case "November":
-				changeClickedMonth(4);
-				inDataText(data);
-				click(in_day1);
-				break;
-			case "December":
-				changeClickedMonth(5);
-				inDataText(data);
-				click(in_day1);
-				break;
+		case "July":
+			inDataText(data);
+			click(in_day1);
+			break;
+		case "August":
+			changeClickedMonth(1);
+			inDataText(data);
+			click(in_day1);
+			break;
+		case "September":
+			changeClickedMonth(2);
+			inDataText(data);
+			click(in_day1);
+			break;
+		case "October":
+			changeClickedMonth(3);
+			inDataText(data);
+			click(in_day1);
+			break;
+		case "November":
+			changeClickedMonth(4);
+			inDataText(data);
+			click(in_day1);
+			break;
+		case "December":
+			changeClickedMonth(5);
+			inDataText(data);
+			click(in_day1);
+			break;
 
 		}	
 		return this;
 	}
-	
+
 	private void outDataText(String data) throws InterruptedException {
 		out_day1 = driver.findElement(By.xpath("//button[@aria-label='" + data +"']"));
 	}
