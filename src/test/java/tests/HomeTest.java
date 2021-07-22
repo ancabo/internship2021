@@ -9,11 +9,13 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 import common.TestBase;
 import pages.ChatPage;
 import pages.GeneralInfoPage;
 import pages.HomePage;
+import pages.MenuPage;
 import pages.SocialMediaPage;
 
 public class HomeTest extends TestBase{
@@ -21,12 +23,14 @@ public class HomeTest extends TestBase{
 	SocialMediaPage socialMedia;
 	GeneralInfoPage generalInfo;
 	ChatPage chat;
+	MenuPage menuPage;
 
 	@BeforeMethod
 	public void beforeMethod() {
 		homePage = new HomePage(driver);
 		socialMedia = new SocialMediaPage(driver);
 		generalInfo = new GeneralInfoPage(driver);
+		menuPage = new MenuPage(driver);
 		chat = new ChatPage(driver);
 	}
 
@@ -57,9 +61,40 @@ public class HomeTest extends TestBase{
 	
 	@Test
 	public void verifyHomeMenu() {
+		SoftAssert softAssert = new SoftAssert();
 		
-		//Assert.assertTrue(roomsPage.roomsButtonDisplayed(), "Rooms button is not displayed on Home Page");
-		//Assert.assertTrue(contactPage.contactButtonDisplayed(), "Contact button is not displayed on Home Page");
+		softAssert.assertTrue(menuPage.homeButtonDisplayed(), "Home button is not displayed on Home Page");
+		logReport("Pass", "Home button is displayed on Home Page");
+		
+		softAssert.assertTrue(menuPage.exploreButtonDisplayed(), "Explore button is not displayed on Home Page");
+		logReport("Pass", "Explore button is displayed on Home Page");
+		
+		softAssert.assertTrue(menuPage.roomsButtonDisplayed(), "Rooms button is not displayed on Home Page");
+		logReport("Pass", "Rooms button is displayed on Home Page");
+		
+		softAssert.assertTrue(menuPage.contactButtonDisplayed(), "Contact button is not displayed on Home Page");
+		logReport("Pass", "Contact button is displayed on Home Page");
+		
+		softAssert.assertTrue(menuPage.bookNowButtonDisplayed(), "Book Now button is not displayed on Home Page");
+		logReport("Pass", "Book Now  button is displayed on Home Page");
+		
+		
+		
+		//Assert.assertEquals(menuPage.getTextHomeButton(), "HONE", "Home button doesn't have a correct name");
+		softAssert.assertEquals(menuPage.getTextHomeButton(), "HONE", "Home button doesn't have a correct name");
+		logReport("Pass", "Home button doesn't have a correct name");
+		
+		softAssert.assertEquals(menuPage.getTextExploreButton(), "EXPLORE", "Explore button doesn't have a correct name");
+		logReport("Pass", "Explore button doesn't have a correct name");
+		
+		softAssert.assertEquals(menuPage.getTextRoomsButton(), "ROOMS", "Rooms button doesn't have a correct name");
+		logReport("Pass", "Rooms button doesn't have a correct name");
+		
+		softAssert.assertEquals(menuPage.getTextContactButton(), "CONTACT", "Contact button doesn't have a correct name");
+		logReport("Pass", "Contact button doesn't have a correct name");
+		
+		softAssert.assertEquals(menuPage.getTextBookNowButton(), "BOOK NOW", "Book Now button doesn't have a correct name");
+		logReport("Fail", "Book Now button doesn't have a correct name");
 		
 	}
 
