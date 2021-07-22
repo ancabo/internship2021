@@ -53,6 +53,14 @@ public class HomeTest extends TestBase{
 		Assert.assertTrue(homePage.homeTabDisplayed(), "Home tab is not displayed"); 
 		logReport("Info", "Home tab ok");
 	}
+	
+	@Test
+	public void verifyHomeMenu() {
+		
+		//Assert.assertTrue(roomsPage.roomsButtonDisplayed(), "Rooms button is not displayed on Home Page");
+		//Assert.assertTrue(contactPage.contactButtonDisplayed(), "Contact button is not displayed on Home Page");
+		
+	}
 
 	@Test
 	public void verifyBackground() { 

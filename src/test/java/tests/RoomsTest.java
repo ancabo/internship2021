@@ -367,8 +367,8 @@ public class RoomsTest extends TestBase{
 	   //{ "25, Sunday July 2021", "30, Friday July 2021", 2, 3 },
 	   //{ "28, Wednesday July 2021", "31, Saturday July 2021", 3, 1 },
 	   { "17, Tuesday August 2021", "27, Friday August 2021", 4, 2 },
-	   //{ "12, Sunday September 2021", "18, Saturday September 2021", 3, 3 },
-	   //{ "20, Wednesday October 2021", "23, Saturday October 2021", 2, 0 },
+	   { "12, Sunday September 2021", "18, Saturday September 2021", 3, 3 },
+	   { "20, Wednesday October 2021", "23, Saturday October 2021", 2, 0 },
 	 };
 	}
 	
@@ -436,6 +436,7 @@ public class RoomsTest extends TestBase{
 		
 			//complete check in field
 			Thread.sleep(5000);
+			logReport("Info", "Start run number: "+Integer.toString(i+1));
 			roomsPage.clickCheckin();
 			roomsPage.changeMonth(data.get(k));
 			Thread.sleep(3000);
@@ -460,11 +461,13 @@ public class RoomsTest extends TestBase{
 
 			String adults = data.get(k-2) + " Adults";
 			Assert.assertEquals(roomsPage.getAdultsText(), adults);
-			logReport("Info", "Adults number is displayed ok");
+			logReport("Pass", "Adults number is displayed ok");
 			
 			String kids = data.get(k-1) + " Kids";
 			Assert.assertEquals(roomsPage.getKidsText(), kids);
-			logReport("Info", "Kids number is displayed ok");
+			logReport("Pass", "Kids number is displayed ok");
+			
+			logReport("Info", "Finish run number: "+Integer.toString(i+1));
 			
 			if (i<n)
 				navigateToURL("https://ancabota09.wixsite.com/intern");
