@@ -39,7 +39,7 @@ public class ExploreTest extends TestBase {
 
 		//Validate that the Explore button exists 
 		Assert.assertTrue(explorePage.exploreBtnDisplayed(), "Title button is not displayed");
-		logReport("Info", "Title Button - ok");
+		logReport("Pass", "Title Button - ok");
 
 		//Click the Explore button
 		explorePage.exploreBtnClicked();
@@ -47,47 +47,47 @@ public class ExploreTest extends TestBase {
 
 		//Validate that the title "Explore the hotel" exists
 		Assert.assertEquals(explorePage.textEqual(), "EXPLORE THE HOTEL", "Not as expected");
-		logReport("Info", "The title 'Explore the hotel' exists");
+		logReport("Pass", "The title 'Explore the hotel' exists");
 
 		//Validate that the "Amenities&Services" exists
 		Assert.assertEquals(explorePage.amentiesGetText(), "AMENITIES & SERVICES", "Not as expected");
-		logReport("Info", "The \"Amenities&Services\" exists");
+		logReport("Pass", "The \"Amenities&Services\" exists");
 
 		//Validate that the "Cleaning Services" exists
 		Assert.assertEquals(explorePage.cleaningGetText(), "Cleaning Services", "Not as expected");
-		logReport("Info", "The \"Cleaning Services\" exists");
+		logReport("Pass", "The \"Cleaning Services\" exists");
 
 		//Validate that the "Free Parking" exists
 		Assert.assertEquals(explorePage.parkingGetText(), "Free Parking", "Not as expected");
-		logReport("Info", "The \"Free Parking\" exists");
+		logReport("Pass", "The \"Free Parking\" exists");
 
 		//Validate that the "Fully Furnished" exists
 		Assert.assertEquals(explorePage.furnishedGetText(), "Fully Furnished", "Not as expected");
-		logReport("Info", "The \"Fully Furnished\" exists");
+		logReport("Pass", "The \"Fully Furnished\" exists");
 
 		//Validate that the "Free WIFI" exists
 		Assert.assertEquals(explorePage.wifiGetText(), "Free WiFi", "Not as expected");
-		logReport("Info", "The \"Free WIFI\" exists");
+		logReport("Pass", "The \"Free WIFI\" exists");
 
 		//Validate that the "Airport Transfers" exists
 		Assert.assertEquals(explorePage.airportGetText(), "Airport Transfers", "Not as expected");
-		logReport("Info", "The \"Airport Transfers\" exists");
+		logReport("Pass", "The \"Airport Transfers\" exists");
 
 		//Validate that the "Explore the city" title exists
 		Assert.assertEquals(explorePage.exploreCityGetText(), "EXPLORE THE CITY", "Not as expected");
-		logReport("Info", "The \"Explore the city\" title exists");
+		logReport("Pass", "The \"Explore the city\" title exists");
 
 		//Validate that the "Chinatown" box exists
 		Assert.assertEquals(explorePage.chinaTownGetText(), "Chinatown", "Not as expected");
-		logReport("Info", "The \"Chinatown\" box exists");
+		logReport("Pass", "The \"Chinatown\" box exists");
 
 		//Validate that the "Haight & Ashbury" box exists
 		Assert.assertEquals(explorePage.haightAshburyGetText(), "Haight & Ashbury", "Not as expected");
-		logReport("Info", "The \"Haight & Ashbury\" box exists");
+		logReport("Pass", "The \"Haight & Ashbury\" box exists");
 
 		//Validate that the "Golden Gate Bridge" box exists
 		Assert.assertEquals(explorePage.bridgeGetText(), "Golden Gate Bridge", "Not as expected");
-		logReport("Info", "The \"Golden Gate Bridge\" box exists");
+		logReport("Pass", "The \"Golden Gate Bridge\" box exists");
 
 		driver.switchTo().defaultContent();
 	}
@@ -109,13 +109,13 @@ public class ExploreTest extends TestBase {
 		waitPageLoad(3000);
 
 		Assert.assertEquals(socialMedia.getSocialMediaIcons().size(), 3, "There are not 3 icons");
-		logReport("Info", "The number of icons - ok");
+		logReport("Pass", "The number of icons - ok");
 		Assert.assertEquals(socialMedia.getSocialMediaLinkList().size(), 3, "There are not 3 links");
-		logReport("Info", "The number of links - ok");
+		logReport("Pass", "The number of links - ok");
 
 		ArrayList<String> socialMediaList = socialMedia.getSocialMediaLinkList() ;
 		Assert.assertEquals(socialMediaList.get(0), "http://www.facebook.com/wix", "The fb link is not ok");
-		logReport("Info", "The fb link is ok");
+		logReport("Pass", "The fb link is ok");
 
 		socialMedia.facebookClicked();
 		socialMedia.switchToTab(1);
@@ -126,7 +126,7 @@ public class ExploreTest extends TestBase {
 		socialMedia.switchToTab(0);
 
 		Assert.assertEquals(socialMediaList.get(1), "http://www.twitter.com/wix", "The twiter link is not ok");
-		logReport("Info", "The twitter link is ok");
+		logReport("Pass", "The twitter link is ok");
 		socialMedia.twitterClicked();
 		socialMedia.switchToTab(1);
 		Assert.assertTrue(socialMedia.getUrl().contains("twitter"), "Twiter page is not displayed");
@@ -135,7 +135,7 @@ public class ExploreTest extends TestBase {
 		socialMedia.switchToTab(0);
 
 		Assert.assertEquals(socialMediaList.get(2), "http://pinterest.com/wixcom/", "The pinterest link is not ok");
-		logReport("Info", "The pinterest link is ok");
+		logReport("Pass", "The pinterest link is ok");
 		socialMedia.pinterestClicked();
 		socialMedia.switchToTab(1);
 		Assert.assertTrue(socialMedia.getUrl().contains("pinterest"), "Pinterest page is not displayed");
@@ -174,7 +174,7 @@ public class ExploreTest extends TestBase {
 		//		driver.switchTo().defaultContent();
 		Assert.assertEquals(generalInfo.getGeneralInfoTitles().size(), 4, "There are not 4 titles");
 		Assert.assertEquals(generalInfo.getGeneralInfoTitleText().size(), 4, "There are not 4 titles");
-		logReport("Info", "The number of titles is ok");
+		logReport("Pass", "The number of titles is ok");
 
 		ArrayList<String> generalInfoList = generalInfo.getGeneralInfoTitleText() ;
 		Assert.assertEquals(generalInfoList.get(0), "ADDRESS", "The Adress title is not ok");
@@ -199,7 +199,7 @@ public class ExploreTest extends TestBase {
 
 		//Validate that the Chat button exists 
 		Assert.assertTrue(chat.chatBtnisDisplayed(), "Chat is not displayed");
-		logReport("Info", "Chat is displayed ok");
+		logReport("Pass", "Chat is displayed ok");
 
 		//Click the chat button
 		chat.chatBtnClicked();
@@ -207,44 +207,44 @@ public class ExploreTest extends TestBase {
 		//Enter a message/emoji 
 		chat.emojiBtnClicked();
 		Assert.assertTrue(chat.emojiBtnDisplayed(), "Emoji button is not selected");
-		logReport("Info", "Emoji button is selected ok");
+		logReport("Pass", "Emoji button is selected ok");
 
 		chat.emojiClicked();
 		Assert.assertTrue(chat.emojiDisplayed(), "Emoji is not selected");
-		logReport("Info", "Emoji is selected ok");
+		logReport("Pass", "Emoji is selected ok");
 
 		chat.sendEmojiClicked();
 
 		Assert.assertTrue(chat.expectedEmojiDisplayed(), "Emoji is not dispayed");
-		logReport("Info", "Emoji is dispayed ok");
+		logReport("Pass", "Emoji is dispayed ok");
 
 
 		//Enter all the information and click the submit button
 		Assert.assertTrue(chat.formDisplayed(), "Chat is not displayed");
-		logReport("Info", "Chat is dispayed ok");
+		logReport("Pass", "Chat is dispayed ok");
 
 		chat.nameClicked();
 		chat.nameSendDisplayed();
 		Assert.assertTrue(chat.nameDisplayed(), "Name is not displayed");
-		logReport("Info", "Name is dispayed ok");
+		logReport("Pass", "Name is dispayed ok");
 
 		chat.emailClicked();
 		chat.emailSendDisplayed();
 		Assert.assertTrue(chat.emailDisplayed(), "Email is not displayed");
-		logReport("Info", "Email is dispayed ok");
+		logReport("Pass", "Email is dispayed ok");
 
 		chat.messageClicked();
 		chat.messageSendDisplayed();
 		Assert.assertTrue(chat.messageDisplayed(), "Name is not displayed");
-		logReport("Info", "Mesaage is dispayed ok");
+		logReport("Pass", "Mesaage is dispayed ok");
 
 		chat.submitClicked();
 		Assert.assertTrue(chat.submitDisplayed(), "Submit has a problem");
-		logReport("Info", "Submit ok");
+		logReport("Pass", "Submit ok");
 
 		//Click the attachment button
 		Assert.assertTrue(chat.attachmentDisplayed(), "Attachment button is not displayed");
-		logReport("Info", "Attachment button is displayed ok");
+		logReport("Pass", "Attachment button is displayed ok");
 		chat.addFileDisplayed();
 
 		implicitWait(10);

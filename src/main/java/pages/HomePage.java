@@ -62,6 +62,9 @@ public class HomePage extends TestBase{
 
 	@FindBy(xpath = "//span[@class='nr31w']" )
 	private WebElement bookNow;
+	
+	@FindBy(xpath = "//*[@id=\"content\"]/div/div[1]/h2/span/span")
+	private WebElement searchResult;
 
 	@FindBy(xpath = "//button[@id='check-in'][1]")
 	private WebElement dataBtnCheckIn;
@@ -178,6 +181,10 @@ public class HomePage extends TestBase{
 
 	public boolean kidsDisplayed() {
 		return display(kids);
+	}
+	
+	public boolean searchResultDisplayed() {
+		return display(searchResult);
 	}
 
 	public boolean kidsDownDisplayed() {
@@ -363,8 +370,9 @@ public class HomePage extends TestBase{
 			click(in_day1);
 			break;
 		case "November":
-			changeClickedMonth(4);
+			changeClickedMonth(4);	
 			inDataText(data);
+			waitElementIsClickable(4, in_day1);
 			click(in_day1);
 			break;
 		case "December":
