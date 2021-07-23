@@ -104,16 +104,16 @@ public class RoomsTest extends TestBase{
 		//verify "ROOMS" text
 		Assert.assertTrue(roomsPage.roomsDisplayed(), "ROOMS is not displayed"); 
 		Assert.assertEquals(roomsPage.getRoomsText(), "ROOMS");
-		logReport("Info", "Rooms text ok");
+		logReport("Pass", "Rooms text displayed ok");
 		
 		//verify the paragraph
 		Assert.assertTrue(roomsPage.paragraphDisplayed(), "Paragraph is not displayed");
-		logReport("Info", "Paragraph ok");
+		logReport("Pass", "Paragraph displayed ok");
 		
 		//verify STAY IN THE CITY
 		Assert.assertTrue(roomsPage.stayInTheCityDisplayed(), "STAY IN THE CITY is not displayed");
 		Assert.assertEquals(roomsPage.getStayInTheCityText(), "STAY IN THE CITY");
-		logReport("Info", "Stay in the city text ok");
+		logReport("Pass", "Stay in the city text displayed ok");
 		
 	}
 
@@ -126,7 +126,7 @@ public class RoomsTest extends TestBase{
 
 		//verify the background image
 		Assert.assertTrue(roomsPage.backgroundImgDisplayed(), "background img is not displayed"); 
-		logReport("Pass", "Background image ok");
+		logReport("Pass", "Background image displayed ok");
 		
 	}
 
@@ -167,7 +167,7 @@ public class RoomsTest extends TestBase{
 
 		//check the date is displayed in check in field
 		Assert.assertEquals(roomsPage.getCheckinText(), "17 Aug 2021");
-		logReport("Info", "The first date is displayed ok in the check in field");
+		logReport("Pass", "The first date is displayed ok in the check in field");
 		roomsPage.clickCheckin();
 
 		//verify the check in calendar is displayed for August
@@ -191,7 +191,7 @@ public class RoomsTest extends TestBase{
 
 		//check the date is displayed in check in field
 		Assert.assertEquals(roomsPage.getCheckinText(), "28 Jul 2021");
-		logReport("Info", "The second date is displayed ok in the check in field");
+		logReport("Pass", "The second date is displayed ok in the check in field");
 		roomsPage.clickCheckin();
 
 		//choose a date before today
@@ -203,7 +203,7 @@ public class RoomsTest extends TestBase{
 
 		//check the date is not displayed in check in field
 		Assert.assertEquals(roomsPage.getCheckinText(), "28 Jul 2021");
-		logReport("Info", "The third date is displayed ok in the check in field");
+		logReport("Pass", "The third date is displayed ok in the check in field");
 
 		//change the frame
 		driver.switchTo().defaultContent();
@@ -247,7 +247,7 @@ public class RoomsTest extends TestBase{
 
 		//check the date is displayed in check out field 
 		Assert.assertEquals(roomsPage.getCheckoutText(), "30 Aug 2021");
-		logReport("Info", "The first date is displayed ok in the check in field");
+		logReport("Pass", "The first date is displayed ok in the check in field");
 		roomsPage.clickCheckout();
 
 		//July month calendar visibility 
@@ -271,7 +271,7 @@ public class RoomsTest extends TestBase{
 
 		//check the date is displayed in check out field 
 		Assert.assertEquals(roomsPage.getCheckoutText(), "31 Jul 2021");
-		logReport("Info", "The second date is displayed ok in the check in field");
+		logReport("Pass", "The second date is displayed ok in the check in field");
 		roomsPage.clickCheckout();
 
 		//choose a date before check in
@@ -282,7 +282,7 @@ public class RoomsTest extends TestBase{
 
 		//check the date is not displayed in check in field
 		Assert.assertEquals(roomsPage.getCheckoutText(), "31 Jul 2021");
-		logReport("Info", "The third date is displayed ok in the check in field");
+		logReport("Pass", "The third date is displayed ok in the check in field");
 
 		//change the frame
 		driver.switchTo().defaultContent();
@@ -316,7 +316,7 @@ public class RoomsTest extends TestBase{
 
 		//verify that the no. of Adults has increased
 		Assert.assertEquals(roomsPage.getAdultsText(), "3 Adults");
-		logReport("Info", "The adults number after increase is ok");
+		logReport("Pass", "The adults number after increase is ok");
 
 		//verify Adults Down icon is visible
 		Assert.assertTrue(roomsPage.adultsDownDisplayed(), "Adults down icon is not displayed");
@@ -327,7 +327,7 @@ public class RoomsTest extends TestBase{
 
 		//verify that the no. of Adults has decreased
 		Assert.assertEquals(roomsPage.getAdultsText(), "2 Adults");
-		logReport("Info", "The adults number after decrease is ok");
+		logReport("Pass", "The adults number after decrease is ok");
 		
 		//change the frame
 		driver.switchTo().defaultContent();
@@ -361,7 +361,7 @@ public class RoomsTest extends TestBase{
 
 		//verify that the no. of Kids has increased
 		Assert.assertEquals(roomsPage.getKidsText(), "2 Kids");
-		logReport("Info", "The kids number after increase is ok");
+		logReport("Pass", "The kids number after increase is ok");
 
 		//verify Kids Down icon is visible
 		Assert.assertTrue(roomsPage.kidsDownDisplayed(), "Kids down icon is not displayed");
@@ -372,7 +372,7 @@ public class RoomsTest extends TestBase{
 
 		//verify that the no. of Kids has decreased
 		Assert.assertEquals(roomsPage.getKidsText(), "1 Kids");
-		logReport("Info", "The kids number after decrease is ok");
+		logReport("Pass", "The kids number after decrease is ok");
 
 		//change the frame
 		driver.switchTo().defaultContent();
@@ -417,8 +417,8 @@ public class RoomsTest extends TestBase{
 	   //{ "25, Sunday July 2021", "30, Friday July 2021", 2, 3 },
 	   //{ "28, Wednesday July 2021", "31, Saturday July 2021", 3, 1 },
 	   { "17, Tuesday August 2021", "27, Friday August 2021", 4, 2 },
-	   { "12, Sunday September 2021", "18, Saturday September 2021", 3, 3 },
-	   { "20, Wednesday October 2021", "23, Saturday October 2021", 2, 0 },
+	   //{ "12, Sunday September 2021", "18, Saturday September 2021", 3, 3 },
+	   //{ "20, Wednesday October 2021", "23, Saturday October 2021", 2, 0 },
 	 };
 	}
 	
@@ -455,16 +455,16 @@ public class RoomsTest extends TestBase{
 		logReport("Pass", "The results text is displayed ok");
 		
 		Assert.assertEquals(roomsPage.getCheckinText(), "17 Aug 2021");
-		logReport("Info", "Check in date is displayed ok");
+		logReport("Pass", "Check in date is displayed ok");
 		
 		Assert.assertEquals(roomsPage.getCheckoutText(), "27 Aug 2021");
-		logReport("Info", "Check out date is displayed ok");
+		logReport("Pass", "Check out date is displayed ok");
 
 		Assert.assertEquals(roomsPage.getAdultsText(), "4 Adults");
-		logReport("Info", "Adults number is displayed ok");
+		logReport("Pass", "Adults number is displayed ok");
 
 		Assert.assertEquals(roomsPage.getKidsText(), "2 Kids");
-		logReport("Info", "Kids number is displayed ok");
+		logReport("Pass", "Kids number is displayed ok");
 		
 	}
 	
@@ -629,7 +629,7 @@ public class RoomsTest extends TestBase{
 		Assert.assertTrue(roomsPage.politiciesDisplayed(), "Read our policies button is not displayed");
 		logReport("Pass", "Read our policies button is displayed ok");
 		Assert.assertEquals(roomsPage.getPoliciesText(), "Read Our Policies");
-		logReport("Info", "Read our policies text ok");
+		logReport("Pass", "Read our policies text ok");
 
 		//back to Our Rooms button
 		Assert.assertTrue(roomsPage.backBDisplayed(), "Go back icon is not displayed");
@@ -680,7 +680,7 @@ public class RoomsTest extends TestBase{
 		Assert.assertTrue(roomsPage.politiciesDisplayed(), "Read our policies button is not displayed");
 		logReport("Pass", "Read our policies button is displayed ok");
 		Assert.assertEquals(roomsPage.getPoliciesText(), "Read Our Policies");
-		logReport("Info", "Read our policies text ok");
+		logReport("Pass", "Read our policies text ok");
 
 		//back to Our Rooms button
 		Assert.assertTrue(roomsPage.backBDisplayed(), "Go back icon is not displayed");
@@ -731,7 +731,7 @@ public class RoomsTest extends TestBase{
 		Assert.assertTrue(roomsPage.politiciesDisplayed(), "Read our policies button is not displayed");
 		logReport("Pass", "Read our policies button is displayed ok");
 		Assert.assertEquals(roomsPage.getPoliciesText(), "Read Our Policies");
-		logReport("Info", "Read our policies text ok");
+		logReport("Pass", "Read our policies text ok");
 
 		//back to Our Rooms button
 		Assert.assertTrue(roomsPage.backBDisplayed(), "Go back icon is not displayed");
@@ -916,13 +916,13 @@ public class RoomsTest extends TestBase{
 
 
 		Assert.assertEquals(socialMedia.getSocialMediaIcons().size(), 3, "There are not 3 icons");
-		logReport("Info", "The number of icons ok");
+		logReport("Pass", "The number of icons ok");
 		Assert.assertEquals(socialMedia.getSocialMediaLinkList().size(), 3, "There are not 3 links");
-		logReport("Info", "The number of links ok");
+		logReport("Pass", "The number of links ok");
 		
 		ArrayList<String> socialMediaList = socialMedia.getSocialMediaLinkList() ;
 		Assert.assertEquals(socialMediaList.get(0), "http://www.facebook.com/wix", "The fb link is not ok");
-		logReport("Info", "Fb link ok");
+		logReport("Pass", "Fb link ok");
 		
 		socialMedia.facebookClicked();
 		socialMedia.switchToTab(1);
@@ -932,7 +932,7 @@ public class RoomsTest extends TestBase{
 		socialMedia.switchToTab(0);
 		
 		Assert.assertEquals(socialMediaList.get(1), "http://www.twitter.com/wix", "The twiter link is not ok");
-		logReport("Info", "Twitter link ok");
+		logReport("Pass", "Twitter link ok");
 		socialMedia.twitterClicked();
 		socialMedia.switchToTab(1);
 		Assert.assertTrue(socialMedia.getUrl().contains("twitter"), "Twiter page is not displayed");
@@ -942,7 +942,7 @@ public class RoomsTest extends TestBase{
 		
 		Assert.assertEquals(socialMediaList.get(2), "http://pinterest.com/wixcom/", "The pinterest link is not ok");
 		socialMedia.pinterestClicked();
-		logReport("Info", "Pinterest link ok");
+		logReport("Pass", "Pinterest link ok");
 		socialMedia.switchToTab(1);
 		Assert.assertTrue(socialMedia.getUrl().contains("pinterest"), "Pinterest page is not displayed");
 		logReport("Pass", "Pinterest page is displayed ok");
@@ -990,17 +990,17 @@ public class RoomsTest extends TestBase{
 
 		Assert.assertEquals(generalInfo.getGeneralInfoTitles().size(), 4, "There are not 4 titles");
 		Assert.assertEquals(generalInfo.getGeneralInfoTitleText().size(), 4, "There are not 4 titles");
-		logReport("Info", "The number of titles ok");
+		logReport("Pass", "The number of titles ok");
 		
 		ArrayList<String> generalInfoList = generalInfo.getGeneralInfoTitleText() ;
 		Assert.assertEquals(generalInfoList.get(0), "ADDRESS", "The Adress title is not ok");
-		logReport("Info", "Adress title ok");
+		logReport("Pass", "Adress title ok");
 		Assert.assertEquals(generalInfoList.get(1), "CONTACT", "The Contact title is not ok");
-		logReport("Info", "Contact title ok");
+		logReport("Pass", "Contact title ok");
 		Assert.assertEquals(generalInfoList.get(2), "HOME & AWAY", "The Home&Away title is not ok");
-		logReport("Info", "Home&Away title ok");
+		logReport("Pass", "Home&Away title ok");
 		Assert.assertEquals(generalInfoList.get(3), "WE ACCEPT", "The accept title is not ok");
-		logReport("Info", "Payment title ok");
+		logReport("Pass", "Payment title ok");
 
 	}
 
