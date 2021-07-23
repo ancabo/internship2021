@@ -1,5 +1,9 @@
 package pages;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -32,7 +36,7 @@ public class MenuPage extends TestBase {
 	@FindBy(xpath = "//div/div/p[contains(text(),'More')]")
 	private WebElement bookNowButtonText;
 	
-	@FindBy(xpath = "(//p[@class='ccDUc'])[1]")
+	@FindBy(xpath = "(//p[@class='ccDUc'])[1]") // //p[@id='i6kl732v0label']
 	private WebElement homeButton;
 	
 	@FindBy(xpath = "(//p[@class='ccDUc'])[2]")
@@ -47,6 +51,33 @@ public class MenuPage extends TestBase {
 	@FindBy(xpath = "(//p[@class='ccDUc'])[5]")
 	private WebElement bookNowButton;
 	
+	@FindBy(xpath = "//span[@class='nr31w']")
+	private WebElement bookNowButtonGood;
+	
+	
+	@FindBy(xpath = "//p/span[@class = 'color_15']")
+	private List<WebElement> generalInfoTitles;
+	
+
+	public List<WebElement> homeMenuTitles() {
+		List<WebElement> titles = driver.findElements(By.xpath("//p[@class='ccDUc']"));
+		return titles;
+	}
+	
+	public List<WebElement> getHomeMenuTitles() {
+		List<WebElement> titles = homeMenuTitles();
+		return titles;
+	}
+	
+	public ArrayList<String> getHomeMenuTitlesText() {
+		List<WebElement> titles = homeMenuTitles();
+		ArrayList<String> listofTitlesLink = new ArrayList<String>();
+		for(WebElement title : titles) {
+			//if(title.isDisplayed()) 
+				listofTitlesLink.add(getText(title));	
+		}
+		return listofTitlesLink;
+	}
 	
 	public boolean roomsButtonDisplayed() {
 		return display(roomsButton);
@@ -68,6 +99,10 @@ public class MenuPage extends TestBase {
 		return display(bookNowButton);
 	}
 	
+	public boolean bookNowButtonGoodDisplayed() {
+		return display(bookNowButtonGood);
+	}
+	
 	public String getTextHomeButton() {
 		//System.out.println(homeButtonText.getText());
 		return homeButtonText.getText();
@@ -87,5 +122,9 @@ public class MenuPage extends TestBase {
 	
 	public String getTextBookNowButton() {
 		return bookNowButtonText.getText();
+	}
+	
+	public String getTextBookNowButtonGood() {
+		return bookNowButtonGood.getText();
 	}
 }
