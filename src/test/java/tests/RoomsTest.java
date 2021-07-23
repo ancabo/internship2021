@@ -525,6 +525,63 @@ public class RoomsTest extends TestBase{
 		}
 		
 	}
+	
+	
+	@Test
+	public void checkInTextFileArrayList() throws InterruptedException{
+
+		ArrayList<String[]> data = roomsPage.readFromFileArrayList();
+		
+		for(int i=0; i<data.size(); i++) {
+					
+			roomsPage.clickRooms();
+			waitPageLoad(10000);
+			Thread.sleep(7000);
+
+			//change the frame  
+			roomsPage.changeFrameBookARoom();
+		
+			//complete check in field
+			Thread.sleep(5000);
+			logReport("Info", "Start run number: "+Integer.toString(i+1));
+			roomsPage.clickCheckin();
+			roomsPage.changeMonth(data.get(i)[0]);
+			Thread.sleep(3000);
+			roomsPage.clickCheckinDate(data.get(i)[0]); 
+				
+			//complete check out field
+			Thread.sleep(3000);
+			roomsPage.clickCheckoutDate(data.get(i)[1]); 
+		
+			//complete the aduls field
+			roomsPage.clickAdultsUp(Integer.parseInt((data.get(i))[2]) - 1); 
+		
+			//complete the kids field
+			roomsPage.clickKidsUp(Integer.parseInt((data.get(i))[3])); 
+		
+			//click search button
+			roomsPage.clickSearch();
+		
+			//verify that the results are displayed
+			Assert.assertTrue(roomsPage.searchResultDisplayed(), "Results for search are not displayed");
+			logReport("Pass", "The results text is displayed ok");
+
+			String adults = data.get(i)[2] + " Adults";
+			Assert.assertEquals(roomsPage.getAdultsText(), adults);
+			logReport("Pass", "Adults number is displayed ok");
+			
+			String kids = data.get(i)[3] + " Kids";
+			Assert.assertEquals(roomsPage.getKidsText(), kids);
+			logReport("Pass", "Kids number is displayed ok");
+			
+			logReport("Info", "Finish run number: "+Integer.toString(i+1));
+			
+			if (i<data.size())
+				navigateToURL("https://ancabota09.wixsite.com/intern");
+			
+		}
+		
+	}
 
 
 	@Test

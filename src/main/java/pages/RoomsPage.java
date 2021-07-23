@@ -3,6 +3,7 @@ package pages;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Vector;
 
 import org.openqa.selenium.By;
@@ -711,6 +712,39 @@ public class RoomsPage extends TestBase{
 			e.printStackTrace();
 			return null;
 		}
+	}
+	
+	public ArrayList<String[]> readFromFileArrayList() {
+		
+		try {
+			BufferedReader file = new BufferedReader(new FileReader("C:\\Users\\z004c2sy\\git\\internship2021\\testData\\testDataRooms.txt"));
+			String lines = "";			
+			ArrayList<String[]> data = new ArrayList<>();
+			
+			while((lines = file.readLine()) != null){				
+				String[] testCase = lines.split(";");
+				data.add(testCase);				
+			}
+			return data;
+		}
+		catch(Exception e) {
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+			return null;
+		}
+		
+		/*
+		String[] testCase = lines.split(";");
+		String checkinDate = testCase[0];
+		String checkoutDate = testCase[1];
+		String adultsNr = testCase[2];
+		String kidsNr = testCase[3];
+		
+		data.add(checkinDate);
+		data.add(checkoutDate);
+		data.add(adultsNr);
+		data.add(kidsNr);
+		*/
 	}
 	
 	public void changeMonth(String date) {
