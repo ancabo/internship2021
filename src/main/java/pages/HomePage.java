@@ -62,7 +62,7 @@ public class HomePage extends TestBase{
 
 	@FindBy(xpath = "//span[@class='nr31w']" )
 	private WebElement bookNow;
-	
+
 	@FindBy(xpath = "//*[@id=\"content\"]/div/div[1]/h2/span/span")
 	private WebElement searchResult;
 
@@ -182,7 +182,7 @@ public class HomePage extends TestBase{
 	public boolean kidsDisplayed() {
 		return display(kids);
 	}
-	
+
 	public boolean searchResultDisplayed() {
 		return display(searchResult);
 	}
@@ -304,11 +304,12 @@ public class HomePage extends TestBase{
 
 
 	public Vector<String> ReadFromFile() throws IOException, InterruptedException {
-		String TestFile = "C:\\Users\\z004c2sx\\eclipse-workspace\\internship2021\\testData\\testData.txt";
+		//String TestFile = "C:\\Users\\z004c2sx\\eclipse-workspace\\internship2021\\testData\\testData.txt";
+		String TestFile = "testData\\testData.txt";
 		FileReader FR = new FileReader(TestFile);
 		try (BufferedReader BR = new BufferedReader(FR)) {
 			String Content = "";
-			String checkInData = "", checkInDataMonth ="", checkOutData = "", nrAdults = "", nrKids = "";
+			String checkInData = "", checkInDataMonth ="", checkOutData = "", checkOutDataMonth = "", checkInDataDay = "", checkOutDataDay = "", nrAdults = "", nrKids = "";
 			Vector<String> info = new Vector<>();
 
 			while((Content = BR.readLine())!= null){
@@ -316,15 +317,27 @@ public class HomePage extends TestBase{
 
 				checkInData = var[0];
 				String[] var1 = Content.split(" ");
+				
+				String[] var2 = Content.split(",");
+				checkInDataDay = var2[0];			
+				//System.out.println(checkInDataDay);
 				checkInDataMonth = var1[2];
 
 				checkOutData = var[1];
+				String[] var3 = checkOutData.split(",");
+				checkOutDataDay = var3[0];
+				String[] var4 = checkOutData.split(" ");
+				checkOutDataMonth = var4[2];
+				
 				nrAdults = var[2];	
 				nrKids = var[3];
 
 				info.add(checkInData);
 				info.add(checkInDataMonth);
+				info.add(checkInDataDay);
 				info.add(checkOutData);
+				info.add(checkOutDataMonth);
+				info.add(checkOutDataDay);
 				info.add(nrAdults);
 				info.add(nrKids) ;
 				//System.out.println(chechInData + checkOutData);
@@ -348,7 +361,6 @@ public class HomePage extends TestBase{
 
 
 	public TestBase setCheckInAndChangeMonthText(String data, String month) throws InterruptedException {
-
 		switch (month) {
 		case "July":
 			inDataText(data);
@@ -393,6 +405,55 @@ public class HomePage extends TestBase{
 		outDataText(data);
 		click(out_day1);
 		return this;
+	}
+
+
+
+	//with ArrayList
+
+
+	public ArrayList<String[]> ReadFromFileArrayList() throws IOException, InterruptedException {
+		//String TestFile = "C:\\Users\\z004c2sx\\eclipse-workspace\\internship2021\\testData\\testData.txt";
+		String TestFile = "testData\\testData.txt";
+		FileReader FR = new FileReader(TestFile);
+		try (BufferedReader BR = new BufferedReader(FR)) {
+			String Content = "";
+			ArrayList<String[]> info = new ArrayList<String[]>(5);
+
+			while((Content = BR.readLine())!= null){
+				String[] var = Content.split(";");
+				info.add(var);
+			}
+			return info;
+		}
+	}
+
+	private WebElement dataCheckIn1;
+	
+	public boolean dataCheckDispalyed(String month, String day) throws InterruptedException {
+		switch (month) {
+			case "July":
+				month = "Jul";
+				break;
+			case "August":
+				month = "Aug";
+				break;
+			case "September":
+				month = "Sep";
+				break;
+			case "October":
+				month = "Oct";
+				break;
+			case "November":
+				month = "Nov";
+				break;
+			case "December":
+				month = "Dec";
+				break;
+
+		}	
+		dataCheckIn1 = driver.findElement(By.xpath("//span[contains(text(),'" + day +" "+ month + "')]"));
+		return display(dataCheckIn1);
 	}
 
 }

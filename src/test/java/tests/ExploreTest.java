@@ -6,11 +6,13 @@ import java.util.ArrayList;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 import common.TestBase;
 import pages.ChatPage;
 import pages.ExplorePage;
 import pages.GeneralInfoPage;
+import pages.MenuPage;
 import pages.SocialMediaPage;
 
 public class ExploreTest extends TestBase {
@@ -18,6 +20,7 @@ public class ExploreTest extends TestBase {
 	SocialMediaPage socialMedia;
 	GeneralInfoPage generalInfo;
 	ChatPage chat;
+	MenuPage menuPage;
 
 	@BeforeMethod
 	public void beforeMethod() {
@@ -25,6 +28,7 @@ public class ExploreTest extends TestBase {
 		socialMedia = new SocialMediaPage(driver);
 		generalInfo = new GeneralInfoPage(driver);
 		chat = new ChatPage(driver);
+		menuPage = new MenuPage(driver);
 	}
 
 	@Test
@@ -33,6 +37,45 @@ public class ExploreTest extends TestBase {
 		logReport("Pass", "Explore Button - ok");
 	}
 
+	@Test
+	public void verifyHomeMenu() {
+		SoftAssert softAssert = new SoftAssert();
+		
+		softAssert.assertTrue(menuPage.homeButtonDisplayed(), "Home button is not displayed on Explore Page");
+		logReport("Pass", "Home button is displayed on Explore Page");
+		
+		softAssert.assertTrue(menuPage.exploreButtonDisplayed(), "Explore button is not displayed on Explore Page");
+		logReport("Pass", "Explore button is displayed on Explore Page");
+		
+		softAssert.assertTrue(menuPage.roomsButtonDisplayed(), "Rooms button is not displayed on Explore Page");
+		logReport("Pass", "Rooms button is displayed on Explore Page");
+		
+		softAssert.assertTrue(menuPage.contactButtonDisplayed(), "Contact button is not displayed on Explore Page");
+		logReport("Pass", "Contact button is displayed on Explore Page");
+		
+		softAssert.assertTrue(menuPage.bookNowButtonDisplayed(), "Book Now button is not displayed on Explore Page");
+		logReport("Pass", "Book Now  button is displayed on Explore Page");
+		
+		
+		
+		//Assert.assertEquals(menuPage.getTextHomeButton(), "HONE", "Home button doesn't have a correct name");
+		softAssert.assertEquals(menuPage.getTextHomeButton(), "HONE", "Home button doesn't have a correct name");
+		logReport("Pass", "Home button doesn't have a correct name");
+		
+		softAssert.assertEquals(menuPage.getTextExploreButton(), "EXPLORE", "Explore button doesn't have a correct name");
+		logReport("Pass", "Explore button doesn't have a correct name");
+		
+		softAssert.assertEquals(menuPage.getTextRoomsButton(), "ROOMS", "Rooms button doesn't have a correct name");
+		logReport("Pass", "Rooms button doesn't have a correct name");
+		
+		softAssert.assertEquals(menuPage.getTextContactButton(), "CONTACT", "Contact button doesn't have a correct name");
+		logReport("Pass", "Contact button doesn't have a correct name");
+		
+		softAssert.assertEquals(menuPage.getTextBookNowButton(), "BOOK NOW", "Book Now button doesn't have a correct name");
+		logReport("Fail", "Book Now button doesn't have a correct name");
+		
+	}
+	
 
 	@Test
 	public void verifyInfo() throws InterruptedException { 

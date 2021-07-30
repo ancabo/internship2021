@@ -39,8 +39,8 @@ public class HomeTest extends TestBase{
 		return new Object[][]{
 			{"12, Sunday September 2021", "18, Saturday September 2021", 3, 3},
 			{"26, Monday July 2021", "30, Friday July 2021", 3, 1},
-			{"25, Sunday July 2021", "30, Friday July 2021", 5, 5},
-			{"23, Friday July 2021", "30, Friday July 2021", 15, 2}
+			//{"25, Sunday July 2021", "30, Friday July 2021", 5, 5},
+			//{"23, Friday July 2021", "30, Friday July 2021", 15, 2}
 			//{"22", "28", 2, 1},
 			//{"25", "29", 13, 5},
 			//{"24", "29", 5, 6},
@@ -58,44 +58,44 @@ public class HomeTest extends TestBase{
 		Assert.assertTrue(homePage.homeTabDisplayed(), "Home tab is not displayed"); 
 		logReport("Info", "Home tab ok");
 	}
-	
+
 	@Test
 	public void verifyHomeMenu() {
 		SoftAssert softAssert = new SoftAssert();
-		
+
 		softAssert.assertTrue(menuPage.homeButtonDisplayed(), "Home button is not displayed on Home Page");
 		logReport("Pass", "Home button is displayed on Home Page");
-		
+
 		softAssert.assertTrue(menuPage.exploreButtonDisplayed(), "Explore button is not displayed on Home Page");
 		logReport("Pass", "Explore button is displayed on Home Page");
-		
+
 		softAssert.assertTrue(menuPage.roomsButtonDisplayed(), "Rooms button is not displayed on Home Page");
 		logReport("Pass", "Rooms button is displayed on Home Page");
-		
+
 		softAssert.assertTrue(menuPage.contactButtonDisplayed(), "Contact button is not displayed on Home Page");
 		logReport("Pass", "Contact button is displayed on Home Page");
-		
+
 		softAssert.assertTrue(menuPage.bookNowButtonDisplayed(), "Book Now button is not displayed on Home Page");
 		logReport("Pass", "Book Now  button is displayed on Home Page");
-		
-		
-		
+
+
+
 		//Assert.assertEquals(menuPage.getTextHomeButton(), "HONE", "Home button doesn't have a correct name");
 		softAssert.assertEquals(menuPage.getTextHomeButton(), "HONE", "Home button doesn't have a correct name");
 		logReport("Pass", "Home button doesn't have a correct name");
-		
+
 		softAssert.assertEquals(menuPage.getTextExploreButton(), "EXPLORE", "Explore button doesn't have a correct name");
 		logReport("Pass", "Explore button doesn't have a correct name");
-		
+
 		softAssert.assertEquals(menuPage.getTextRoomsButton(), "ROOMS", "Rooms button doesn't have a correct name");
 		logReport("Pass", "Rooms button doesn't have a correct name");
-		
+
 		softAssert.assertEquals(menuPage.getTextContactButton(), "CONTACT", "Contact button doesn't have a correct name");
 		logReport("Pass", "Contact button doesn't have a correct name");
-		
+
 		softAssert.assertEquals(menuPage.getTextBookNowButton(), "BOOK NOW", "Book Now button doesn't have a correct name");
 		logReport("Fail", "Book Now button doesn't have a correct name");
-		
+
 	}
 
 	@Test
@@ -489,7 +489,7 @@ public class HomeTest extends TestBase{
 	@Test(dataProvider = "Check-In")
 	public void checkIn(String checkInDate, String checkOutDate, int nrAdults, int nrKids) throws InterruptedException {
 
-		String checkInMonth = "";
+		String checkInMonth = "", checkInDay = "", checkOutDay = "", checkOutMonth = "";
 		waitPageLoad(4000);
 
 		//Validate that frame exists
@@ -499,9 +499,12 @@ public class HomeTest extends TestBase{
 
 		//Click the check in field
 		String[] var = checkInDate.split(" ");
+		String[] var1 = checkInDate.split(",");
+		checkInDay = var1[0];
+
 		checkInMonth = var[2];
-		logReport("Info", "Test contain month: "+checkInMonth);
-		
+		logReport("Info", "Test contains data: " + checkInDay + " " +checkInMonth + " (as CheckIn)");
+
 		homePage.checkInClicked();
 		Thread.sleep(1000);
 
@@ -522,11 +525,19 @@ public class HomeTest extends TestBase{
 
 		homePage.frameWixHotels();
 		//Assert.assertEquals(homePage.actualDateCheckIn(), "20 Jul 2021");
+		Assert.assertTrue(homePage.dataCheckDispalyed(checkInMonth, checkInDay), "Data CheckIn is not displayed");
+		logReport("Pass", "Data CheckIn is correct");
 
 		//switch to default
 		driver.switchTo().defaultContent();
 
 		homePage.switchToframe();
+
+		String[] var2 = checkInDate.split(" ");
+		String[] var3 = checkInDate.split(",");
+		checkOutDay = var3[0];
+
+		checkOutMonth = var2[2];
 
 		Thread.sleep(1000);
 		homePage.setCheckOutAndClick(checkOutDate);
@@ -535,13 +546,15 @@ public class HomeTest extends TestBase{
 
 		homePage.frameWixHotels();
 		//Assert.assertEquals(homePage.actualDateCheckOut(), "30 Jul 2021");
+		Assert.assertTrue(homePage.dataCheckDispalyed(checkOutMonth, checkOutDay), "Data CheckOut is not displayed");
+		logReport("Pass", "Data CheckOut is correct");
 
 		//homePage.upClickedAdults(1);
 		homePage.upClickedAdults(nrAdults-1);
 		String adults ="Adults" + '\n' + nrAdults ;
 		Assert.assertEquals(homePage.adultsgetText(), adults);
 		logReport("Pass", "Adults number as expected");
-		
+
 		homePage.upClickedKids(nrKids);
 		String kids = ""+ nrKids ;
 		Assert.assertEquals(homePage.kidsGetText(), kids);
@@ -585,7 +598,7 @@ public class HomeTest extends TestBase{
 			implicitWait(100);
 
 			logReport("Info", "Start run number: "+Integer.toString(nrTeste));
-			
+
 			//Click the check in field
 			homePage.checkInClicked();
 			//Thread.sleep(1000);
@@ -608,7 +621,9 @@ public class HomeTest extends TestBase{
 			Thread.sleep(1000);
 
 			homePage.frameWixHotels();
-			//Assert.assertEquals(homePage.actualDateCheckIn(), "20 Jul 2021");
+
+			Assert.assertTrue(homePage.dataCheckDispalyed(info.get(i), info.get(++i)), "Data CheckIn is not displayed");
+			logReport("Pass", "Data CheckIn is correct");
 
 			//switch to default
 			driver.switchTo().defaultContent();
@@ -622,6 +637,8 @@ public class HomeTest extends TestBase{
 			Thread.sleep(1000);
 
 			homePage.frameWixHotels();
+			Assert.assertTrue(homePage.dataCheckDispalyed(info.get(++i), info.get(++i)), "Data CheckOut is not displayed");
+			logReport("Pass", "Data CheckOut is correct");
 			//Assert.assertEquals(homePage.actualDateCheckOut(), "30 Jul 2021");
 
 			//homePage.upClickedAdults(1);
@@ -633,7 +650,7 @@ public class HomeTest extends TestBase{
 			String adults ="Adults" + '\n' + getNrAdults ;
 			Assert.assertEquals(homePage.adultsgetText(), adults);
 			logReport("Pass", "Adults number as expected");
-			
+
 			homePage.upClickedKids(getNrKids);
 			String kids = ""+getNrKids ;
 			Assert.assertEquals(homePage.kidsGetText(), kids);
@@ -655,18 +672,133 @@ public class HomeTest extends TestBase{
 			implicitWait(20);
 
 			homePage.switchTo(0);
-//			Assert.assertTrue(homePage.searchResultDisplayed(), "Results for search are not displayed");
-//			logReport("Pass", "The results text is displayed ok");
-			
+			//			Assert.assertTrue(homePage.searchResultDisplayed(), "Results for search are not displayed");
+			//			logReport("Pass", "The results text is displayed ok");
+
 			Assert.assertTrue(getCurrentURL().contains("rooms"), "Rooms page is not displayed");	
 			logReport("Pass", "Rooms page is displayed ok");
-			
+
 			//Thread.sleep(1000);
-			
-			
+
+
 			logReport("Info", "Finish run number: "+Integer.toString(nrTeste));
 			i++;
 			if (nrTeste < 3) 
+				navigateToURL("https://ancabota09.wixsite.com/intern");
+		}
+	}
+
+
+	@Test
+	public void checkInTextArrayList() throws InterruptedException, IOException {
+
+		ArrayList<String[]> info = homePage.ReadFromFileArrayList();
+		int i = 0;
+		while(i < info.size()) {
+			waitPageLoad(4000);
+			Thread.sleep(2000);
+
+			//Validate that frame exists
+			homePage.frameWixHotels();
+			implicitWait(100);
+
+			logReport("Info", "Start run number: "+Integer.toString(i));
+
+			//Click the check in field
+			homePage.checkInClicked();
+			//Thread.sleep(1000);
+			implicitWait(100);
+
+			//switch to default
+			driver.switchTo().defaultContent();
+
+			//Click on a date (later than today)
+			//switch to check-in frame
+			homePage.switchToframe();
+
+			//select a date ->later than today
+			Thread.sleep(3000);
+			
+			String dataCheckIn = info.get(i)[0];
+			String[] var2 = dataCheckIn.split(",");
+			String checkInDataDay = var2[0];			
+			String[] var3 = dataCheckIn.split(" ");
+			String checkInDataMonth = var3[2];
+
+			Thread.sleep(1000);
+			homePage.setCheckInAndChangeMonthText(dataCheckIn, checkInDataMonth );
+
+
+			implicitWait(50);
+			Thread.sleep(1000);
+
+			homePage.frameWixHotels();
+			//Assert.assertEquals(homePage.actualDateCheckIn(), "20 Jul 2021");
+			Assert.assertTrue(homePage.dataCheckDispalyed(checkInDataMonth, checkInDataDay), "Data CheckIn is not displayed");
+			logReport("Pass", "Data CheckIn is correct");
+
+			//switch to default
+			driver.switchTo().defaultContent();
+
+			homePage.switchToframe();
+
+			//Thread.sleep(1000);
+			String dataCheckOut= info.get(i)[1];
+			String[] var4 = dataCheckIn.split(",");
+			String checkOutDataDay = var4[0];			
+			String[] var5 = dataCheckIn.split(" ");
+			String checkOutDataMonth = var5[2];
+
+			implicitWait(20);
+			homePage.setCheckOutAndClickText(dataCheckOut);
+
+			Thread.sleep(1000);
+
+			homePage.frameWixHotels();
+			//Assert.assertEquals(homePage.actualDateCheckOut(), "30 Jul 2021");
+			Assert.assertTrue(homePage.dataCheckDispalyed(checkOutDataMonth, checkOutDataDay), "Data CheckOut is not displayed");
+			logReport("Pass", "Data CheckOut is correct");
+			//homePage.upClickedAdults(1);
+
+			int getNrAdults = Integer.parseInt(info.get(i)[2]);
+			int getNrKids = Integer.parseInt(info.get(i)[3]);
+
+			homePage.upClickedAdults(getNrAdults-1);
+			String adults ="Adults" + '\n' + getNrAdults ;
+			Assert.assertEquals(homePage.adultsgetText(), adults);
+			logReport("Pass", "Adults number as expected");
+
+			homePage.upClickedKids(getNrKids);
+			String kids = ""+getNrKids ;
+			Assert.assertEquals(homePage.kidsGetText(), kids);
+			logReport("Pass", "Kids number as expected");
+
+			implicitWait(10);
+			driver.switchTo().defaultContent();
+
+			Thread.sleep(1000);
+			homePage.frameWixHotels();
+
+			//Validate that the Search button exists
+			Assert.assertTrue(homePage.searchBtnDisplayed(), "Search button is not displayed");
+			logReport("Pass", "Search button is displayed ok");
+
+			//Click the Search button (after the other fields are completed)
+			homePage.searchBtnClicked();
+
+			implicitWait(20);
+
+			homePage.switchTo(0);
+			//			Assert.assertTrue(homePage.searchResultDisplayed(), "Results for search are not displayed");
+			//			logReport("Pass", "The results text is displayed ok");
+
+			Assert.assertTrue(getCurrentURL().contains("rooms"), "Rooms page is not displayed");	
+			logReport("Pass", "Rooms page is displayed ok");
+
+
+			logReport("Info", "Finish run number: "+Integer.toString(i));
+			i++;
+			if (i < info.size()) 
 				navigateToURL("https://ancabota09.wixsite.com/intern");
 		}
 	}
