@@ -33,8 +33,11 @@ public class MenuPage extends TestBase {
 	@FindBy(xpath = "//a/div/div/p[contains(text(),'CONTACT')]")
 	private WebElement contactButtonText;
 	
-	@FindBy(xpath = "//div/div/p[contains(text(),'More')]")
+	@FindBy(xpath = "//span[contains(text(),'BOOK ')]")
 	private WebElement bookNowButtonText;
+	
+	//div/div/p[contains(text(),'More')]
+	//span[contains(text(),'BOOK ')]
 	
 	@FindBy(xpath = "(//p[@class='ccDUc'])[1]") // //p[@id='i6kl732v0label']
 	private WebElement homeButton;
@@ -80,23 +83,23 @@ public class MenuPage extends TestBase {
 	}
 	
 	public boolean roomsButtonDisplayed() {
-		return display(roomsButton);
+		return display(roomsButtonText);
 	}
 	
 	public boolean contactButtonDisplayed() {
-		return display(contactButton);
+		return display(contactButtonText);
 	}
 	
 	public boolean exploreButtonDisplayed() {
-		return display(exploreButton);
+		return display(exploreButtonText);
 	}
 	
 	public boolean homeButtonDisplayed() {
-		return display(homeButton);
+		return display(homeButtonText);
 	}
 	
 	public boolean bookNowButtonDisplayed() {
-		return display(bookNowButton);
+		return display( bookNowButtonText);
 	}
 	
 	public boolean bookNowButtonGoodDisplayed() {
@@ -105,23 +108,23 @@ public class MenuPage extends TestBase {
 	
 	public String getTextHomeButton() {
 		//System.out.println(homeButtonText.getText());
-		return homeButtonText.getText();
+		return homeButton.getText();
 	}
 	
 	public String getTextExploreButton() {
-		return exploreButtonText.getText();
+		return exploreButton.getText();
 	}
 	
 	public String getTextRoomsButton() {
-		return roomsButtonText.getText();
+		return roomsButton.getText();
 	}
 	
 	public String getTextContactButton() {
-		return contactButtonText.getText();
+		return contactButton.getText();
 	}
 	
 	public String getTextBookNowButton() {
-		return bookNowButtonText.getText();
+		return bookNowButtonGood.getText();
 	}
 	
 	public String getTextBookNowButtonGood() {

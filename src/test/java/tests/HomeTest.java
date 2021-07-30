@@ -75,26 +75,28 @@ public class HomeTest extends TestBase{
 		softAssert.assertTrue(menuPage.contactButtonDisplayed(), "Contact button is not displayed on Home Page");
 		logReport("Pass", "Contact button is displayed on Home Page");
 
-		softAssert.assertTrue(menuPage.bookNowButtonDisplayed(), "Book Now button is not displayed on Home Page");
+		softAssert.assertTrue(menuPage.bookNowButtonGoodDisplayed(), "Book Now button is not displayed on Home Page");
 		logReport("Pass", "Book Now  button is displayed on Home Page");
 
 
 
 		//Assert.assertEquals(menuPage.getTextHomeButton(), "HONE", "Home button doesn't have a correct name");
 		softAssert.assertEquals(menuPage.getTextHomeButton(), "HONE", "Home button doesn't have a correct name");
-		logReport("Pass", "Home button doesn't have a correct name");
+		logReport("Info", "Home button has been checked");
 
 		softAssert.assertEquals(menuPage.getTextExploreButton(), "EXPLORE", "Explore button doesn't have a correct name");
-		logReport("Pass", "Explore button doesn't have a correct name");
+		logReport("Info", "Explore button has been checked");
 
 		softAssert.assertEquals(menuPage.getTextRoomsButton(), "ROOMS", "Rooms button doesn't have a correct name");
-		logReport("Pass", "Rooms button doesn't have a correct name");
+		logReport("Info", "Rooms button has been checked");
 
 		softAssert.assertEquals(menuPage.getTextContactButton(), "CONTACT", "Contact button doesn't have a correct name");
-		logReport("Pass", "Contact button doesn't have a correct name");
+		logReport("Info", "Contact button has been checked");
 
 		softAssert.assertEquals(menuPage.getTextBookNowButton(), "BOOK NOW", "Book Now button doesn't have a correct name");
-		logReport("Fail", "Book Now button doesn't have a correct name");
+		logReport("Info", "Book Now has been checked");
+		
+		softAssert.assertAll();
 
 	}
 

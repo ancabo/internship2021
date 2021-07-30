@@ -78,7 +78,7 @@ public class ContactTest extends TestBase{
 		softAssert.assertEquals(homeMenuTextList.get(3), "CONTACT", "The CONTACT title is not ok");
 		logReport("Pass", "CONTACT text ok");
 		
-		softAssert.assertTrue(homeMenu.bookNowButtonDisplayed(), "Book Now button is not displayed on Home Page");
+		softAssert.assertTrue(homeMenu.bookNowButtonGoodDisplayed(), "Book Now button is not displayed on Home Page");
 		logReport("Pass", "Book Now  button is displayed on Home Page");
 		logReport("Info", "Book Now / xpath like other buttons");
 		softAssert.assertEquals(homeMenuTextList.get(4), "BOOK NOW", "The BOOK NOW title is not ok");
