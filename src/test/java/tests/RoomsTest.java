@@ -63,31 +63,35 @@ public class RoomsTest extends TestBase{
 		softAssert.assertTrue(homeMenu.homeButtonDisplayed(), "Home button is not displayed on Home Page");
 		logReport("Pass", "Home button is displayed on Home Page");
 		softAssert.assertEquals(homeMenuTextList.get(0), "HONE", "The HOME title is not ok");
-		logReport("Pass", "HOME text ok");
+		logReport("Info", "HOME text checked");
 		
 		softAssert.assertTrue(homeMenu.exploreButtonDisplayed(), "Explore button is not displayed on Home Page");
 		logReport("Pass", "Explore button is displayed on Home Page");
 		softAssert.assertEquals(homeMenuTextList.get(1), "EXPLORE", "The EXPLORE title is not ok");
-		logReport("Pass", "EXPLORE text ok");
+		logReport("Info", "EXPLORE text checked");
 		
 		softAssert.assertTrue(homeMenu.roomsButtonDisplayed(), "Rooms button is not displayed on Home Page");
 		logReport("Pass", "Rooms button is displayed on Home Page");
 		softAssert.assertEquals(homeMenuTextList.get(2), "ROOMS", "The ROOMS title is not ok");
-		logReport("Pass", "ROOMS text ok");
+		logReport("Info", "ROOMS text checked");
 		
 		softAssert.assertTrue(homeMenu.contactButtonDisplayed(), "Contact button is not displayed on Home Page");
 		logReport("Pass", "Contact button is displayed on Home Page");
 		softAssert.assertEquals(homeMenuTextList.get(3), "CONTACT", "The CONTACT title is not ok");
-		logReport("Pass", "CONTACT text ok");
+		logReport("Info", "CONTACT text checked");
 		
 		softAssert.assertTrue(homeMenu.bookNowButtonDisplayed(), "Book Now button is not displayed on Home Page");
 		logReport("Pass", "Book Now  button is displayed on Home Page");
-		logReport("Info", "Book Now / xpath like other buttons");
-		softAssert.assertEquals(homeMenuTextList.get(4), "BOOK NOW", "The BOOK NOW title is not ok");
-		logReport("Fail", "BOOK NOW text ok");
-		logReport("Info", "Book Now / different xpath from the other buttons");
+		
+		//logReport("Info", "Book Now / xpath like other buttons");
+		//softAssert.assertNotEquals(homeMenuTextList.get(4), "BOOK NOW", "The BOOK NOW title is not ok");
+		//logReport("Pass", "BOOK NOW text ok");
+		
+		//logReport("Info", "Book Now / different xpath from the other buttons");
 		softAssert.assertEquals(homeMenu.getTextBookNowButtonGood(), "BOOK NOW", "The BOOK NOW title is not ok");
-		logReport("Pass", "BOOK NOW text ok");
+		logReport("Info", "BOOK NOW text checked");
+		
+		softAssert.assertAll();
 		
 	}
 
